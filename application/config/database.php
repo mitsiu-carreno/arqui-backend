@@ -44,8 +44,6 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
-//test_2
-//test_3
 
 $active_group = 'default';
 $active_record = TRUE;
