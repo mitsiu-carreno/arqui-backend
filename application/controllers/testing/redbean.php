@@ -19,6 +19,18 @@ class Redbean extends CI_Controller {
 	 */
 	public function index()
 	{
-		
+		$this->load->library('rb');
+                $album = R::dispense('album');
+                $album->title = '13 Songs';
+                $album->artist = 'Fugazi';
+                $album->year = 1990;
+                $album->rating = 5;
+                $id = R::store($album);
+                
+                echo "Ambiente " . ENVIRONMENT;
 	}
+        
+        public function log(){
+            $this->load->library('unit_test');
+        }
 }
