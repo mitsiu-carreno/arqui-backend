@@ -49,4 +49,22 @@ class Redbean extends CI_Controller {
             
             echo $this->unit->report();
         }
+        
+        public function user(){
+            $this->load->library('unit_test');
+            //Creat a client
+            $this->load->helper('string');
+            $this->load->model("client_model");
+            $client["nombre"] = random_string('alpha', 16);
+            $client["email"] = random_string('alpha', 16);
+            $client["password"] = random_string('alpha', 16);
+            
+            $id = $this->client_model->insert($client);
+            $this->unit->run($id, 'is_int', 'Insert client');
+            
+            //Find a client
+            $client2 = $this->client_model->get($id);
+            $this->unit->run($client2->email, $client["email"], 'get a client');
+            echo $this->unit->report();
+        }
 }
