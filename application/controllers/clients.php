@@ -14,4 +14,13 @@ class Clients extends CI_Controller {
     function form(){
         $this->load->view("clients/new");
     }
+    
+    function insert(){
+        $client = $this->input->post();
+        $this->load->model("client_model");
+        $id = $this->client_model->insert($client);
+        $client["id"] = $id;
+        echo json_encode($client);
+    }
+    
 }

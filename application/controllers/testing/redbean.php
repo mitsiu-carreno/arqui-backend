@@ -34,20 +34,30 @@ class Redbean extends CI_Controller {
             $this->load->library('unit_test');
             //Creat a user
             $this->load->model("log_model");
-            $email = "drbyde@gmail.com";
-            $password = "root";
-            $this->unit->run($this->log_model->insert($email,$password), 'is_int', 'Creando al usuario');
+            $user->email = random_string('alpha', 16);
+            $user->password = md5(random_string('alpha', 16));
+
+            $this->unit->run($this->log_model->insert($user->email,$user->password), 'is_int', 'Creando al usuario');
             
             //Log in true
-            $user = $this->log_model->in($email,$password);
-            $this->unit->run($user->email, $email, 'Login TRUE');
+            $user_current = $this->log_model->in($email,$password);
+            $this->unit->run($user_current->email, $user->email, 'Login TRUE');
             
             //Log in false
             $password = "justTljsdfjkldfsesting";
             $user = $this->log_model->in($email,$password);
-            $this->unit->run($user->email, 'is_null', 'Login False');
+            $this->unit->run($user_current->email, 'is_null', 'Login False');
+            
+            $this->session->set_userdata("user_testing", $user);
             
             echo $this->unit->report();
+        }
+        
+        public function log_js(){
+            $data["user"] = $this->session->userdata("user_testing");
+            $this->load->view("testing/header");
+            $this->load->view("testing/log",$data);
+            $this->load->view("testing/footer");
         }
         
         public function user(){
