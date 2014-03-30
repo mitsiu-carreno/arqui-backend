@@ -4,7 +4,7 @@ class Rb {
 	
 	function __construct() {
 		// Include database configuration
-		include(APPPATH.'config' . ((ENVIRONMENT == 'production')?'':'/'.ENVIRONMENT)  . '/database.php');
+		include(APPPATH.'config' . ((ENVIRONMENT == 'testing')?'/'.ENVIRONMENT : '')  . '/database.php');
 		
 		// Get Redbean
 		include(APPPATH.'third_party/rb.php');

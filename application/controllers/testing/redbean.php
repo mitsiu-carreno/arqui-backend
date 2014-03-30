@@ -34,18 +34,18 @@ class Redbean extends CI_Controller {
             $this->load->library('unit_test');
             //Creat a user
             $this->load->model("log_model");
-            $username = "ulises";
-            $password = "justTesting";
-            $this->unit->run($this->log_model->insert($username,$password), 'is_int', 'Creando al usuario');
+            $email = "drbyde@gmail.com";
+            $password = "root";
+            $this->unit->run($this->log_model->insert($email,$password), 'is_int', 'Creando al usuario');
             
             //Log in true
-            $user = $this->log_model->in($username,$password);
-            $this->unit->run($user->username, $username, 'Login TRUE');
+            $user = $this->log_model->in($email,$password);
+            $this->unit->run($user->email, $email, 'Login TRUE');
             
             //Log in false
             $password = "justTljsdfjkldfsesting";
-            $user = $this->log_model->in($username,$password);
-            $this->unit->run($user->username, 'is_null', 'Login False');
+            $user = $this->log_model->in($email,$password);
+            $this->unit->run($user->email, 'is_null', 'Login False');
             
             echo $this->unit->report();
         }

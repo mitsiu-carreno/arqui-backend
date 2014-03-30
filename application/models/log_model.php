@@ -7,14 +7,14 @@ class Log_model extends CI_Model {
         R::freeze( TRUE );
     }
     
-    function in($username,$password){
-        $user = R::findOne( 'user', " username LIKE ? AND password = MD5(?)", array($username,$password) );
+    function in($email,$password){
+        $user = R::findOne( 'user', " email LIKE ? AND password = MD5(?)", array($email,$password) );
         return $user;
     }
     
-    function insert($username,$password){
+    function insert($email,$password){
         $user = R::dispense('user');
-        $user->username = $username;
+        $user->email = $email;
         $user->password = md5($password);
         $id = R::store($user); 
         return $id;
