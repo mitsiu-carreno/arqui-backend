@@ -47,20 +47,16 @@ class Redbean extends CI_Controller {
             $password = "justTljsdfjkldfsesting";
             $user = $this->log_model->in($email,$password);
             $this->unit->run($user_current->email, 'is_null', 'Login False');
-            
-            $this->session->set_userdata("user_testing", $user);
-            
             echo $this->unit->report();
         }
         
         public function log_js(){
-            $data["user"] = $this->session->userdata("user_testing");
             $this->load->view("testing/header");
             $this->load->view("testing/log",$data);
             $this->load->view("testing/footer");
         }
         
-        public function user(){
+        public function client(){
             $this->load->library('unit_test');
             //Creat a client
             $this->load->helper('string');
