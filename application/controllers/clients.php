@@ -22,5 +22,4 @@ class Clients extends CI_Controller {
         $client["id"] = $id;
         echo json_encode($client);
     }
-    
 }
