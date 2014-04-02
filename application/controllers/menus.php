@@ -7,7 +7,7 @@ class Menus extends CI_Controller {
     }
     
     function get($index){
-        
+        $this->load->view("menu");
     }
 
 }
