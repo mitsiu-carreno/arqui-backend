@@ -49,7 +49,7 @@
             e.preventDefault();
             $.post(this.action,$(this).serialize(), function(data){
                 if(data > 0)
-                    window.location = "<?php echo site_url(array("users")) ?>";
+                    window.location = "<?php echo site_url(array("portada")) ?>";
                 else
                     $("#error").show("fade");
             });

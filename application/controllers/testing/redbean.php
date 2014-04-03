@@ -18,15 +18,7 @@ class Redbean extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
-	{
-		$this->load->library('rb');
-                $album = R::dispense('album');
-                $album->title = '13 Songs';
-                $album->artist = 'Fugazi';
-                $album->year = 1990;
-                $album->rating = 5;
-                $id = R::store($album);
-                
+	{         
                 echo "Ambiente " . ENVIRONMENT;
 	}
         
@@ -40,13 +32,13 @@ class Redbean extends CI_Controller {
             $this->unit->run($this->log_model->insert($user->email,$user->password), 'is_int', 'Creando al usuario');
             
             //Log in true
-            $user_current = $this->log_model->in($email,$password);
+            $user_current = $this->log_model->in($user->email,$user->password);
             $this->unit->run($user_current->email, $user->email, 'Login TRUE');
             
             //Log in false
             $password = "justTljsdfjkldfsesting";
-            $user = $this->log_model->in($email,$password);
-            $this->unit->run($user_current->email, 'is_null', 'Login False');
+            $userCurrentWrong = $this->log_model->in($user->email,$password);
+            $this->unit->run(@$userCurrentWrong->email, 'is_null', 'Login False');
             echo $this->unit->report();
         }
         

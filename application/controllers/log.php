@@ -15,8 +15,9 @@ class Log extends CI_Controller {
         
     }
     
-    public function logout(){
-        
+    public function out(){
+        $this->session->sess_destroy();
+        redirect("portada");
     }
 
 }
