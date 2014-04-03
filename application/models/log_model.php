@@ -4,7 +4,7 @@ class Log_model extends CI_Model {
     function __construct() {
         parent::__construct();
         $this->load->library('rb');
-        R::freeze( TRUE );
+//        R::freeze( TRUE );
     }
     
     function in($email,$password){

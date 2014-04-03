@@ -6,7 +6,7 @@ class Menus extends CI_Controller {
         parent::__construct();
     }
     
-    function get($index){
+    function get($index = 1){
         $this->load->view("header");
         $this->load->view("back-end");
         $this->load->view("menu");

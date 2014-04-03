@@ -23,11 +23,14 @@ class Client_model extends CI_Model {
     }
             
     function insert($data){
+//        R::debug(true);
         $client = R::dispense('client');
         $client->nombre = $data["nombre"];
         $client->email = $data["email"];
         $client->password = md5($data["password"]);
         $client->activo = 1;
+//        $client->menus = array();
+        $client->contacto = $data["email"];
         $id = R::store($client); 
         return $id;
     }
@@ -40,6 +43,12 @@ class Client_model extends CI_Model {
         $client->activo = $data["activo"];
         if (isset($data["password"]) && $data["password"] !== '')
             $client->password = md5($data["password"]);
+        R::store($client);
+        return $id;
+    }
+    function update_contacto($id, $contacto){
+        $client = R::load( 'client', $id );
+        $client->contacto = $data["contacto"];
         R::store($client);
         return $id;
     }
