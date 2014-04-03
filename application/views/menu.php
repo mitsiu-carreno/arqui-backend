@@ -1,5 +1,26 @@
 <html>
     <head>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/prettify.css"></link>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css"></link>
+
+        <script src="<?php echo base_url() ?>js/wysihtml5-0.3.0.js"></script>
+        <script src="<?php echo base_url() ?>js/jquery-1.11.0.js"></script>
+        <script src="<?php echo base_url() ?>js/prettify.js"></script>
+        <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url() ?>js/bootstrap-wysihtml5.js"></script>
+
+        <script>
+                $('.textarea').wysihtml5();
+        </script>
+
+        <script type="text/javascript" charset="utf-8">
+                $(prettyPrint);
+        </script>
         <script>
         $(function(){
                 //$("#menu_body").hide();
@@ -47,7 +68,7 @@
                 });
             })
     </script>
-        <style>
+        <style type="text/css" media="screen">
             #encabezado{
                 height: 400px;
             }
@@ -73,7 +94,17 @@
             .fondo_2{
                 background-color: #e4e4e4;
             }
+            .btn.jumbo {
+		font-size: 20px;
+		font-weight: normal;
+		padding: 14px 24px;
+		margin-right: 10px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
         </style>
+
     </head>
     <body>
         <div id="selec_tipo" class="fondo_2">
@@ -164,7 +195,12 @@
                     <div class="col-sm-9 borde fondo_2">
                        <label>Texto HTML</label>
                        <br>
-                       <textarea name="textarea" id="textarea" class="textarea" cols="100" rows="10"></textarea> 
+                       <p>Aquí estoy</p>
+                       <div class="container">
+                            <div class="hero-unit" style="margin-top:40px">
+                                    <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+                            </div>
+                    </div> 
                     </div>     
                 </div>
             </div>
