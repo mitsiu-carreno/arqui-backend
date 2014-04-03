@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://192.168.56.102/animactiva';
+$config['base_url']	= 'http://cognosvideoapp.com.mx';
 
 /*
 |--------------------------------------------------------------------------

@@ -47,12 +47,12 @@
 //Test_2
 
 $active_group = 'default';
-$active_record = TRUE;
+$active_record = FALSE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'mitc5003';
-$db['default']['database'] = 'arqui';
+$db['default']['username'] = 'byde';
+$db['default']['password'] = 'rootroot.1';
+$db['default']['database'] = 'videos';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

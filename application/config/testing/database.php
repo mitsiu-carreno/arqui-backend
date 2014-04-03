@@ -50,9 +50,9 @@ $active_group = 'default';
 $active_record = FALSE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'arqui_testing';
+$db['default']['username'] = 'byde';
+$db['default']['password'] = 'rootroot.1';
+$db['default']['database'] = 'video_testing';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

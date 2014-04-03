@@ -14,19 +14,14 @@
         <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
         <script src="<?php echo base_url() ?>js/bootstrap-wysihtml5.js"></script>
 
-        <script>
-                $('.textarea').wysihtml5();
-        </script>
-
         <script type="text/javascript" charset="utf-8">
-                $(prettyPrint);
-        </script>
-        <script>
         $(function(){
+            $('.textarea').wysihtml5();
+                $(prettyPrint);
                 //$("#menu_body").hide();
                 //                          $("#menu_body").load("menu_body.php");
                 /*
-                $("#btn-crear-registro").click(function(e){
+                $("#btn-crear-registro").click(function(e){ 
                     e.preventDefault();
                     $("#form-persona").toggle();
                 });
@@ -161,10 +156,15 @@
                            </div>
                            <div id="submenu_html">
                                <br>
-                            <div class="fondo_1" style="height: 150px">
+                            <!--<div class="fondo_1" style="height: 150px">-->
                                 <br>
-                                <textarea name="textarea" id="textarea" class="textarea" cols="40" rows="6"></textarea> 
-                            </div>
+                                <!--<div class="container">-->
+                                    <div class="hero-unit fondo_1" style="width: 305px; height: 350px;">
+                                        <textarea class="textarea" placeholder="Enter text ..." style="width: 250px; height: 100px; margin-left: -30px"></textarea>
+                                    </div>
+                                <!--</div>--> 
+                                <!--<textarea name="textarea" id="textarea" class="textarea" cols="40" rows="6"></textarea> -->
+                            <!--</div>-->
                            </div>
                        </form>
                     </div>  
@@ -180,7 +180,11 @@
                             </div>
                         </form>
                         <div class="fondo_1">
-
+                            <div class="container">
+                                <div class="hero-unit" style="margin-top:40px">
+                                    <textarea id="txt_contenido" class="textarea" placeholder="Enter text ..." style="width: 500px; height: 200px"></textarea>
+                                </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -195,12 +199,11 @@
                     <div class="col-sm-9 borde fondo_2">
                        <label>Texto HTML</label>
                        <br>
-                       <p>Aquí estoy</p>
                        <div class="container">
-                            <div class="hero-unit" style="margin-top:40px">
-                                    <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+                            <div class="hero-unit fondo_1" style="margin-top:20px">
+                                    <textarea id="txt_contenido" class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
                             </div>
-                    </div> 
+                       </div> 
                     </div>     
                 </div>
             </div>
