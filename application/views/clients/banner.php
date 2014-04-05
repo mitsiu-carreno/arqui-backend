@@ -13,7 +13,7 @@ $(function(){
             var img = new Image();
             img.src = oFREvent.target.result;
             img.onload = function () {
-                if ((this.width != 1024) && (this.height != 227)) {
+                if ((this.width !== 1024) && (this.height !== 227)) {
                     //that.value="";
                     $("#alert_subir").fadeIn("slow");
                 }
