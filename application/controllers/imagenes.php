@@ -3,17 +3,17 @@
 class Imagenes extends CI_Controller {
     
     function index(){
+//        $this->load->library('encrypt');
         $this->load->view("header");
         $this->load->view("clients/banner");
         $this->load->view("footer");
+//        $key = $this->encrypt->encode("id:2");
+//        echo substr($key, 0,-2);
     }
     
     function subir_banner(){
         	$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '100';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		$config['allowed_types'] = 'png';
 
 		$this->load->library('upload', $config);
 
