@@ -3,7 +3,7 @@
 class Clients extends CI_Controller {
     function index(){
         $this->load->model("client_model");
-        $data["clientes"] = $this->client_model->get();
+        $data["clients"] = $this->client_model->get();
         $this->load->view("header");
         $this->load->view("modal");
         $this->load->view("navbar");
