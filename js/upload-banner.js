@@ -56,7 +56,7 @@ $(function(){
 
             // Automatically upload the file once it is added to the queue
             var jqXHR = data.submit().success(function (result, textStatus, jqXHR) {
-                console.log(result);
+                console.log(result); 
                 if(result.hasOwnProperty("error")){
                     $("#status").empty();
                         $("#error-message").clone().attr("id","").appendTo($("#status")).find("i").html(result.error);
@@ -64,7 +64,7 @@ $(function(){
                     
                 if(result.hasOwnProperty("upload_data")){
                     $("#status").empty();
-                        $("#success-message").clone().attr("id","").appendTo($("#status")).find("i").html("<p>La imagen se ha subido con exito</p>");
+                        $("#success-message").clone().attr("id","").appendTo($("#status")).find("i").html("<p>La imagen se ha subido con éxito</p>");
                 }
                     
 //                        $("#status").empty();

@@ -15,7 +15,7 @@ class Imagenes extends CI_Controller {
         $data = array("idcliente"=>$idcliente);
         $this->load->view("header");
         $this->load->view("clients/banner",$data);
-        $this->load->view("footer");
+        $this->load->view("footer"); 
     }
     
     function subir_banner($idcliente){
@@ -36,10 +36,12 @@ class Imagenes extends CI_Controller {
 		{
 			$data = array('upload_data' => $this->upload->data());
                         $config2['image_library'] = 'ImageMagick';
-                        $config2['library_path']='/usr/bin';
-                        $config2['source_image']="./banners/" . $data["upload_data"]["file_name"];
-                        $config2['new_image']='./banners/' . $idcliente . ".png";
+                        $config2['library_path'] = '/usr/bin';
+                        $config2['source_image']=$data["upload_data"]["full_path"];
+                        $config2['new_image']=$data["upload_data"]["file_path"] . $idcliente . ".png";
                         $this->load->library('image_lib',$config2);
+                        $this->image_lib->resize();
+                        $data["config"] = $config2;
 			echo json_encode($data);
 		}
     }

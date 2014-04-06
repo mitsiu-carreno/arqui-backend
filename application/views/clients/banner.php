@@ -45,7 +45,7 @@
         float: left;
         /*border: 1px solid black;*/
         width: 880px;
-    }
+    } 
 </style>
 <div class="container">
     <form id="upload" method="post" action="<?php echo site_url(array("imagenes", "subir_banner", $idcliente)) ?>" enctype="multipart/form-data">
