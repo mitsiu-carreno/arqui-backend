@@ -65,6 +65,8 @@ $(function(){
                 if(result.hasOwnProperty("upload_data")){
                     $("#status").empty();
                         $("#success-message").clone().attr("id","").appendTo($("#status")).find("i").html("<p>La imagen se ha subido con éxito</p>");
+                        var d = new Date();
+                    $("#img_banner").attr("src", result.upload_data.src_uri + "?" +d.getTime());
                 }
                     
 //                        $("#status").empty();

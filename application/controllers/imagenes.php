@@ -18,6 +18,18 @@ class Imagenes extends CI_Controller {
         $this->load->view("footer"); 
     }
     
+    function get_banner($idclient){
+        $filename= "./banners/" . $idclient . ".png";
+        $filename = (file_exists($filename)) ? $filename : "./img/demo.png";
+            header('Content-Length: '.filesize($filename)); //<-- sends filesize header
+            header('Content-Type: image/png'); //<-- send mime-type header
+            header('Content-Disposition: inline; filename="'.$filename.'";'); //<-- sends filename header
+            readfile($filename); //<--reads and outputs the file onto the output buffer
+            die(); //<--cleanup
+            exit; //and exit
+                
+    }
+    
     function subir_banner($idcliente){
         	$config['upload_path'] = './banners/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -42,6 +54,7 @@ class Imagenes extends CI_Controller {
                         $this->load->library('image_lib',$config2);
                         $this->image_lib->resize();
                         $data["config"] = $config2;
+                        $data["upload_data"]["src_uri"] = site_url(array("imagenes","get_banner",$idcliente));
 			echo json_encode($data);
 		}
     }
