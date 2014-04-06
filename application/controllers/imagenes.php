@@ -11,9 +11,18 @@ class Imagenes extends CI_Controller {
 //        echo substr($key, 0,-2);
     }
     
-    function subir_banner(){
-        	$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'png';
+    function form_banner($idcliente){
+        $data = array("idcliente"=>$idcliente);
+        $this->load->view("header");
+        $this->load->view("clients/banner",$data);
+        $this->load->view("footer");
+    }
+    
+    function subir_banner($idcliente){
+        	$config['upload_path'] = './banners/';
+		$config['allowed_types'] = 'gif|jpg|png';
+                $config['file_name'] = $idcliente;
+                $config['overwrite'] = TRUE;
 
 		$this->load->library('upload', $config);
 
@@ -21,13 +30,17 @@ class Imagenes extends CI_Controller {
 		{
 			$error = array('error' => $this->upload->display_errors());
 
-			$this->load->view('upload_form', $error);
+			echo json_encode($error);
 		}
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
-
-			$this->load->view('upload_success', $data);
+                        $config2['image_library'] = 'ImageMagick';
+                        $config2['library_path']='/usr/bin';
+                        $config2['source_image']="./banners/" . $data["upload_data"]["file_name"];
+                        $config2['new_image']='./banners/' . $idcliente . ".png";
+                        $this->load->library('image_lib',$config2);
+			echo json_encode($data);
 		}
     }
     
