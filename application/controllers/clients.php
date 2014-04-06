@@ -22,4 +22,9 @@ class Clients extends CI_Controller {
         echo json_encode($client);
     }
     
+    function update_status($idclient,$status){
+        $this->load->model("client_model");
+        $this->client_model->update_field($idclient,"activo",$status);
+    }
+    
 }

@@ -37,34 +37,58 @@ $(function(){
     });
     
     $("body").delegate(".btn-eliminar", "click",function(){
-        if(bootbox.confirm('¿Estás seguro de <strong><span class="text-danger">desactivar</span></strong> este proyecto?',function(result){return result;})){
-//            $.ajax({
-//            url : this.action,
-//            type : "POST",
-//            dataType: "json",
-//            data : $(this).serialize(),
-//            success : function(cliente){
-//                if(!(cliente.id > 0)){
-//                    console.log("error: " + cliente);
-//                } else {
-//                    var tr = $("<tr />");
-//                    tr.append($("<td />").html(cliente.id));
-//                    tr.append($("<td />").html($("<a />").html(cliente.nombre).attr("href","<?php echo site_url(array("menus","get")) ?>/"+cliente.id)));
-//                    tr.append($("<td />").html(cliente.email));
-//                    tr.append($("<td />").html($("<button />").html("Editar").addClass("btn-editar btn btn-primary").attr("clienteid",cliente.id)));
-//                    tr.append($("<td />").html($("<button />").html("Eliminer").addClass("btn-eliminar btn btn-danger").attr("clienteid",cliente.id)));
-//                    $("#tbl-list > tbody").append(tr);
-//                    console.log("bien: " + cliente);
-//                }
-//            }
-//        });
-        } else{
-            console.log("noup");
+        var element = $(this);
+        if($(this).attr("status") == 1){
+            bootbox.confirm('¿Estás seguro de <strong><span class="text-danger">desactivar</span></strong> este proyecto?', function(result){
+                if(result){
+                    element.attr("status",0);
+                    element.attr("title","Desactivado");
+                    element.find("span").removeClass("glyphicon-ok-circle");
+                    element.find("span").addClass("glyphicon-remove-circle");
+                    element.find("span").removeClass("text-success");
+                    element.find("span").addClass("text-danger");
+                    $.get("<?php echo site_url(array("clients","update_status")) ?>/" + element.attr("clienteid") + "/0");
+                }
+            });
+    //            $.ajax({
+    //            url : this.action,
+    //            type : "POST",
+    //            dataType: "json",
+    //            data : $(this).serialize(),
+    //            success : function(cliente){
+    //                if(!(cliente.id > 0)){
+    //                    console.log("error: " + cliente);
+    //                } else {
+    //                    var tr = $("<tr />");
+    //                    tr.append($("<td />").html(cliente.id));
+    //                    tr.append($("<td />").html($("<a />").html(cliente.nombre).attr("href","<?php echo site_url(array("menus","get")) ?>/"+cliente.id)));
+    //                    tr.append($("<td />").html(cliente.email));
+    //                    tr.append($("<td />").html($("<button />").html("Editar").addClass("btn-editar btn btn-primary").attr("clienteid",cliente.id)));
+    //                    tr.append($("<td />").html($("<button />").html("Eliminer").addClass("btn-eliminar btn btn-danger").attr("clienteid",cliente.id)));
+    //                    $("#tbl-list > tbody").append(tr);
+    //                    console.log("bien: " + cliente);
+    //                }
+    //            }
+    //        });
+            
+        }else{
+            bootbox.confirm('¿Estás seguro de <strong><span class="text-success">activar</span></strong> este proyecto?', function(result){
+                if(result){
+                
+                element.attr("status",1);
+                element.attr("title","Activado");
+                element.find("span").removeClass("glyphicon-remove-circle");
+                element.find("span").addClass("glyphicon-ok-circle");
+                element.find("span").removeClass("text-danger");
+                element.find("span").addClass("text-success");
+                    $.get("<?php echo site_url(array("clients","update_status")) ?>/" + element.attr("clienteid") + "/1");
+            }
+            });
         }
     });
     
     $('.tooltip-status').tooltip();
-    bootbox.confirm('¿Estás seguro de <strong><span class="text-danger">desactivar</span></strong> este proyecto?',function(result){console.log(result);return result;});
+//    bootbox.confirm('¿Estás seguro de <strong><span class="text-danger">desactivar</span></strong> este proyecto?');
 });
 </script>
 <style>
