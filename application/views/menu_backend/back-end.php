@@ -1,5 +1,6 @@
 <html>
     <body>
+        <!--
         <div id="encabezado" class="borde">
             <div class="fondo_1">
                 <label>Encabezado</label>
@@ -11,11 +12,12 @@
                     <button type="button" class="btn btn-primary">Buscar</button>
                 </div>
                 <div class="col-sm-3  borde">
-                    <!--<span class="glyphicon glyphicon-info-sign"></span>-->
+                    <!--<span class="glyphicon glyphicon-info-sign"></span>    ->
                     <label>Esta imagen debe ser de 1024 x 200</label>
                 </div>
             </div>    
         </div>
+        -->
         <div id="contacto" class="borde">
             <div class="fondo_1">
                 <label>Contacto</label>

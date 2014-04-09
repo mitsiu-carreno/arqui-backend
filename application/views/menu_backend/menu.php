@@ -173,7 +173,7 @@
                         <!--label>Submenú</label>-->
                         <br>
                         <br>
-                        <input type="text"/>
+                        <input type="text" placeholder="Nuevo Submenú"/>
                         <form role="form">
                             <div class="checkbox">
                                 <input type="radio" name="tipo" checked/> Video
