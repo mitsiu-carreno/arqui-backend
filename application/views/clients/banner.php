@@ -52,8 +52,6 @@
         <input type="file" id="inp_file" name="userfile" />
         <button class="btn btn-default btn-large" id="btn_subir"><span class="glyphicon glyphicon-circle-arrow-up"></span> Subir Imagen</button>
         
-                    <span class="glyphicon glyphicon-info-sign"></span>    Esta imagen debe ser de 1024 x 200
-         
         <div id="status">
         </div>
     </form>

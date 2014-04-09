@@ -22,6 +22,10 @@
             $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
                 $("#inp_email").val(data.contacto);
             });
+            $("#inp_email").keyup(function(){
+                //alert("Cambio");
+                $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
+            });
         });
                 </script>
         <div id="contacto" class="borde">
@@ -29,18 +33,18 @@
                 <label>Contacto</label>
             </div>
             <div class="fondo_2">
+                        <form role="form" id="form_contacto">
                 <div class="row">
                     <div class="col-sm-1 col-sm-offset-1 borde">
-                        <form role="form">
                             <div class="form-group">
-                                <label for="inp_email">Email</label>
+                                <label for="for_email">Email</label>
                             </div>
-                        </form>
                     </div>
                     <div class="col-sm-2 borde">
-                        <input type="email" class="form-control" id="inp_email" placeholder="Ingrese email">
+                        <input name="contacto" type="email" class="form-control" id="inp_email" placeholder="Ingrese email">
                     </div>
                 </div>
+                        </form>
             </div>
         </div>
         <div id="menu">
