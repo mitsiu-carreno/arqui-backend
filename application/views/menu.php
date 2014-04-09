@@ -59,7 +59,8 @@
                 $("#nuevo_menu").click(function(e){
                     alert("nuevo menu");
                     e.preventDefault();
-                    $('<li><a href="#">Menu1</a></li>').appendTo('#menu_div');
+                    //$('<li><input type="text" href="#"></a></li>').appendTo('#menu_div');
+                    $('<li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>').appendTo('#menu_div');
                 });
             })
     </script>
@@ -128,7 +129,7 @@
                         <label>Submenú</label>
                     </div>  
                     <div class="col-sm-3 borde fondo_2">
-                       <label>Submenú 1</label>
+                        <label><input type="text" placeholder="Submenú 1"></label>
                        <br>
                        <form id="submenu_2" role="form">
                             <div class="checkbox">

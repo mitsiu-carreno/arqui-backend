@@ -43,7 +43,7 @@
                 <div class="col-sm-offset-1 borde">
                     <ul id="menu_div" class="nav nav-tabs">
                         <li><a href="#" class="menu_cont">Menu1</a></li>
-                        <li><a href="#" class="menu_cont" id="nuevo_menu">+</a></li>
+                        <li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>
                     </ul>
                 </div>
             </div>
