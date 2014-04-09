@@ -1,23 +1,22 @@
-<html>
-    <head>
-        
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.min.css"></link>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/prettify.css"></link>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap-wysihtml5.css"></link>
-
-        <script src="<?php echo base_url() ?>js/wysihtml5-0.3.0.js"></script>
-        <script src="<?php echo base_url() ?>js/jquery-1.11.0.js"></script>
-        <script src="<?php echo base_url() ?>js/prettify.js"></script>
-        <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
-        <script src="<?php echo base_url() ?>js/bootstrap-wysihtml5.js"></script>
-
+<script src="<?php echo base_url() ?>js/tinymce/tinymce.min.js"></script>
         <script type="text/javascript" charset="utf-8">
         $(function(){
-            $('.textarea').wysihtml5();
-                $(prettyPrint);
+            tinymce.init({
+    selector: ".textarea",
+    width: 600,
+    menubar : false,
+    height: 300,
+    language : 'es',
+    image_advtab: true,
+    plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+         "save table contextmenu directionality emoticons template paste textcolor jbimages"
+   ],
+   toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+   relative_urls: false
+ });
                 //$("#menu_body").hide();
                 //                          $("#menu_body").load("menu_body.php");
                 /*
@@ -101,8 +100,6 @@
 	}
         </style>
 
-    </head>
-    <body>
         <div id="selec_tipo" class="fondo_2">
                 <br>
                 <div class="row">
@@ -208,6 +205,3 @@
                     </div>     
                 </div>
             </div>
-        </div>
-    </body>
-</html>

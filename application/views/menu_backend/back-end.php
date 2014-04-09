@@ -1,5 +1,4 @@
-<html>
-    <body>
+
         <!--
         <div id="encabezado" class="borde">
             <div class="fondo_1">
@@ -18,6 +17,13 @@
             </div>    
         </div>
         -->
+        <script>        
+        $(function(){
+            $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
+                $("#inp_email").val(data.contacto);
+            });
+        });
+                </script>
         <div id="contacto" class="borde">
             <div class="fondo_1">
                 <label>Contacto</label>
@@ -27,12 +33,12 @@
                     <div class="col-sm-1 col-sm-offset-1 borde">
                         <form role="form">
                             <div class="form-group">
-                                <label for="Email1">Email</label>
+                                <label for="inp_email">Email</label>
                             </div>
                         </form>
                     </div>
                     <div class="col-sm-2 borde">
-                        <input type="email" class="form-control" id="Email1" placeholder="Ingrese email">
+                        <input type="email" class="form-control" id="inp_email" placeholder="Ingrese email">
                     </div>
                 </div>
             </div>
@@ -50,5 +56,3 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>

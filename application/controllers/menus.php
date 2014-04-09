@@ -15,7 +15,7 @@ class Menus extends CI_Controller {
         //$this->load->view("header");
         $this->load->view("clients/banner",$data);
         //$this->load->view("footer"); 
-        $this->load->view("menu_backend/back-end");
+        $this->load->view("menu_backend/back-end", $data);
         $this->load->view("menu_backend/menu");
         $this->load->view("footer");
     }
