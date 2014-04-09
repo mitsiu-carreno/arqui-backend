@@ -26,25 +26,40 @@
                 //alert("Cambio");
                 $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
             });
+            $("#txt_contacto").change(function() {
+            //$("#txt_contacto").change(function(){
+                //alert("Cambio");
+                $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
+            });
         });
                 </script>
-        <div id="contacto" class="borde">
+        <br>
+        <div id="contacto" class="borde" style="height: 500px">
             <div class="fondo_1">
                 <label>Contacto</label>
             </div>
-            <div class="fondo_2">
-                        <form role="form" id="form_contacto">
-                <div class="row">
-                    <div class="col-sm-1 col-sm-offset-1 borde">
+            <div>
+                <form role="form" id="form_contacto">
+                    <div class="row">
+                        <div class="col-sm-1 col-sm-offset-1 borde">
                             <div class="form-group">
                                 <label for="for_email">Email</label>
                             </div>
+                        </div>
+                        <div class="col-sm-2 borde">
+                            <input name="contacto" type="email" class="form-contro inp_contactol" id="inp_email" placeholder="Ingrese email">
+                        </div>
                     </div>
-                    <div class="col-sm-2 borde">
-                        <input name="contacto" type="email" class="form-control" id="inp_email" placeholder="Ingrese email">
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-1 col-sm-offset-1 borde">
+                            <label>Contenido</label>
+                        </div>
+                        <div class="col-sm-2 borde">
+                            <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."></textarea>
+                        </div>
                     </div>
-                </div>
-                        </form>
+                </form>
             </div>
         </div>
         <div id="menu">
