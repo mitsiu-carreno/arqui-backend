@@ -26,11 +26,20 @@
                 //alert("Cambio");
                 $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
             });
+            /*
             $("#txt_contacto").change(function() {
             //$("#txt_contacto").change(function(){
                 //alert("Cambio");
                 $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
             });
+            */
+           $('#txt_contacto').keyup(function (){
+               
+                       alert('keyup occured');
+            //console.log('init event', e);
+            //console.log('Editor contents was modified. Contents: ' + editor.getContent());
+            
+        });
         });
                 </script>
         <br>
