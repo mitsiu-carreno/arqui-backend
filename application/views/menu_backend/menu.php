@@ -1,59 +1,6 @@
 
-<script src="<?php echo base_url() ?>js/tinymce/tinymce.min.js"></script>
         <script type="text/javascript" charset="utf-8">
-        $(function(){
-            tinymce.init({
-    selector: ".textarea",
-    width: 600,
-    menubar : false,
-    height: 300,
-    language : 'es',
-    image_advtab: true,
-    plugins: [
-         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-         "save table contextmenu directionality emoticons template paste textcolor jbimages"
-   ],
-   toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
-   relative_urls: false,
-   setup : function(editor){
-        editor.on('keyup', function(e) {
-            alert('keyup occured');
-            //console.log('init event', e);
-            console.log('Editor contents was modified. Contents: ' + editor.getContent());
-            //check_submit(); //another function calling
-        });
-            }
-   /*
-   setup : function(ed) {
-      ed.onKeyUp(function() {
-          alert("cambio");
-          console.debug('Key up event: ' + e.keyCode);
-      });
-   }
-   /*
-   setup : function(ed) {
-                  ed.on("change", function(e) {
-                      e.preventDefault;
-                      alert("cambio");
-                     console.log('the event object '+e);
-                     console.log('the editor object '+ed);
-                     console.log('the content '+ed.getContent());
-                     tinymce.setup();
-                  });
-            }
-            */
- });
-                //$("#menu_body").hide();
-                //                          $("#menu_body").load("menu_body.php");
-                /*
-                $("#btn-crear-registro").click(function(e){ 
-                    e.preventDefault();
-                    $("#form-persona").toggle();
-                });
-                */
-               //$("#submenu_indice").hide();
-               
+        $(function(){    
                $("#submenu_html").hide();
                $("#contenido").hide();
                
@@ -82,51 +29,9 @@
                     }
                 });
                 
-                $("#nuevo_menu").click(function(e){
-                    alert("nuevo menu");
-                    e.preventDefault();
-                    //$('<li><input type="text" href="#"></a></li>').appendTo('#menu_div');
-                    $('<li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>').appendTo('#menu_div');
-                });
             })
     </script>
-        <style type="text/css" media="screen">
-            #encabezado{
-                height: 400px;
-            }
-            
-            #imagen_logo{
-                height: 300px;
-                width: 90%;
-                margin: 0 auto;
-                margin-top: 15px;
-            }
-            
-            #contacto{
-                height: 100px;
-            }
-            .borde{
-                border: 0px solid #000;
-            }
-            .fondo_1{
-                background-color: #B8B8B8;
-                height: 30px;
-            }
-            
-            .fondo_2{
-                background-color: #e4e4e4;
-            }
-            .btn.jumbo {
-		font-size: 20px;
-		font-weight: normal;
-		padding: 14px 24px;
-		margin-right: 10px;
-		-webkit-border-radius: 6px;
-		-moz-border-radius: 6px;
-		border-radius: 6px;
-	}
-        </style>
-
+       
         <div id="selec_tipo" class="fondo_2">
                 <br>
                 <div class="row">

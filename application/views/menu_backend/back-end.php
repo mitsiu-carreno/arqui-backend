@@ -1,4 +1,82 @@
-
+<script src="<?php echo base_url() ?>js/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+        $(function(){
+            tinymce.init({
+                selector: ".textarea",
+                width: 600,
+                menubar : false,
+                height: 300,
+                language : 'es',
+                image_advtab: true,
+                plugins: [
+                     "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                     "save table contextmenu directionality emoticons template paste textcolor jbimages"
+               ],
+               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+               relative_urls: false,
+               
+               setup : function(editor){
+                    editor.on('keyup', function(e) {
+                        alert('Cambio_tinymce');
+                    });
+               }
+          });
+  
+            $("#nuevo_menu").click(function(e){
+                alert("nuevo menu");
+                e.preventDefault();
+                $('<li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>').prepend('#menu_div');
+            });
+                
+            $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
+                $("#inp_email").val(data.contacto);
+            });
+            
+            $("#inp_email").keyup(function(){
+                //alert("Cambio");
+                $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
+            });
+            })
+    </script>
+    
+        <style type="text/css" media="screen">
+            #encabezado{
+                height: 400px;
+            }
+            
+            #imagen_logo{
+                height: 300px;
+                width: 90%;
+                margin: 0 auto;
+                margin-top: 15px;
+            }
+            
+            #contacto{
+                height: 100px;
+            }
+            .borde{
+                border: 0px solid #000;
+            }
+            .fondo_1{
+                background-color: #B8B8B8;
+                height: 30px;
+            }
+            
+            .fondo_2{
+                background-color: #e4e4e4;
+            }
+            .btn.jumbo {
+		font-size: 20px;
+		font-weight: normal;
+		padding: 14px 24px;
+		margin-right: 10px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+        </style>
+        
         <!--
         <div id="encabezado" class="borde">
             <div class="fondo_1">
@@ -17,31 +95,7 @@
             </div>    
         </div>
         -->
-        <script>        
-        $(function(){
-            $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
-                $("#inp_email").val(data.contacto);
-            });
-            $("#inp_email").keyup(function(){
-                //alert("Cambio");
-                $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
-            });
-            /*
-            $("#txt_contacto").change(function() {
-            //$("#txt_contacto").change(function(){
-                //alert("Cambio");
-                $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
-            });
-            */
-           $('#txt_contacto').keyup(function (){
-               
-                       alert('keyup occured');
-            //console.log('init event', e);
-            //console.log('Editor contents was modified. Contents: ' + editor.getContent());
-            
-        });
-        });
-                </script>
+        
         <br>
         <div id="contacto" class="borde" style="height: 500px">
             <div class="fondo_1">
@@ -78,7 +132,7 @@
             <div class="row">
                 <div class="col-sm-offset-1 borde">
                     <ul id="menu_div" class="nav nav-tabs">
-                        <li><a href="#" class="menu_cont">Menu1</a></li>
+                        <!--<li><a href="#" class="menu_cont">Menu1</a></li>-->
                         <li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>
                     </ul>
                 </div>
