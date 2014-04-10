@@ -17,27 +17,52 @@
                relative_urls: false,
                
                setup : function(editor){
+                      editor.on('Init', function(ed) {
+                          $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
+                            $("#inp_email").val(data.contacto);
+                            //alert(data.contacto);
+                            //alert(data.contacto_texto);
+                            tinymce.get('txt_contacto').setContent(data.contacto_texto);
+                            //tinymce.activeEditor.setContent(data.contacto_texto);
+                          });
+                      });
+          
+                   
                     editor.on('keyup', function(e) {
-                        $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
+                        //$contenido = 'contacto_text: ' + tinymce.activeEditor.getContent();
+                        //alert($contenido);
+//                        alert(tinymce.get('txt_contacto').getContent());
+                        //$value=tinymce.get('txt_contacto').getContent();
+                        //$value=tinymce.get('txt_contacto').getContent()
+                        //$('txt_contacto').val($value);
+                        
+                        //tinymce.get('txt_contacto').setContent($value);
+                        var parametros = {contacto: $("#inp_email").val(), contacto_texto: tinymce.get('txt_contacto').getContent()};
+                        console.log($.param(parametros));
+                        $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $.param(parametros));
                     });
                }
-          });
+            });
   
             $("#nuevo_menu").click(function(e){
                 alert("nuevo menu");
                 e.preventDefault();
-                $('<li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>').prepend('#menu_div');
+                $('<li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>').appendTo('#menu_div');
             });
                 
-            $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
-                $("#inp_email").val(data.contacto);
-            });
+//            $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
+//                $("#inp_email").val(data.contacto);
+//                
+//            });
             
             $("#inp_email").keyup(function(){
-                //alert("Cambio");
-                $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
+                var parametros = {contacto: $("#inp_email").val(), contacto_texto:tinymce.get('txt_contacto').getContent()};
+                        console.log($.param(parametros));
+                        $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $.param(parametros));
+                //$.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
+                
             });
-            })
+        })
     </script>
     
         <style type="text/css" media="screen">
