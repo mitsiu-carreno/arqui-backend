@@ -18,7 +18,7 @@
                
                setup : function(editor){
                     editor.on('keyup', function(e) {
-                        alert('Cambio_tinymce');
+                        $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
                     });
                }
           });

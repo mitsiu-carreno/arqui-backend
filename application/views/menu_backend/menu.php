@@ -1,6 +1,6 @@
-
         <script type="text/javascript" charset="utf-8">
-        $(function(){    
+        $(function(){
+           
                $("#submenu_html").hide();
                $("#contenido").hide();
                
@@ -28,10 +28,45 @@
                         $("#submenu_html").show();
                     }
                 });
-                
             })
     </script>
-       
+        <style type="text/css" media="screen">
+            #encabezado{
+                height: 400px;
+            }
+            
+            #imagen_logo{
+                height: 300px;
+                width: 90%;
+                margin: 0 auto;
+                margin-top: 15px;
+            }
+            
+            #contacto{
+                height: 100px;
+            }
+            .borde{
+                border: 0px solid #000;
+            }
+            .fondo_1{
+                background-color: #B8B8B8;
+                height: 30px;
+            }
+            
+            .fondo_2{
+                background-color: #e4e4e4;
+            }
+            .btn.jumbo {
+		font-size: 20px;
+		font-weight: normal;
+		padding: 14px 24px;
+		margin-right: 10px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+        </style>
+
         <div id="selec_tipo" class="fondo_2">
                 <br>
                 <div class="row">
