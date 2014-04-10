@@ -20,8 +20,7 @@
                       editor.on('Init', function(ed) {
                           $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
                             $("#inp_email").val(data.contacto);
-                            //alert(data.contacto);
-                            //alert(data.contacto_texto);
+                            
                             tinymce.get('txt_contacto').setContent(data.contacto_texto);
                             //tinymce.activeEditor.setContent(data.contacto_texto);
                           });
