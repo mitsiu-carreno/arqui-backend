@@ -13,6 +13,7 @@ class Menu_model extends CI_Model {
         $menu = R::dispense( 'menu' );
         $menu->titulo = $titulo;
         $menu->activo = 1;
+        $menu->pos = ($this->getLastPosition($clientid))+1;
         
         $client->ownMenu[] = $menu;
         
@@ -26,6 +27,13 @@ class Menu_model extends CI_Model {
                 return $client->ownMenu;
             else
                 return $client->ownMenu[$id];
+    }
+    
+    function getLastPosition($clientid){
+        $menu = R::findOne( 'menu', "client_id = ? ORDER BY pos DESC", array($clientid));
+        var_dump($menu);
+        return $menu->pos;
+        
     }
     
     function getLast($clientid){

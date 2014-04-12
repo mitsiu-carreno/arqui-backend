@@ -13,13 +13,13 @@
                 <button type="button" class="btn btn-default">
                     Menú 1 
                 </button>
+                <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
                     <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-move"></span>Mover</a></li>
                 </ul>
             </div>
         </li>
@@ -28,13 +28,13 @@
                 <button type="button" class="btn btn-default">
                     Menú 2
                 </button>
+                <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
                     <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-move"></span>Mover</a></li>
                 </ul>
             </div>
         </li>
@@ -43,15 +43,18 @@
                 <button type="button" class="btn btn-default">
                     Menú 3
                 </button>
+                <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
                     <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                    <li><a href="#" class="btn_menus_mover"><span class="glyphicon glyphicon-move"></span>Mover <small><i>Arrastre</i></small></a></li>
                 </ul>
             </div>
+        </li>
+        <li>
+            <button class="btn btn-success" id="btn_menus_add"><span class="glyphicon glyphicon-plus"></span></button>
         </li>
     </ul>
 </div>
@@ -75,6 +78,14 @@
     });
 
     $("#lista-menus").sortable({
-        handle: ".btn_menus_mover"
+        handle: ".btn_menus_mover",
+        cancel : ''
     }).disableSelection();
+    
+    $("#btn_menus_add").click(function(){
+        bootbox.prompt("Crear nuevo menú", function(data){
+            var parametros = {"titulo" : data};
+            $.post("<?php echo site_url(array("menus","insert",$idcliente)) ?>", $.param(parametros));
+        });
+    });
 </script> 
