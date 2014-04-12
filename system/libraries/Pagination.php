@@ -37,7 +37,64 @@ class CI_Pagination {
 	var $use_page_numbers	= FALSE; // Use page number for segment instead of offset
 	var $first_link			= '&lsaquo; First';
 	var $next_link			= '&gt;';
-	var $prerams as $key => $val)
+	var $prev_link			= '&lt;';
+	var $last_link			= 'Last &rsaquo;';
+	var $uri_segment		= 3;
+	var $full_tag_open		= '';
+	var $full_tag_close		= '';
+	var $first_tag_open		= '';
+	var $first_tag_close	= '&nbsp;';
+	var $last_tag_open		= '&nbsp;';
+	var $last_tag_close		= '';
+	var $first_url			= ''; // Alternative URL for the First Page.
+	var $cur_tag_open		= '&nbsp;<strong>';
+	var $cur_tag_close		= '</strong>';
+	var $next_tag_open		= '&nbsp;';
+	var $next_tag_close		= '&nbsp;';
+	var $prev_tag_open		= '&nbsp;';
+	var $prev_tag_close		= '';
+	var $num_tag_open		= '&nbsp;';
+	var $num_tag_close		= '';
+	var $page_query_string	= FALSE;
+	var $query_string_segment = 'per_page';
+	var $display_pages		= TRUE;
+	var $anchor_class		= '';
+
+	/**
+	 * Constructor
+	 *
+	 * @access	public
+	 * @param	array	initialization parameters
+	 */
+	public function __construct($params = array())
+	{
+		if (count($params) > 0)
+		{
+			$this->initialize($params);
+		}
+
+		if ($this->anchor_class != '')
+		{
+			$this->anchor_class = 'class="'.$this->anchor_class.'" ';
+		}
+
+		log_message('debug', "Pagination Class Initialized");
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Initialize Preferences
+	 *
+	 * @access	public
+	 * @param	array	initialization parameters
+	 * @return	void
+	 */
+	function initialize($params = array())
+	{
+		if (count($params) > 0)
+		{
+			foreach ($params as $key => $val)
 			{
 				if (isset($this->$key))
 				{
