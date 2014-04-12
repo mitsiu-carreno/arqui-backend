@@ -1,0 +1,42 @@
+<?php
+
+class Menus extends CI_Controller {
+
+    function __construct() {
+        parent::__construct();
+        $userid = $this->session->userdata("userid");
+        if(!($userid > 0))
+            redirect ("users/login");
+    }
+    
+    function get($idcliente = 1){
+        $this->load->view("header");
+        $data = array("idcliente"=>$idcliente);
+        //$this->load->view("header");
+        $this->load->view("clients/banner",$data);
+        //$this->load->view("footer"); 
+        $this->load->view("menu_backend/back-end", $data);
+        $this->load->view("menu_backend/menu");
+        $this->load->view("footer");
+    }
+    
+    function insert($idcliente = NULL){
+        if ($idcliente === NULL){
+            echo "error";
+        } else {
+            $this->load->model("menu_model");
+            $this->menu_model->insert($idcliente, $this->input->post("titulo"));
+        }
+    }
+    
+    function lista($idcliente = 1){
+        $data = array("idcliente"=>$idcliente);
+        $this->load->model("menu_model");
+        $data["menus"] = $this->menu_model->get($idcliente);
+//        var_dump($data);
+                $this->load->view("header");
+        $this->load->view("clients/menus", $data);
+        $this->load->view("footer");
+    }
+
+}

@@ -1,0 +1,18 @@
+[06-Apr-2014 05:44:13 UTC] PHP Fatal error:  Call to undefined method CI_Image_lib::convert() in /home/cognos1/public_html/application/controllers/imagenes.php on line 45
+[06-Apr-2014 05:46:10 UTC] PHP Fatal error:  Call to undefined method CI_Image_lib::convert() in /home/cognos1/public_html/application/controllers/imagenes.php on line 45
+[06-Apr-2014 05:57:57 UTC] PHP Parse error:  syntax error, unexpected '$data' (T_VARIABLE) in /home/cognos1/public_html/application/controllers/imagenes.php on line 44
+[09-Apr-2014 01:42:48 UTC] PHP Fatal error:  Call to undefined method Client_model::set() in /home/cognos1/public_html/application/controllers/contacto.php on line 12
+[09-Apr-2014 10:59:44 UTC] PHP Fatal error:  Call to undefined method Client_model::set() in /home/cognos1/public_html/application/controllers/contacto.php on line 12
+[09-Apr-2014 21:33:04 UTC] PHP Fatal error:  Call to undefined method Client_model::set() in /home/cognos1/public_html/application/controllers/contacto.php on line 12
+[09-Apr-2014 21:33:22 UTC] PHP Fatal error:  Call to undefined method Client_model::set() in /home/cognos1/public_html/application/controllers/contacto.php on line 12
+[09-Apr-2014 21:33:45 UTC] PHP Fatal error:  Call to undefined method Client_model::set() in /home/cognos1/public_html/application/controllers/contacto.php on line 12
+[09-Apr-2014 21:33:48 UTC] PHP Fatal error:  Call to undefined method Client_model::set() in /home/cognos1/public_html/application/controllers/contacto.php on line 12
+[12-Apr-2014 22:28:28 UTC] PHP Fatal error:  Uncaught [23000] - SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'pos' cannot be null
+trace: #0 /home/cognos1/public_html/application/third_party/rb.php(419): RedBean_Driver_PDO->runQuery('INSERT INTO `me...', Array)
+#1 /home/cognos1/public_html/application/third_party/rb.php(442): RedBean_Driver_PDO->GetAll('INSERT INTO `me...', Array)
+#2 /home/cognos1/public_html/application/third_party/rb.php(2402): RedBean_Driver_PDO->GetCol('INSERT INTO `me...', Array)
+#3 /home/cognos1/public_html/application/third_party/rb.php(3168): RedBean_Adapter_DBAdapter->getCell('INSERT INTO `me...', Array, 0)
+#4 /home/cognos1/public_html/application/third_party/rb.php(3326): RedBean_QueryWriter_AQueryWriter->insertRecord('menu', Array, Array)
+#5 /home/cognos1/public_html/application/third_party/rb.php(5559): RedBean_QueryWriter_AQueryWriter->updateRecord('menu', Array, 0)
+#6 /home/cognos1/public_html/application/third_party/rb.php(6151): RedBean_OODB->storeBean(Object(RedBean_OODBBean))
+#7 /home/cognos1/public_html in /home/cognos1/public_html/application/third_party/rb.php on line 286
