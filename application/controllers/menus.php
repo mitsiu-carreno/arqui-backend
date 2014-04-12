@@ -19,5 +19,13 @@ class Menus extends CI_Controller {
         $this->load->view("menu_backend/menu");
         $this->load->view("footer");
     }
+    
+    function lista($idcliente = 1){
+        $this->load->model("menu_model");
+                $this->load->view("header");
+        $data = array("idcliente"=>$idcliente);
+        $this->load->view("clients/menus", $data);
+        $this->load->view("footer");
+    }
 
 }
