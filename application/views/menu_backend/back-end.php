@@ -39,7 +39,7 @@
                         var parametros = {contacto: $("#inp_email").val(), contacto_texto: tinymce.get('txt_contacto').getContent()};
                         console.log($.param(parametros));
                         $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $.param(parametros));
-                    });
+                    });                 
                }
             });
   
@@ -149,6 +149,7 @@
                 </form>
             </div>
         </div>
+        <!--
         <div id="menu">
             <div class="fondo_1">
                 <label>Menús</label>
@@ -156,9 +157,10 @@
             <div class="row">
                 <div class="col-sm-offset-1 borde">
                     <ul id="menu_div" class="nav nav-tabs">
-                        <!--<li><a href="#" class="menu_cont">Menu1</a></li>-->
+                        <!--<li><a href="#" class="menu_cont">Menu1</a></li> ->               
                         <li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>
                     </ul>
                 </div>
             </div>
         </div>
+        -->
