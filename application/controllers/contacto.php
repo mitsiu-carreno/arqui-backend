@@ -9,7 +9,7 @@ class Contacto extends CI_Controller {
     
     function set($idclient){
         $this->load->model("client_model");
-        $this->client_model->set($idclient, $this->input->post("contacto"), $this->input->post("contacto_texto"));
+        $this->client_model->update_contacto($idclient, $this->input->post("contacto"), $this->input->post("contacto_texto"));
     }
     
 }
