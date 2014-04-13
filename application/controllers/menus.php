@@ -44,5 +44,10 @@ class Menus extends CI_Controller {
        $menu = $this->menu_model->updateTitulo($idcliente, $this->input->post("id"),  $this->input->post("titulo"));
        
     }
+    
+    function eliminar($idmenu){
+        $this->load->model("menu_model");
+       $menu = $this->menu_model->delete($idmenu);
+    }
 
 }

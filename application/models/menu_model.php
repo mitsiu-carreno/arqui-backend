@@ -48,5 +48,10 @@ class Menu_model extends CI_Model {
         $menu->titulo = $titulo;
         R::store($menu);
     }
+    
+    function delete($idmenu){
+        $menu = R::load( 'menu', $idmenu );
+        R::trash($menu);
+    }
 }
     
