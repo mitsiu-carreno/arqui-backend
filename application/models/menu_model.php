@@ -17,7 +17,8 @@ class Menu_model extends CI_Model {
         
         $client->ownMenu[] = $menu;
         
-        R::store($client); 
+        $id = R::store($client); 
+        //echo $id;
         return $this->getLast($clientid);
     }
     
@@ -29,16 +30,23 @@ class Menu_model extends CI_Model {
                 return $client->ownMenu[$id];
     }
     
-    function getLastPosition($clientid){
-        $menu = R::findOne( 'menu', "client_id = ? ORDER BY pos DESC", array($clientid));
-        var_dump($menu);
-        return $menu->pos;
-        
+    function getLast($clientid){
+        $menu = R::findLast( 'menu', "client_id = ?", array($clientid));
+        return $menu->export();
     }
     
-    function getLast($clientid){
-        $menus = $this->get($clientid);
-        return end($menus);
+    function getLastPosition($clientid){
+        $menu = R::findOne( 'menu', "client_id = ? ORDER BY pos DESC", array($clientid));
+        if ($menu)
+            return $menu->pos;
+        else
+            return 0;
+    }
+    
+    function updateTitulo($idcliente,$idmenu,$titulo){
+        $menu = R::load( 'menu', $idmenu );
+        $menu->titulo = $titulo;
+        R::store($menu);
     }
 }
     

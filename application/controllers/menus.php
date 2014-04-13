@@ -25,7 +25,8 @@ class Menus extends CI_Controller {
             echo "error";
         } else {
             $this->load->model("menu_model");
-            $this->menu_model->insert($idcliente, $this->input->post("titulo"));
+            $menu = $this->menu_model->insert($idcliente, $this->input->post("titulo"));
+            echo json_encode($menu);
         }
     }
     
@@ -33,10 +34,15 @@ class Menus extends CI_Controller {
         $data = array("idcliente"=>$idcliente);
         $this->load->model("menu_model");
         $data["menus"] = $this->menu_model->get($idcliente);
-//        var_dump($data);
+//     var_dump($data);
                 $this->load->view("header");
         $this->load->view("clients/menus", $data);
         $this->load->view("footer");
+    }
+    function editar($idcliente){
+       $this->load->model("menu_model");
+       $menu = $this->menu_model->updateTitulo($idcliente, $this->input->post("id"),  $this->input->post("titulo"));
+       
     }
 
 }

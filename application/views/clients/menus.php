@@ -9,9 +9,9 @@
     <!-- Single button -->
     <ul id="lista-menus"  class="list-inline">
         <?php foreach ($menus as $m): ?>
-            <li>
+        <li class="li-menu" idmenu="<?php echo $m["id"] ?>">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default">
+                    <button type="button" class="btn btn-default btn_menus_titulo">
                         <?php echo $m["titulo"] ?>
                     </button>
                     <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
@@ -19,8 +19,8 @@
                         <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                        <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
                     </ul>
                 </div>
             </li>
@@ -35,20 +35,38 @@
         </li>
     </ul>
 </div>
+<li id="li_to_clone" class="hidden li-menu" idmenu="">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn_menus_titulo">
+                    </button>
+                    <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
+                    </ul>
+                </div>
+            </li>
 <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
 <script>
     $(".btn_menus_editar").click(function(e) {
+        var btn_menu = $(this).closest("div");
+        var menuid = btn_menu.closest("li").attr("idmenu");
         e.preventDefault();
-        var nombreDelMenu = $(this).text();
+        var nombreDelMenu = $.trim(btn_menu.find(".btn_menus_titulo").html());
         console.log(nombreDelMenu);
         bootbox.prompt({
             title: "Editar menú",
-            value: "Menú 2",
+            value: nombreDelMenu,
             callback: function(result) {
                 if (result === null) {
                     console.log("Prompt dismissed");
                 } else {
-                    console.log("Hi <b>" + result + "</b>");
+                    btn_menu.find(".btn_menus_titulo").html(result);
+                    var parametros = {id:menuid,"titulo": result};
+                    $.post("<?php echo site_url(array("menus", "editar", $idcliente)) ?>", $.param(parametros),"json");
                 }
             }
         });
@@ -65,21 +83,11 @@
             if (data && data.length > 0) {
                 var parametros = {"titulo": data};
                 $.post("<?php echo site_url(array("menus", "insert", $idcliente)) ?>", $.param(parametros), function(success){
-                    var li = $("<li />").append(
-                        $("<div/>").addClass("btn-group").append(
-                        $("<button />").attr("type", "button").html(success.titulo).addClass("btn btn-default")
-                        ).append('<button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>').append(
-                        '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">' +
-                        '<span class="sr-only">Toggle Dropdown</span><span class="caret"></span>' +
-                        '</button>' +
-                        '<ul class="dropdown-menu" role="menu">' +
-                        '<li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>' +
-                        '<li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>' +
-                        '</ul>'
-                        )
-                        );
-                $("#lista-menus li:last").before(li);
-                });
+                    console.log(success);
+                    var li = $("#li_to_clone").clone().attr("id","").removeClass("hidden").attr("idmenu",success.id);
+                    li.find(".btn_menus_titulo").html(success.titulo);
+                    $("#lista-menus li:last").before(li);
+                },"json");
                 
                 $("#li_menus_empty").remove();
             }
