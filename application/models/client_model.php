@@ -56,8 +56,8 @@ class Client_model extends CI_Model {
     
     function update_contacto($id, $contacto, $texto){
         $client = R::load( 'client', $id );
-        $client->contacto = $data["contacto"];
-        $client->contacto_texto = $data["texto"];
+        $client->contacto = $contacto;
+        $client->contacto_texto = $texto;
         R::store($client);
         return $id;
     }

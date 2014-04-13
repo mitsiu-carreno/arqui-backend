@@ -20,6 +20,7 @@ class Redbean extends CI_Controller {
 	public function index()
 	{         
                 echo "Ambiente " . ENVIRONMENT;
+                echo "hola"; 
 	}
         
         public function log(){
