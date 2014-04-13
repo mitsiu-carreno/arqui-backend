@@ -5,8 +5,12 @@
                $("#contenido").hide();
                
                $('#tipo input').on('change', function() {
-                    //alert($('input[name=radioName]:checked', '#myForm').val()); 
-                    if($('input[name=tipo]:checked', '#tipo').val()=="html"){
+                    //alert($('input[name=radioName]:checked', '#myForm').val());
+                    var parametros = {tipo: $("#tipo").val()};
+                        console.log($.param(parametros));
+                        $.post("<?php echo site_url(array("tipo","set",$idcliente)) ?>", $.param(parametros));
+                        
+                    if($('input[name=tipo]:checked', '#tipo').val()==1){
                         $("#contenido").show();
                         
                         $("#submenu").hide();
@@ -76,9 +80,9 @@
                     <div class="col-sm-2 borde">
                         <form id="tipo" role="form">
                             <div class="checkbox">
-                                <input type="radio" name="tipo" value="submenu" checked> Submenú
+                                <input type="radio" name="tipo" value="0" checked> Submenú
                                 <br>
-                                <input type="radio" name="tipo" value="html"> HTML 
+                                <input type="radio" name="tipo" value="1"> HTML 
                             </div>
                         </form>
                     </div>    
@@ -97,8 +101,8 @@
                        <br>
                        <form id="submenu_2" role="form">
                             <div class="checkbox">
-                                <input type="radio" name="tipo" value="video" checked> Video
-                                <input type="radio" name="tipo" value="html" style="margin-left:20%"> HTML 
+                                <input type="radio" name="sub_tipo" value="video" checked> Video
+                                <input type="radio" name="sub_tipo" value="html" style="margin-left:20%"> HTML 
                             </div>
                             <input type="text" class="form-control" id="URL" placeholder="URL">
                                 <div class="checkbox">
@@ -140,8 +144,8 @@
                         <input type="text" placeholder="Nuevo Submenú"/>
                         <form role="form">
                             <div class="checkbox">
-                                <input type="radio" name="tipo" checked/> Video
-                                <input type="radio" name="tipo" style="margin-left:20%" checked/> HTML 
+                                <input type="radio" name="nuev_tipo" checked/> Video
+                                <input type="radio" name="nuev_tipo" style="margin-left:20%" checked/> HTML 
                             </div>
                         </form>
                         <div class="fondo_1">
