@@ -8,52 +8,29 @@
 <div class="container">
     <!-- Single button -->
     <ul id="lista-menus"  class="list-inline">
-        <li>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default">
-                    Menú 1 
-                </button>
-                <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                    <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default">
-                    Menú 2
-                </button>
-                <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                    <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default">
-                    Menú 3
-                </button>
-                <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                    <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                </ul>
-            </div>
-        </li>
-        <li>
+        <?php foreach ($menus as $m): ?>
+            <li>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">
+                        <?php echo $m["titulo"] ?>
+                    </button>
+                    <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                        <li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
+                    </ul>
+                </div>
+            </li>
+        <?php endforeach; ?>
+        <?php if (count($menus) == 0): ?>
+            <li id="li_menus_empty">
+                <small><i>No hay menús, haga click en el siguiente botón para agregar uno -></i></small>
+            </li>
+        <?php endif; ?>
+        <li id="li_menus_add">
             <button class="btn btn-success" id="btn_menus_add"><span class="glyphicon glyphicon-plus"></span></button>
         </li>
     </ul>
@@ -79,13 +56,33 @@
 
     $("#lista-menus").sortable({
         handle: ".btn_menus_mover",
-        cancel : ''
+        cancel: ''
     }).disableSelection();
-    
-    $("#btn_menus_add").click(function(){
-        bootbox.prompt("Crear nuevo menú", function(data){
-            var parametros = {"titulo" : data};
-            $.post("<?php echo site_url(array("menus","insert",$idcliente)) ?>", $.param(parametros));
+
+    $("#btn_menus_add").click(function() {
+        bootbox.prompt("Crear nuevo menú", function(data) {
+            console.log(data);
+            if (data && data.length > 0) {
+                var parametros = {"titulo": data};
+                $.post("<?php echo site_url(array("menus", "insert", $idcliente)) ?>", $.param(parametros), function(success){
+                    var li = $("<li />").append(
+                        $("<div/>").addClass("btn-group").append(
+                        $("<button />").attr("type", "button").html(success.titulo).addClass("btn btn-default")
+                        ).append('<button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>').append(
+                        '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">' +
+                        '<span class="sr-only">Toggle Dropdown</span><span class="caret"></span>' +
+                        '</button>' +
+                        '<ul class="dropdown-menu" role="menu">' +
+                        '<li><a href="#"><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>' +
+                        '<li><a href="#" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>' +
+                        '</ul>'
+                        )
+                        );
+                $("#lista-menus li:last").before(li);
+                });
+                
+                $("#li_menus_empty").remove();
+            }
         });
     });
 </script> 
