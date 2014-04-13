@@ -74,7 +74,16 @@
 
     $("#lista-menus").sortable({
         handle: ".btn_menus_mover",
-        cancel: ''
+        cancel: '',
+        update: function( event, ui ) {
+            var elementos = {};
+            $.each($("#lista-menus .li-menu"), function(index,value){
+                elementos[index+1] = $(value).attr("idmenu");
+            });
+            var parametros = {"menus" : elementos};
+            console.log(parametros);
+            $.post("<?php echo site_url(array("menus", "resort", $idcliente)) ?>", $.param(parametros),"json");
+        }
     }).disableSelection();
 
     $("#btn_menus_add").click(function() {

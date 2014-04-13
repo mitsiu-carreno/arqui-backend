@@ -25,7 +25,7 @@ class Menu_model extends CI_Model {
     function get($clientid, $id = NULL){
             $client = R::load( 'client', $clientid );
             if ($id===NULL)
-                return $client->ownMenu;
+                return $client->with(' ORDER BY pos ASC ')->ownMenu;
             else
                 return $client->ownMenu[$id];
     }
@@ -52,6 +52,15 @@ class Menu_model extends CI_Model {
     function delete($idmenu){
         $menu = R::load( 'menu', $idmenu );
         R::trash($menu);
+    }
+    
+    function updatePos($idcliente,$data){
+            foreach ($data as $key => $value) {
+                $menu = R::load( 'menu', $value );
+                $menu->pos=$key;
+                R::store($menu); 
+            }
+    
     }
 }
     

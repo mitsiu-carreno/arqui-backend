@@ -49,5 +49,10 @@ class Menus extends CI_Controller {
         $this->load->model("menu_model");
        $menu = $this->menu_model->delete($idmenu);
     }
+    
+    function resort($idcliente){
+        $this->load->model("menu_model");
+        $this->menu_model->updatePos($idcliente,  $this->input->post("menus"));
+    }
 
 }
