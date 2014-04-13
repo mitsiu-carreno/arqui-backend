@@ -13,8 +13,6 @@
     #btn_subir{
     }
     #status {
-        padding: 6px;
-        margin-top: 10px;
     } 
 </style>
 <div class="container">

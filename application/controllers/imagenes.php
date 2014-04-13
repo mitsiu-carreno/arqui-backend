@@ -97,4 +97,17 @@ class Imagenes extends CI_Controller {
 		}
     }
     
+    function galeria_files($idcliente){
+        $this->load->helper('file');
+        $path = './galeria/' . $idcliente . '/';
+        $directorio = get_dir_file_info($path);
+        var_dump($directorio);
+        $archivos = array();
+        foreach($directorio as $a){
+            $arhivos[]["name"] = $a["name"];
+            $arhivos[]["name"] = $a["name"];
+        }
+        echo json_encode(array("archivos"=>$arhivos));
+    }
+    
 }

@@ -4,7 +4,7 @@ $(function(){
     $('#upload').fileupload({
 
         // This element will accept file drag/drop uploading
-        dropZone: $('#img_banner'),
+        dropZone: $('#panel_list_files'),
         dataType: 'json',
         // This function is called when a file is added to the queue;
         // either via the browse button, or via drag/drop:
