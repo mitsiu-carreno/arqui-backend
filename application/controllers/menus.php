@@ -10,12 +10,15 @@ class Menus extends CI_Controller {
     }
     
     function get($idcliente = 1){
-        $this->load->view("header");
         $data = array("idcliente"=>$idcliente);
-        //$this->load->view("header");
+        $this->load->model("menu_model");
+        $data["menus"] = $this->menu_model->get($idcliente);
+        
+        
+        $this->load->view("header");
         $this->load->view("clients/banner",$data);
-        //$this->load->view("footer"); 
         $this->load->view("menu_backend/back-end", $data);
+        $this->load->view("clients/menus", $data);
         $this->load->view("menu_backend/menu");
         $this->load->view("footer");
     }
