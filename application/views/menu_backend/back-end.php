@@ -3,9 +3,9 @@
         $(function(){
             tinymce.init({
                 selector: ".textarea",
-                width: 600,
+                width: 550,
                 menubar : false,
-                height: 300,
+                height: 200,
                 language : 'es',
                 image_advtab: true,
                 plugins: [
@@ -121,7 +121,7 @@
         -->
         
         <br>
-        <div id="contacto" class="borde" style="height: 500px">
+        <div id="contacto" class="borde" style="height: 400px">
             <div class="fondo_1">
                 <label>Contacto</label>
             </div>
