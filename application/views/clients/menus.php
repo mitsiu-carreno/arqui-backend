@@ -105,4 +105,9 @@
             }
         });
     });
+    $(".btn_menus_titulo").click(function(){
+        var menuid=$(this).closest("li").attr("idmenu")
+        alert(menuid);
+        //setTimeout('location.href="<?php echo site_url(array("menus", "eliminar",$m['id'])) ?>"');
+    });
 </script> 

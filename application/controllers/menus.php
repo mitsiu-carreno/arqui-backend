@@ -14,12 +14,12 @@ class Menus extends CI_Controller {
         $this->load->model("menu_model");
         $data["menus"] = $this->menu_model->get($idcliente);
         
-        
+        //var_dump($data["menus"]);
         $this->load->view("header");
         $this->load->view("clients/banner",$data);
-        $this->load->view("menu_backend/back-end", $data);
+        $this->load->view("menu_backend/contacto", $data);
         $this->load->view("clients/menus", $data);
-        $this->load->view("menu_backend/menu");
+        $this->load->view("menu_backend/submenu", $data);
         $this->load->view("footer");
     }
     
@@ -51,6 +51,7 @@ class Menus extends CI_Controller {
     function eliminar($idmenu){
         $this->load->model("menu_model");
        $menu = $this->menu_model->delete($idmenu);
+       //redirect('menus/lista');
     }
     
     function resort($idcliente){
