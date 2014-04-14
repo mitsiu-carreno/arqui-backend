@@ -61,4 +61,10 @@ class Client_model extends CI_Model {
         R::store($client);
         return $id;
     }
+    
+    function updateTipo($idmenu,$tipo){
+        $menu = R::load( 'menu', $idmenu );
+        $menu->tipo = $tipo;
+        R::store($menu);
+    }
 }
