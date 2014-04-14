@@ -1,14 +1,22 @@
         <script type="text/javascript" charset="utf-8">
         $(function(){
-           
+                //$.getJSON("<?php echo site_url(array("tipo","get",3)) ?>", function(data){
+                //alert(data.contacto);
+                //$("#inp_email").val(data.contacto);
+                
+                
                $("#submenu_html").hide();
                $("#contenido").hide();
                
                $('#tipo input').on('change', function() {
                     //alert($('input[name=radioName]:checked', '#myForm').val());
-                    var parametros = {tipo: $("#tipo").val()};
+                    //alert($('input[name=tipo]:checked', '#tipo').val()); <-value de radio
+                    //alert($("#tipo").val());
+                    var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
                         console.log($.param(parametros));
-                        $.post("<?php echo site_url(array("tipo","set",$idcliente)) ?>", $.param(parametros));
+                        //alert($(".btn_menus_titulo").closest("li").attr("idmenu")); <-IDMENU
+                        
+                        $.post("<?php echo site_url(array("tipo","set", 1)) ?>", $.param(parametros));
                         
                     if($('input[name=tipo]:checked', '#tipo').val()==1){
                         $("#contenido").show();
@@ -96,12 +104,15 @@
                         <br>
                         <label>Submenú</label>
                     </div>  
-                    <div class="col-sm-3 borde fondo_2">
+                    <div class="col-sm-5 borde fondo_2">
+                        <div style="margin: 0 auto">
                         <label><input type="text" placeholder="Submenú 1"></label>
+                        </div>
                        <br>
                        <form id="submenu_2" role="form">
                             <div class="checkbox">
                                 <input type="radio" name="sub_tipo" value="video" checked> Video
+                                <input type="radio" name="sub_tipo" value="video" style="margin-left: 20%"> Galería
                                 <input type="radio" name="sub_tipo" value="html" style="margin-left:20%"> HTML 
                             </div>
                             <input type="text" class="form-control" id="URL" placeholder="URL">
@@ -124,9 +135,9 @@
                                 <input type="text" name="texto_boton" placeholder="Texto del botón"/>
                            </div>
                            <div id="submenu_html">
-                               <br>
+                               
                             <!--<div class="fondo_1" style="height: 150px">-->
-                                <br>
+                                    
                                 <!--<div class="container">-->
                                     <div class="hero-unit fondo_1" style="width: 305px; height: 350px;">
                                         <textarea class="textarea" placeholder="Enter text ..." style="width: 250px; height: 100px; margin-left: -30px"></textarea>
@@ -165,12 +176,12 @@
                         <br>
                         <label>Contenido</label>
                     </div>  
-                    <div class="col-sm-9 borde fondo_2">
+                    <div class="col-sm-5 borde fondo_2">
                        <label>Texto HTML</label>
                        <br>
                        <div class="container">
-                            <div class="hero-unit fondo_1" style="margin-top:20px">
-                                    <textarea id="txt_contenido" class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+                            <div style="margin-top:20px">
+                                   <textarea class="textarea" placeholder="Enter text ..." ></textarea>
                             </div>
                        </div> 
                     </div>     
