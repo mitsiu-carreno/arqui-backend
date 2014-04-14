@@ -6,9 +6,11 @@
                
                $('#tipo input').on('change', function() {
                     //alert($('input[name=radioName]:checked', '#myForm').val());
-                    var parametros = {tipo: $("#tipo").val()};
+                    alert($('input[name=tipo]:checked', '#tipo').val());
+                    //alert($("#tipo").val());
+                    var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
                         console.log($.param(parametros));
-                        $.post("<?php echo site_url(array("tipo","set",$idcliente)) ?>", $.param(parametros));
+                        $.post("<?php echo site_url(array("tipo","set",$idmenu)) ?>", $.param(parametros));
                         
                     if($('input[name=tipo]:checked', '#tipo').val()==1){
                         $("#contenido").show();
