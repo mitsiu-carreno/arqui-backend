@@ -3,7 +3,7 @@
 class Tipo extends CI_Controller {
     
     function get($idclient){
-        $this->load->model("tipo_model");
+        $this->load->model("client_model");
         $data = $this->client_model->get($idclient);
         echo json_encode(array("tipo" => $data["tipo"]));
     }

@@ -61,9 +61,9 @@
                     <div class="col-sm-2 borde">
                         <form id="tipo" role="form">
                             <div class="checkbox">
-                                <input type="radio" name="tipo" value="0" checked> Submenú
+                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
                                 <br>
-                                <input type="radio" name="tipo" value="1"> HTML 
+                                <input type="radio" name="tipo" id="html" value="1"> HTML 
                             </div>
                         </form>
                     </div>    
@@ -79,7 +79,21 @@
         $(".btn_menus_titulo").first().addClass("active");
         //$(".btn_menus_titulo").first().button("untoggle");
         menuid=$(".btn_menus_titulo").closest("li").attr("idmenu");
+        //alert(<?php echo $idcliente?>);
+        //alert('antes');
+        $.getJSON("<?php echo site_url(array("tipo","get",$idcliente)) ?>", function(data){
+            //alert('entro');
+            data.tipo=1;
+            alert(data.tipo);
+            if(data.tipo==0||data.tipo==null){
+                $('#sub').attr('checked', true);
+            }else{
+                $('#html').attr('checked', true);
+            }
+        });
     });
+    
+    
     
     $(".btn_menus_editar").click(function(e) {
         var btn_menu = $(this).closest("div");
