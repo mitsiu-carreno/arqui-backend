@@ -8,26 +8,7 @@
                $("#submenu_html").hide();
                $("#contenido").hide();
                
-               $('#tipo input').on('change', function() {
-                    //alert($('input[name=radioName]:checked', '#myForm').val());
-                    //alert($('input[name=tipo]:checked', '#tipo').val()); <-value de radio
-                    //alert($("#tipo").val());
-                    var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
-                        console.log($.param(parametros));
-                        //alert($(".btn_menus_titulo").closest("li").attr("idmenu")); //<-IDMENU
-                        //console.log($m["id"]);
-                        $.post("<?php echo site_url(array("tipo","set", 1)) ?>", $.param(parametros));
-                        
-                    if($('input[name=tipo]:checked', '#tipo').val()==1){
-                        $("#contenido").show();
-                        
-                        $("#submenu").hide();
-                    }
-                    else{
-                        $("#submenu").show();
-                        $("#contenido").hide();
-                    }
-                });
+               
                 
                 $('#submenu_2 input').on('change', function() {
                     //alert($('input[name=radioName]:checked', '#myForm').val()); 
@@ -79,7 +60,7 @@
 	}
         </style>
         
-        <div id="selec_tipo" class="fondo_2">
+       <!-- <div id="selec_tipo" class="fondo_2">
                 <br>
                 <div class="row">
                     <div class="col-sm-1 col-sm-offset-1 borde">
@@ -95,7 +76,7 @@
                         </form>
                     </div>    
                 </div>
-            </div>
+            </div>-->
             <!--Submenú-->
             <div id="submenu">
                 <br>

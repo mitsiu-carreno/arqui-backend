@@ -52,8 +52,34 @@
                     </ul>
                 </div>
             </li>
+            <div id="selec_tipo" class="fondo_2">
+                <br>
+                <div class="row">
+                    <div class="col-sm-1 col-sm-offset-1 borde">
+                        <label>Tipo</label>
+                    </div>
+                    <div class="col-sm-2 borde">
+                        <form id="tipo" role="form">
+                            <div class="checkbox">
+                                <input type="radio" name="tipo" value="0" checked> Submenú
+                                <br>
+                                <input type="radio" name="tipo" value="1"> HTML 
+                            </div>
+                        </form>
+                    </div>    
+                </div>
+            </div>
 <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
 <script>
+    
+    var menuid = null;
+    $( document ).ready(function() {
+        //$(".btn").slice(2,3).button("toggle");
+        $(".btn_menus_titulo").first().button("toggle");
+        $(".btn_menus_titulo").first().button("untoggle");
+        menuid=$(".btn_menus_titulo").closest("li").attr("idmenu");
+    });
+    
     $(".btn_menus_editar").click(function(e) {
         var btn_menu = $(this).closest("div");
         var menuid = btn_menu.closest("li").attr("idmenu");
@@ -106,8 +132,24 @@
         });
     });
     $(".btn_menus_titulo").click(function(){
-        var menuid=$(this).closest("li").attr("idmenu")
-        alert(menuid);
-        //setTimeout('location.href="<?php echo site_url(array("menus", "eliminar",$m['id'])) ?>"');
+        menuid=$(this).closest("li").attr("idmenu");  
     });
+    
+    $('#tipo input').on('change', function() {
+                    //alert($('input[name=tipo]:checked', '#tipo').val()); <-value de radio
+                    var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
+                        console.log($.param(parametros));
+                        //alert(menuid);
+                        $.post("<?php echo site_url(array("tipo","set")) ?>/" + menuid, $.param(parametros));
+                        
+                    if($('input[name=tipo]:checked', '#tipo').val()==1){
+                        $("#contenido").show();
+                        
+                        $("#submenu").hide();
+                    }
+                    else{
+                        $("#submenu").show();
+                        $("#contenido").hide();
+                    }
+                });
 </script> 
