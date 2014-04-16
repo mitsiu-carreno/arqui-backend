@@ -82,9 +82,8 @@
         //alert(<?php echo $idcliente?>);
         //alert('antes');
         $.getJSON("<?php echo site_url(array("tipo","get",$idcliente)) ?>", function(data){
-            //alert('entro');
             data.tipo=1;
-            alert(data.tipo);
+            //alert(data.tipo);
             if(data.tipo==0||data.tipo==null){
                 $('#sub').attr('checked', true);
             }else{
