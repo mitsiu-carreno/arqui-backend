@@ -41,10 +41,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'dbUlises.db.5245242.hostedresource.com';
-$db['default']['username'] = 'dbUlises';
-$db['default']['password'] = 'DB4l1s3s!';
-$db['default']['database'] = 'dbUlises';
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'byde';
+$db['default']['password'] = 'rootroot.1';
+$db['default']['database'] = 'videos';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
