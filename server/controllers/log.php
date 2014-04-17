@@ -31,7 +31,7 @@ class Log extends REST_Controller
             $user = $this->log_model->in($this->post("email"),$this->post("password"));
             if(is_array($user)){
                 $this->load->library('encrypt');
-                $user["token"] = $this->encrypt->encode($user["id"]);
+                $user["token"] = base64_encode($this->encrypt->encode($user["id"]));
                 $this->response($user, 200);
             } else {
                 $this->response(array('error' => 'No se encontró el usuario'), 404);
