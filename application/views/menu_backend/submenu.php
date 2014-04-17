@@ -176,6 +176,7 @@
                 </div>
             </div>
         </div>
+-->
         <div id="contenido">
             <br>
             <div class="row">
@@ -183,7 +184,7 @@
                     <br>
                     <label>Contenido</label>
                 </div>  
-                <div class="col-sm-5 borde fondo_2">
+                <div class="col-sm-6 borde fondo_2">
                    <label>Texto HTML</label>
                    <br>
                    <div class="container">
@@ -195,4 +196,4 @@
             </div>
         </div>
                     
-                    -->
+                   
