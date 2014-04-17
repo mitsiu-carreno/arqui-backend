@@ -24,10 +24,12 @@ class Menu_model extends CI_Model {
     
     function get($clientid, $id = NULL){
             $client = R::load( 'client', $clientid );
-            if ($id===NULL)
-                return $client->with(' ORDER BY pos ASC ')->ownMenu;
-            else
-                return $client->ownMenu[$id];
+
+            if ($id === NULL) {
+            return $client->with(' ORDER BY pos ASC ')->ownMenu;
+        } else {
+            return $client->ownMenu[$id];
+        }
     }
     
     function getLast($clientid){
