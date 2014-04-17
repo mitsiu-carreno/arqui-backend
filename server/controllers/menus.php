@@ -22,7 +22,7 @@ class Menus extends REST_Controller
         parent::__construct();
          header("Access-Control-Allow-Origin: *");
     }
-    function token_get(){
+    function token_post(){
                 $this->load->library('encrypt');
         $idcliente = $this->encrypt->decode(base64_decode($this->get("cliente")));
         if(!is_numeric($idcliente)){
@@ -37,4 +37,4 @@ class Menus extends REST_Controller
             }
         }
     }
-}
+} 
