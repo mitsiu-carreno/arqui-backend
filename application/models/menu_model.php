@@ -13,6 +13,8 @@ class Menu_model extends CI_Model {
         $menu = R::dispense( 'menu' );
         $menu->titulo = $titulo;
         $menu->activo = 1;
+        $menu->videoURL = NULL;
+        $menu->submenu = 1; //1 -> video, 2 -> Galeria, 3 -> HTML
         $menu->pos = ($this->getLastPosition($clientid))+1;
         
         $client->ownMenu[] = $menu;
@@ -22,12 +24,17 @@ class Menu_model extends CI_Model {
         return $this->getLast($clientid);
     }
     
-    function get($clientid, $id = NULL){
+    function get($clientid = NULL, $id = NULL){
             $client = R::load( 'client', $clientid );
             if ($id===NULL)
                 return $client->with(' ORDER BY pos ASC ')->ownMenu;
             else
                 return $client->ownMenu[$id];
+    }
+    
+    function getTipo($idmenu){
+        $menu = R::findOne( 'menu', "id = ?", array($idmenu));
+        return $menu->export();
     }
     
     function getLast($clientid){
@@ -47,6 +54,13 @@ class Menu_model extends CI_Model {
         $menu = R::load( 'menu', $idmenu );
         $menu->titulo = $titulo;
         R::store($menu);
+    }
+    
+    function updateTipo($idmenu,$tipo){
+        $menu = R::load( 'menu', $idmenu );
+        $menu->tipo = $tipo;
+        R::store($menu);
+        return $menu->export();
     }
     
     function delete($idmenu){

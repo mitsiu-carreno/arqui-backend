@@ -37,7 +37,6 @@
             <button class="btn btn-success" id="btn_menus_add"><span class="glyphicon glyphicon-plus"></span></button>
         </li>
     </ul>
-</div>
 <li id="li_to_clone" class="hidden li-menu" idmenu="">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default btn_menus_titulo">
@@ -69,6 +68,14 @@
                     </div>    
                 </div>
             </div>
+            <div class="panel panel-default" id="submenu_content">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Elija un tipo de submenu</h3>
+                </div>
+                <div class="panel-body">
+                </div>
+              </div>
+</div>
 <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
 <script>
     
@@ -78,11 +85,11 @@
         //$(".btn_menus_titulo").first().button("toggle");
         $(".btn_menus_titulo").first().addClass("active");
         //$(".btn_menus_titulo").first().button("untoggle");
-        menuid=$(".btn_menus_titulo").closest("li").attr("idmenu");
+        menuid=$("#lista-menus li").first().attr("idmenu");
         //alert(<?php echo $idcliente?>);
         //alert('antes');
-        $.getJSON("<?php echo site_url(array("tipo","get",$idcliente)) ?>", function(data){
-            data.tipo=1;
+        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
+            //data.tipo=1;
             //alert(data.tipo);
             if(data.tipo==0||data.tipo==null){
                 $('#sub').attr('checked', true);
