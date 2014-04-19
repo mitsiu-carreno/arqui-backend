@@ -74,6 +74,8 @@
     
     var menuid = null;
     $( document ).ready(function() {
+         $("#submenu").hide();
+         $("#contenido").hide();
         //$(".btn").slice(2,3).button("toggle");
         //$(".btn_menus_titulo").first().button("toggle");
         $(".btn_menus_titulo").first().addClass("active");
@@ -86,8 +88,12 @@
             //alert(data.tipo);
             if(data.tipo==0||data.tipo==null){
                 $('#sub').attr('checked', true);
+                 $("#submenu").show();
+                 $("#contenido").hide();
             }else{
                 $('#html').attr('checked', true);
+                 $("#submenu").hide();
+                 $("#contenido").show();
             }
         });
     });
