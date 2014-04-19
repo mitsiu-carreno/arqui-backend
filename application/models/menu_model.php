@@ -69,6 +69,13 @@ class Menu_model extends CI_Model {
         R::trash($menu);
     }
     
+    function update($idmenu, $field, $value){
+        $menu = R::load( 'menu', $idmenu );
+        $menu->$field = $value;
+        R::store($menu);
+        return $menu->export();
+    }
+    
     function updatePos($idcliente,$data){
             foreach ($data as $key => $value) {
                 $menu = R::load( 'menu', $value );

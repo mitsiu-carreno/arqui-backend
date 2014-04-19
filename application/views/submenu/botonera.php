@@ -1,3 +1,8 @@
+<style>
+    #inp_videourl{
+        margin: 5px;
+    }
+</style>
 <div class="container">
     <div class="row">
 <div class="panel panel-default col-md-4">

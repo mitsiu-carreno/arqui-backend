@@ -36,4 +36,10 @@ class Submenu extends CI_Controller {
         echo json_encode(array($data));
     }
     
+    function update($field,$idmenu){
+        $this->load->model("menu_model");
+        $data =$this->menu_model->update($idmenu, $field, $this->input->post("video_url"));
+        echo json_encode($data);
+    }
+    
 }

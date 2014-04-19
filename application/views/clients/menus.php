@@ -180,4 +180,10 @@
                         $("#contenido").hide();
                     }
                 });
+                
+                $("body").delegate("#inp_videourl","keyup", function(){
+                    console.log($(this).serialize());
+                    $.post("<?php echo site_url(array("submenu","update","videoURL")) ?>/" + menuid, $(this).serialize());
+                });
+                //videoURL
 </script> 
