@@ -14,6 +14,7 @@ class Menu_model extends CI_Model {
         $menu->titulo = $titulo;
         $menu->activo = 1;
         $menu->tipo = 0;
+        $menu->videosubmenu = 1;
         $menu->videoURL = NULL;
         $menu->submenu = 1; //1 -> video, 2 -> Galeria, 3 -> HTML
         $menu->pos = ($this->getLastPosition($clientid))+1;

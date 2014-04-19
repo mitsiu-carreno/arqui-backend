@@ -184,6 +184,33 @@
                 $("body").delegate("#inp_videourl","keyup", function(){
                     console.log($(this).serialize());
                     $.post("<?php echo site_url(array("submenu","update","videoURL")) ?>/" + menuid, $(this).serialize());
+                    $("#iframe_video").attr("src",$(this).val());
+                });
+                
+                $("body").delegate("#btn_agregar_indice_video","click", function(){
+                    console.log("bumm");
+                    bootbox.dialog({
+                        message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
+                         buttons: {
+                            main: {
+                              label: "Insertar",
+                              className: "btn-success",
+                              callback: function() {
+                                  var li = $("#tpl_li_indice_video").clone().attr("id","").removeClass("hidden");
+                                  li.find("input name[txt_time_video]").val($('#inp_new_time_video').val());
+                                  li.find("input name[txt_boton_video]").val($('#id_new_button_video').val());
+                                  li.attr("idmarcador",1);
+                                console.log("Hi "+ $('#inp_new_time_video').val());
+                              }
+                            },
+                            danger: {
+                                label: "Cancelar",
+                                className: "btn-danger",
+                                callback: function() {
+                                }
+                            }
+                        }
+                    });
                 });
                 //videoURL
 </script> 
