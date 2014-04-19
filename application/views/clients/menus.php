@@ -70,9 +70,10 @@
             </div>
             <div class="panel panel-default" id="submenu_content">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Elija un tipo de submenu</h3>
+                  <h3 class="panel-title">Submenú</h3>
                 </div>
                 <div class="panel-body">
+                    
                 </div>
               </div>
 </div>
@@ -80,6 +81,16 @@
 <script>
     
     var menuid = null;
+    
+    var loadSubmenuContent = function(tipo){
+            if(tipo==0||tipo==null){
+                $('#sub').attr('checked', true);
+                $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+            }else{
+                $('#html').attr('checked', true);
+            }
+    };
+    
     $( document ).ready(function() {
         //$(".btn").slice(2,3).button("toggle");
         //$(".btn_menus_titulo").first().button("toggle");
@@ -89,13 +100,7 @@
         //alert(<?php echo $idcliente?>);
         //alert('antes');
         $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
-            //data.tipo=1;
-            //alert(data.tipo);
-            if(data.tipo==0||data.tipo==null){
-                $('#sub').attr('checked', true);
-            }else{
-                $('#html').attr('checked', true);
-            }
+            loadSubmenuContent(data.tipo);
         });
     });
     
