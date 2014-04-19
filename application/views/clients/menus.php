@@ -215,8 +215,3 @@
                     });
                 });
                 //videoURL
-<<<<<<< HEAD
-</script> 
-=======
-</script> 
->>>>>>> b69ba2552f5af202f9771dad3ae4f38e6c2a69a7
