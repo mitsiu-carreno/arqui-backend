@@ -9,6 +9,19 @@
                 <label>Menús</label>
 </div>
 <div class="container">
+ <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker4'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <!-- Single button -->
     <ul id="lista-menus"  class="list-inline">
         <?php foreach ($menus as $m): ?>
@@ -92,7 +105,9 @@
         });
     });
     
-    
+   $('#datetimepicker4').datetimepicker({
+                    pickDate: true
+                });
     
     $(".btn_menus_editar").click(function(e) {
         var btn_menu = $(this).closest("div");

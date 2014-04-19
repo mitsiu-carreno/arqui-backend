@@ -8,6 +8,7 @@
         <script src="<?php echo base_url() ?>js/jquery-1.11.0.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/bootstrap.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/bootbox.js" type="text/javascript"></script>
+        
     </head>
     <body>
 
