@@ -37,7 +37,6 @@
             <button class="btn btn-success" id="btn_menus_add"><span class="glyphicon glyphicon-plus"></span></button>
         </li>
     </ul>
-</div>
 <li id="li_to_clone" class="hidden li-menu" idmenu="">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default btn_menus_titulo">
@@ -69,10 +68,29 @@
                     </div>    
                 </div>
             </div>
+            <div class="panel panel-default" id="submenu_content">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Submenú</h3>
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+              </div>
+</div>
 <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
 <script>
     
     var menuid = null;
+    
+    var loadSubmenuContent = function(tipo){
+            if(tipo==0||tipo==null){
+                $('#sub').attr('checked', true);
+                $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+            }else{
+                $('#html').attr('checked', true);
+            }
+    };
+    
     $( document ).ready(function() {
          $("#submenu").hide();
          $("#contenido").hide();
@@ -80,21 +98,11 @@
         //$(".btn_menus_titulo").first().button("toggle");
         $(".btn_menus_titulo").first().addClass("active");
         //$(".btn_menus_titulo").first().button("untoggle");
-        menuid=$(".btn_menus_titulo").closest("li").attr("idmenu");
+        menuid=$("#lista-menus li").first().attr("idmenu");
         //alert(<?php echo $idcliente?>);
         //alert('antes');
-        $.getJSON("<?php echo site_url(array("tipo","get",$idcliente)) ?>", function(data){
-            data.tipo=1;
-            //alert(data.tipo);
-            if(data.tipo==0||data.tipo==null){
-                $('#sub').attr('checked', true);
-                 $("#submenu").show();
-                 $("#contenido").hide();
-            }else{
-                $('#html').attr('checked', true);
-                 $("#submenu").hide();
-                 $("#contenido").show();
-            }
+        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
+            loadSubmenuContent(data.tipo);
         });
     });
     
@@ -174,4 +182,37 @@
                         $("#contenido").hide();
                     }
                 });
+                
+                $("body").delegate("#inp_videourl","keyup", function(){
+                    console.log($(this).serialize());
+                    $.post("<?php echo site_url(array("submenu","update","videoURL")) ?>/" + menuid, $(this).serialize());
+                    $("#iframe_video").attr("src",$(this).val());
+                });
+                
+                $("body").delegate("#btn_agregar_indice_video","click", function(){
+                    console.log("bumm");
+                    bootbox.dialog({
+                        message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
+                         buttons: {
+                            main: {
+                              label: "Insertar",
+                              className: "btn-success",
+                              callback: function() {
+                                  var li = $("#tpl_li_indice_video").clone().attr("id","").removeClass("hidden");
+                                  li.find("input name[txt_time_video]").val($('#inp_new_time_video').val());
+                                  li.find("input name[txt_boton_video]").val($('#id_new_button_video').val());
+                                  li.attr("idmarcador",1);
+                                console.log("Hi "+ $('#inp_new_time_video').val());
+                              }
+                            },
+                            danger: {
+                                label: "Cancelar",
+                                className: "btn-danger",
+                                callback: function() {
+                                }
+                            }
+                        }
+                    });
+                });
+                //videoURL
 </script> 
