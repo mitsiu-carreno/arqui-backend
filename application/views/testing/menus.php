@@ -11,13 +11,11 @@
                 <label>Menús</label>
 </div>
 <div class="container">
-				<span>Start:</span>
-				<div class='input-group date' id='start'>
-						<input type='text' class="form-control" />
-						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-						</span>
-			
-		</div>
+		 <div class="input-append bootstrap-timepicker">
+                <input id="timepicker1" type="text" class="input-small">
+                <span class="add-on"><i class="glyphicon glyphicon-time"></i></span>
+</div>
+ 
     <!-- Single button -->
     <ul id="lista-menus"  class="list-inline">
         <?php foreach ($menus as $m): ?>
@@ -177,7 +175,14 @@
                         $("#contenido").hide();
                     }
                 });
-                 jQuery(document).ready(function() {
-    jQuery("#datepicker").datepicker();
-});
+       
 </script> 
+<script type="text/javascript">
+				$(function () {
+					  $('#timepicker1').timepicker({
+showSeconds: true,
+showMeridian: false,
+defaultTime:'00:00:00'
+});
+                                });
+		</script>

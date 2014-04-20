@@ -3,10 +3,9 @@
 class Prueba extends CI_Controller {
 
     function index(){
-        $this->load->view('header');
-        $this->load->view('navbar');
-        $this->load->view('modal');
-        echo 'hola';
+        $this->load->view('testing/header');
+        $this->load->view('testing/menus');
+
     }
     
 }
