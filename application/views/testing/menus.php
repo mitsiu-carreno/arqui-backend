@@ -174,15 +174,12 @@
                         $("#submenu").show();
                         $("#contenido").hide();
                     }
+                    	 
                 });
+                 $('#timepicker1').timepicker({
+                                showSeconds: true,
+                                showMeridian: false,
+                                defaultTime:'00:00:00'
+                                });
        
 </script> 
-<script type="text/javascript">
-				$(function () {
-					  $('#timepicker1').timepicker({
-showSeconds: true,
-showMeridian: false,
-defaultTime:'00:00:00'
-});
-                                });
-		</script>
