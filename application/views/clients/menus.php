@@ -10,6 +10,10 @@
 </div>
 <div class="container">
     <!-- Single button -->
+    <div class="input-append bootstrap-timepicker">
+                <input id="timepicker1" type="text" class="input-small">
+                <span class="add-on"><i class="glyphicon glyphicon-time"></i></span>
+</div>
     <ul id="lista-menus"  class="list-inline">
         <?php foreach ($menus as $m): ?>
         <li class="li-menu" idmenu="<?php echo $m["id"] ?>">
@@ -165,12 +169,14 @@
         });
     });
     $(".btn_menus_titulo").click(function(){
-        menuid=$(this).closest("li").attr("idmenu");  
+        menuid=$(this).closest("li").attr("idmenu");
+        
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
         $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
             loadSubmenuContent(data.tipo);
-            //alert('menuid:'+ menuid + 'tipo:' + data.tipo);
+            
+            alert('menuid:'+ menuid + 'tipo:' + data.tipo);
         });
     });
     
@@ -201,7 +207,7 @@
                 $("body").delegate("#btn_agregar_indice_video","click", function(){
                     console.log("bumm");
                     bootbox.dialog({
-                        message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
+                        message: "Tiempo:<div class='input-append bootstrap-timepicker'><input id='timepicker1' type='text' class='input-small'><span class='add-on'><i class='glyphicon glyphicon-time'></i></span></div><br />Botón<input typoe='text' id='id_new_button_video' />",
                          buttons: {
                             main: {
                               label: "Insertar",
@@ -221,8 +227,16 @@
                                 }
                             }
                         }
+                        
                     });
+                                                    
                 });
+                 $('#timepicker1').timepicker({
+                                showSeconds: true,
+                                showMeridian: false,
+                                defaultTime:'00:00:00'
+                                });
                 //videoURL
+
                 
 </script>
