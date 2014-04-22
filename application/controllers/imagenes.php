@@ -59,15 +59,15 @@ class Imagenes extends CI_Controller {
 		}
     }
     
-    function galeria($idcliente){
+    function galeria($idcliente,$idmenu){
         $data = array("idcliente"=>$idcliente);
         $this->load->view("header");
         $this->load->view("galeria", $data);
         $this->load->view("footer"); 
     }
     
-    function subir_galeria($idcliente){
-        	$config['upload_path'] = './galeria/' . $idcliente . '/';
+    function subir_galeria($idcliente,$idmenu = 0){
+        	$config['upload_path'] = './galeria/' . $idcliente . '/' . $idmenu .'/';
 		$config['allowed_types'] = 'gif|jpg|png';
 //                $this->load->helper('file');
 //                var_dump(read_file($config['upload_path']));
@@ -97,9 +97,9 @@ class Imagenes extends CI_Controller {
 		}
     }
     
-    function galeria_files($idcliente){
+    function galeria_files($idcliente, $idmenu){
         $this->load->helper('file');
-        $path = './galeria/' . $idcliente . '/';
+        $path = './galeria/' . $idcliente . '/' . $idmenu .'/';
         $directorio = get_dir_file_info($path);
 //        var_dump($directorio);
         $archivos = array();
