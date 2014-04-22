@@ -83,10 +83,15 @@
     var menuid = null;
     
     var loadSubmenuContent = function(tipo){
+        //alert(tipo);
             if(tipo==0||tipo==null){
+                //alert('el tipo es 0 o null');
+                $('#html').attr('checked', false);
                 $('#sub').attr('checked', true);
+                
                 $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
             }else{
+                $('#sub').attr('checked', false);
                 $('#html').attr('checked', true);
             }
     };
@@ -160,9 +165,15 @@
         });
     });
     $(".btn_menus_titulo").click(function(){
-        menuid=$(this).closest("li").attr("idmenu");  
+        menuid=$(this).closest("li").attr("idmenu");
+        
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
+        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
+            loadSubmenuContent(data.tipo);
+            
+            alert('menuid:'+ menuid + 'tipo:' + data.tipo);
+        });
     });
     
     $('#tipo input').on('change', function() {
@@ -215,3 +226,5 @@
                     });
                 });
                 //videoURL
+                
+</script>

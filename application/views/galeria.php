@@ -28,7 +28,7 @@
                 <div class="panel-body" id="panel_list_files">
                     <ul id="ul_filelist" class="list-group">
                     </ul>
-                    <form id="upload"  method="post" action="<?php echo site_url(array("imagenes", "subir_galeria", $idcliente)) ?>" enctype="multipart/form-data">
+                    <form id="upload"  method="post" action="<?php echo site_url(array("imagenes", "subir_galeria", $idcliente, $idmenu)) ?>" enctype="multipart/form-data">
                         <input type="file" id="inp_file" name="userfile" />
                         <div id="status"></div>
                         <button class="btn btn-default btn-large btn-block" id="btn_subir"><span class="glyphicon glyphicon-circle-arrow-up"></span> Subir Imagen</button>
@@ -71,7 +71,7 @@
         var listOfFiles = function(){
             var idcliente = <?php echo $idcliente; ?>;
             $("#ul_filelist").empty();
-            $.getJSON("<?php echo site_url(array("imagenes","galeria_files",$idcliente)) ?>", function(data){
+            $.getJSON("<?php echo site_url(array("imagenes","galeria_files",$idcliente,$idmenu)) ?>", function(data){
                 var first = true;
                 $.each(data.archivos, function(index, value){
                     $("#ul_filelist").append($("<li />").html(value.name).addClass("list-group-item").append($("<a />").attr("href","<?php echo site_url(array("imagenes","del_galeria",$idcliente)) ?>/"+ Base64.encode(value.name)).append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
