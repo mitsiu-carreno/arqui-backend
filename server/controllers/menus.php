@@ -29,7 +29,9 @@ class Menus extends REST_Controller
             $this->response(array("error" => "bad token"), 400);
         } else {
             $this->load->model("menu_model");
-            $menus = $this->menu_model->get($idcliente);
+            $data = array();
+            $data["banner"] = site_url(array("imagenes","get_banner",$idcliente));
+            $data["menus"] = $this->menu_model->get($idcliente);
             if(is_array($menus)){
                 $this->response($menus, 200);
             } else {
