@@ -60,7 +60,7 @@ class Imagenes extends CI_Controller {
     }
     
     function galeria($idcliente,$idmenu){
-        $data = array("idcliente"=>$idcliente);
+        $data = array("idcliente"=>$idcliente, "idmenu" => $idmenu);
         $this->load->view("header");
         $this->load->view("galeria", $data);
         $this->load->view("footer"); 
