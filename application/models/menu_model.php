@@ -27,11 +27,16 @@ class Menu_model extends CI_Model {
     }
     
     function get($clientid = NULL, $id = NULL){
+        if($clientid != NULL){
             $client = R::load( 'client', $clientid );
             if ($id===NULL)
                 return $client->with(' ORDER BY pos ASC ')->ownMenu;
             else
                 return $client->ownMenu[$id];
+        } else {
+            $menu = R::load("menu", $id);
+            return $menu->export();
+        }
     }
     
     function getTipo($idmenu){

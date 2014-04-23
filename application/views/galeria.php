@@ -28,7 +28,7 @@
                 <div class="panel-body" id="panel_list_files">
                     <ul id="ul_filelist" class="list-group">
                     </ul>
-                    <form id="upload"  method="post" action="<?php echo site_url(array("imagenes", "subir_galeria", $idcliente, $idmenu)) ?>" enctype="multipart/form-data">
+                    <form id="upload"  method="post" action="<?php echo site_url(array("imagenes", "subir_galeria", $idsubmenu)) ?>" enctype="multipart/form-data">
                         <input type="file" id="inp_file" name="userfile" />
                         <div id="status"></div>
                         <button class="btn btn-default btn-large btn-block" id="btn_subir"><span class="glyphicon glyphicon-circle-arrow-up"></span> Subir Imagen</button>
@@ -58,7 +58,6 @@
 </div>
 <script>
     
-    var idcliente = <?php echo $idcliente; ?>;
             $("#btn_subir").click(function() {
             $("#inp_file").click();
         });
@@ -69,13 +68,12 @@
         });
         
         var listOfFiles = function(){
-            var idcliente = <?php echo $idcliente; ?>;
             $("#ul_filelist").empty();
-            $.getJSON("<?php echo site_url(array("imagenes","galeria_files",$idcliente,$idmenu)) ?>", function(data){
+            $.getJSON("<?php echo site_url(array("imagenes","galeria_files",$idsubmenu)) ?>", function(data){
                 var first = true;
                 $.each(data.archivos, function(index, value){
-                    $("#ul_filelist").append($("<li />").html(value.name).addClass("list-group-item").append($("<a />").attr("href","<?php echo site_url(array("imagenes","del_galeria",$idcliente)) ?>/"+ Base64.encode(value.name)).append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
-                    $("#carousel_galeria .carousel-inner").append($("<div />").addClass("item").addClass(first?"active":"").append($("<img />").attr("src","<?php echo base_url() ?>galeria/<?php echo $idcliente ?>/" + value.name)));
+                    $("#ul_filelist").append($("<li />").html(value.name).addClass("list-group-item").append($("<a />").attr("href","<?php echo site_url(array("imagenes","del_galeria")) ?>/").append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
+                    $("#carousel_galeria .carousel-inner").append($("<div />").addClass("item").addClass(first?"active":"").append($("<img />").attr("src","<?php echo base_url() ?>galeria/<?php echo $idsubmenu ?>/" + value.name)));
                     first = false;
                 });
             });

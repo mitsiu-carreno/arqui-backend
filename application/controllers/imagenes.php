@@ -59,15 +59,18 @@ class Imagenes extends CI_Controller {
 		}
     }
     
-    function galeria($idcliente,$idmenu){
-        $data = array("idcliente"=>$idcliente, "idmenu" => $idmenu);
+    function galeria($idsubmenu){
+        $data = array("idsubmenu" => $idsubmenu);
         $this->load->view("header");
         $this->load->view("galeria", $data);
         $this->load->view("footer"); 
     }
     
-    function subir_galeria($idcliente,$idsubmenu = 0){
-        	$config['upload_path'] = './galeria/' . $idcliente . '/' . $idsubmenu .'/';
+    function subir_galeria($idsubmenu){
+//        
+//        $this->load->model("submenu_model");
+//        $idcliente = $this->submenu_model->getClientID($idsubmenu);
+        	$config['upload_path'] = './galeria/' . $idsubmenu .'/';
 		$config['allowed_types'] = 'gif|jpg|png';
                 if(!file_exists($config['upload_path']))
                     mkdir($config['upload_path'], 0775);
@@ -87,16 +90,18 @@ class Imagenes extends CI_Controller {
 		}
     }
     
-    function galeria_files($idcliente, $idmenu){
+    function galeria_files($idsubmenu){
         $this->load->helper('file');
-        $path = './galeria/' . $idcliente . '/' . $idmenu .'/';
+        $path = './galeria/' . $idsubmenu .'/';
         $directorio = get_dir_file_info($path);
 //        var_dump($directorio);
         $archivos = array();
-        foreach($directorio as $a){
-            $arhivos[]["name"] = $a["name"];
+        if(file_exists($path)){
+            foreach($directorio as $a){
+                $archivos[]["name"] = $a["name"];
+            }
         }
-        echo json_encode(array("archivos"=>$arhivos));
+        echo json_encode(array("archivos"=>$archivos));
     }
     
 }

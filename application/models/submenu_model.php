@@ -37,9 +37,11 @@ class Submenu_model extends CI_Model {
     
     function getClientID($idsubmenu){
         $submenu = R::findOne( 'submenu', "id = ? ", array($idsubmenu));
-        if ($submenu)
-            return $submenu->menu_id;
-        else
+        if ($submenu){
+            $this->load->model("menu_model");
+            $menu = $this->menu_model->get(NULL,$submenu->menu_id);
+            return $menu->client_id;
+        }else
             return 0;
     }
     
