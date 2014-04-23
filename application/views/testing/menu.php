@@ -17,18 +17,26 @@
     <ul id="lista-menus"  class="list-block">
         <?php foreach ($menus as $m): ?>
         <li class="li-menu" idmenu="<?php echo $m["id"] ?>">
-                <div class="btn-group">
-                    <input type="text" id="editar" value="<?php echo $m["titulo"] ?>" class="hidden"/>
-                    <button type="button" class="btn btn-default btn_menus_titulo ">
-                        <?php echo $m["titulo"] ?>
-                    </button>
+            <div class="btn-group" style="vertical-align: baseline">
+                    
+                    <input type="button"  id="editar" class="btn btn-default btn_menus_titulo" value="<?php echo $m["titulo"] ?>" style="width:100px;">
+                        
+              
                     <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
+                        <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
+                        <form id="tipo" role="form">
+                            <div class="checkbox">
+                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
+                                <br>
+                                <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
+                            </div>
+                        </form>
+<!--                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>-->
                     </ul>
                 </div>
             </li>
@@ -213,18 +221,36 @@
                 //videoURL
 
      $(".btn_menus_titulo").dblclick(function(e){
-                    console.log('hola');
-                   $(this).addClass('hidden');
-             var btn_menu = $(this).closest("div");
-        var menuid = btn_menu.closest("li").attr("idmenu");
-        e.preventDefault();
-        var nombreDelMenu = $.trim(btn_menu.find(".btn_menus_titulo").html());
-        console.log(nombreDelMenu);
-        var selector ='#editar';
-            $(selector).removeClass('hidden');
+            console.log('hola');
+                 
+            var btn_menu = $(this).closest("div");
+            var menuid = btn_menu.closest("li").attr("idmenu");
+            e.preventDefault();
+            var nombreDelMenu = $.trim(btn_menu.find(".btn_menus_titulo").html());
+        
+            console.log(nombreDelMenu);
+            var selector ='#editar';
+            $(selector).removeAttr("type");
+            $(this).prop('type','text');
+            $(this).keypress(function(key){
+      
+        var unicode
+            if (key.charCode)
+                unicode=key.charCode;
+            else
+                unicode=key.keyCode;
+            if (unicode == 13){
+                    btn_menu.find(".btn_menus_titulo").html();
+                    var result=$(this).val();
+                    var parametros = {id:menuid,"titulo": result};
+                    $.post("<?php echo site_url(array("menus", "editar", $idcliente)) ?>", $.param(parametros),"json");
+                    $(this).prop('type','button');
+    }
+             });
+
+             
                 });
                     
-
                 
 </script>
     

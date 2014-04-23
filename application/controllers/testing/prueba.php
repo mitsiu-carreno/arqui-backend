@@ -7,7 +7,7 @@ class Prueba extends CI_Controller {
         $this->load->view("navbar");
         $this->load->view("footer"); 
     }
-    function menus($idcliente=3){
+    function menus($idcliente=1){
         $data = array("idcliente"=>$idcliente);
         $this->load->model("menu_model");
         $data["menus"] = $this->menu_model->get($idcliente);
@@ -17,7 +17,7 @@ class Prueba extends CI_Controller {
         $this->load->view("testing/menu",$data);
         $this->load->view("footer"); 
     }
-    function banner($idcliente=3){
+    function banner($idcliente=1){
         $data = array("idcliente"=>$idcliente);
         $this->load->model("menu_model");
         $data["menus"] = $this->menu_model->get($idcliente);
@@ -27,7 +27,7 @@ class Prueba extends CI_Controller {
         $this->load->view("clients/banner",$data);
         $this->load->view("footer"); 
     }
-    function contacto($idcliente=3){
+    function contacto($idcliente=1){
         $data = array("idcliente"=>$idcliente);
         $this->load->model("menu_model");
         $data["menus"] = $this->menu_model->get($idcliente);
