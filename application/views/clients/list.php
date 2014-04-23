@@ -105,7 +105,7 @@ $(function(){
             <?php foreach ($clientes as $c): ?>
             <tr>
                 <td><?php echo $c["id"] ?></td>
-                <td><a href="<?php echo site_url(array("menus","get",$c["id"])) ?>"><?php echo $c["nombre"] ?></a></td>
+                <td><a href="<?php echo site_url(array("proyectos","menus",$c["id"])) ?>"><?php echo $c["nombre"] ?></a></td>
                 <td><?php echo $c["email"] ?></td>
                 <td><button clienteid="<?php echo $c["id"] ?>" class="btn-editar btn btn-primary">Editar</button></td>
                 <td><button clienteid="<?php echo $c["id"] ?>" status="<?php echo $c["activo"] ?>" class="btn-eliminar btn btn-default tooltip-status"  data-toggle="tooltip" data-placement="left" title="<?php echo ($c["activo"])? "Activo" : "Desactivado" ?>" ><span class="glyphicon glyphicon-<?php echo ($c["activo"])? "ok" : "remove" ?>-circle text-<?php echo ($c["activo"])? "success" : "danger" ?>"></span></button></td>

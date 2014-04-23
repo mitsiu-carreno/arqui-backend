@@ -52,15 +52,23 @@
     </ul>
 <li id="li_to_clone" class="hidden li-menu" idmenu="">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default btn_menus_titulo">
+                    <button type="button" class="btn btn-default btn_menus_titulo" style="width:100px;">
                     </button>
                     <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="sr-only">Toggle Dropdown</span><span class="caret"></span>
+                        <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
+                        <form id="tipo" role="form">
+                            <div class="checkbox">
+                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
+                                <br>
+                                <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
+                            </div>
+                        </form>
+<!--                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>-->
                     </ul>
                 </div>
             </li>
@@ -70,39 +78,39 @@
     
     var menuid = null;
     
-//    var loadSubmenuContent = function(tipo){
-//        //alert(tipo);
-//            if(tipo==0||tipo==null){
-//                //alert('el tipo es 0 o null');
-//                if($('#html').is(':checked') === true) {
-//                $('#html').attr('checked', false);
-//                $('#sub').attr('checked', true);
-//            }
-//                
-//                $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
-//            }else{
-//                
-//                if($('#html').is(':checked') === flase) {
-//                $('#sub').attr('checked', false);
-//                $('#html').attr('checked', true);
-//            }
-//            }
-//    };
+    var loadSubmenuContent = function(tipo){
+        //alert(tipo);
+            if(tipo==0||tipo==null){
+                //alert('el tipo es 0 o null');
+                if($('#html').is(':checked') === true) {
+                $('#html').attr('checked', false);
+                $('#sub').attr('checked', true);
+            }
+                
+                $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+            }else{
+                
+                if($('#html').is(':checked') === flase) {
+                $('#sub').attr('checked', false);
+                $('#html').attr('checked', true);
+            }
+            }
+    };
     
-//    $( document ).ready(function() {
-//         $("#submenu").hide();
-//         $("#contenido").hide();
-//        //$(".btn").slice(2,3).button("toggle");
-//        //$(".btn_menus_titulo").first().button("toggle");
-//        $(".btn_menus_titulo").first().addClass("active");
-//        //$(".btn_menus_titulo").first().button("untoggle");
-//        menuid=$("#lista-menus li").first().attr("idmenu");
-//        //alert(<?php echo $idcliente?>);
-//        //alert('antes');
-//        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
-//            loadSubmenuContent(data.tipo);
-//        });
-//    });
+    $( document ).ready(function() {
+         $("#submenu").hide();
+         $("#contenido").hide();
+        //$(".btn").slice(2,3).button("toggle");
+        //$(".btn_menus_titulo").first().button("toggle");
+        $(".btn_menus_titulo").first().addClass("active");
+        //$(".btn_menus_titulo").first().button("untoggle");
+        menuid=$("#lista-menus li").first().attr("idmenu");
+        //alert(<?php echo $idcliente?>);
+        //alert('antes');
+        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
+            loadSubmenuContent(data.tipo);
+        });
+    });
     
     
     
@@ -173,12 +181,11 @@
                     //alert($('input[name=tipo]:checked', '#tipo').val()); <-value de radio
                     var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
                         console.log($.param(parametros));
-                        //alert(menuid);
+                        alert(menuid);
                         $.post("<?php echo site_url(array("tipo","set")) ?>/" + menuid, $.param(parametros));
                         
                     if($('input[name=tipo]:checked', '#tipo').val()==1){
-                        $("#contenido").show();
-                        
+                        $("#contenido").show();                        
                         $("#submenu").hide();
                     }
                     else{
@@ -231,7 +238,7 @@
             console.log(nombreDelMenu);
             var selector ='#editar';
             $(selector).removeAttr("type");
-            $(this).prop('type','text');
+            $(this).attr('type','text');
             $(this).keypress(function(key){
       
         var unicode
@@ -245,6 +252,7 @@
                     var parametros = {id:menuid,"titulo": result};
                     $.post("<?php echo site_url(array("menus", "editar", $idcliente)) ?>", $.param(parametros),"json");
                     $(this).prop('type','button');
+                    
     }
              });
 
