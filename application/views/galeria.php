@@ -20,7 +20,7 @@
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Galeria</h3>
@@ -35,25 +35,7 @@
                     </form>
                 </div>
             </div>
-        </div>
-            
-            
-            <div id="carousel_galeria" class="carousel slide col-md-8" data-ride="carousel"  >
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-  </div>
-
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel_galeria" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel_galeria" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
-</div>
-            
-            
+        </div>       
     </div>
 </div>
 <script>
@@ -73,7 +55,6 @@
                 var first = true;
                 $.each(data.archivos, function(index, value){
                     $("#ul_filelist").append($("<li />").html(value.name).addClass("list-group-item").append($("<a />").attr("href","<?php echo site_url(array("imagenes","del_galeria")) ?>/").append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
-                    $("#carousel_galeria .carousel-inner").append($("<div />").addClass("item").addClass(first?"active":"").append($("<img />").attr("src","<?php echo base_url() ?>galeria/<?php echo $idsubmenu ?>/" + value.name)));
                     first = false;
                 });
             });

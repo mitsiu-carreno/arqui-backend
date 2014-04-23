@@ -25,8 +25,7 @@ class Submenu_model extends CI_Model {
         $submenu["id"] = $id;
         return $submenu;
     }
-
-    //Falta editar
+    
     function getLastPosition($idmenu){
         $submenu = R::findOne( 'submenu', "menu_id = ? ORDER BY pos DESC", array($idmenu));
         if ($submenu)
