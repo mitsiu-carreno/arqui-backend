@@ -29,4 +29,9 @@ class Galeria_model extends CI_Model {
         else
             return 0;
     }
+    
+    function get($idsubmenu){
+        $submenu = R::load( 'submenu', $idsubmenu );
+        return $submenu->ownGaleria;
+    }
 }

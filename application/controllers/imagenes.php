@@ -104,16 +104,9 @@ class Imagenes extends CI_Controller {
     }
     
     function galeria_files($idsubmenu){
-        $this->load->helper('file');
-        $path = './galeria/' . $idsubmenu .'/';
-        $directorio = get_dir_file_info($path);
-//        var_dump($directorio);
-        $archivos = array();
-        if(file_exists($path)){
-            foreach($directorio as $a){
-                $archivos[]["name"] = $a["name"];
-            }
-        }
+    	$this->load->model("galeria_model");
+        $archivos = $this->galeria_model->get($idsubmenu);
+        
         echo json_encode(array("archivos"=>$archivos));
     }
     
