@@ -29,10 +29,12 @@ class Menus extends REST_Controller
             $this->response(array("error" => "bad token"), 400);
         } else {
             $this->load->model("menu_model");
-            $data = array();
-            $data["menus"] = $this->menu_model->get($idcliente);
-            if(is_array($data["menus"])){
-                $this->response($data, 200);
+            $menus = $this->menu_model->get($idcliente);
+            unset($menus["activo"]);
+            unset($menus["id"]);
+            unset($menus["client_id"]);
+            if(is_array($menus)){
+                $this->response($menus, 200);
             } else {
                 $this->response(array('error' => 'No hay menus para este usuario'), 404);
             }
