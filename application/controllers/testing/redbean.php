@@ -90,4 +90,30 @@ class Redbean extends CI_Controller {
             
             return $this->client_model->insert($client);
         }
+        
+        private function __create_menu(){
+            //Creat a client
+            $this->load->helper('string');
+            $this->load->model("menu_model");
+            $clientid = $this->__create_client();
+            $titulo = random_string('alpha', 16);
+            return $this->menu_model->insert($clientid, $titulo);
+        }
+                
+        function submenu(){
+            $this->load->library('unit_test');
+            $menu = $this->__create_menu();
+            $this->load->model("submenu_model");
+            $titulo = random_string('alpha', 16);
+            $submenu = $this->submenu_model->insert($menu["id"], $titulo);
+            
+            $this->unit->run($submenu->titulo, $titulo, 'Store a submenu', json_encode($submenu->export()));
+            
+            $titulo = random_string('alpha', 16);
+            $submenu = $this->submenu_model->insert($menu["id"], $titulo);
+            
+            $this->unit->run($submenu->pos, 2, 'Position', json_encode($submenu->export()));
+            
+            echo $this->unit->report();
+        }
 }

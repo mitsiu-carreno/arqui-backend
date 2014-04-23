@@ -20,7 +20,7 @@ class Submenu_model extends CI_Model {
         
         $menu->ownSubmenu[] = $submenu;
         
-        $id = R::store(menu); 
+        $id = R::store($menu); 
         //echo $id;
         $submenu["id"] = $id;
         return $submenu;
@@ -28,9 +28,9 @@ class Submenu_model extends CI_Model {
 
     //Falta editar
     function getLastPosition($idmenu){
-        $menu = R::findOne( 'submenu', "menu_id = ? ORDER BY pos DESC", array($idmenu));
+        $submenu = R::findOne( 'submenu', "menu_id = ? ORDER BY pos DESC", array($idmenu));
         if ($submenu)
-            return $menu->pos;
+            return $submenu->pos;
         else
             return 0;
     }
