@@ -9,7 +9,7 @@ class Menu_model extends CI_Model {
     }
 
     function get($clientid) {
-        $clients = R::find( 'menu', "client_id = ? ORDER BY pos DESC", array($clientid));
+        $clients = R::find( 'menu', "client_id = ? ORDER BY pos ASC", array($clientid));
 //        var_dump($client);
         return R::exportAll($clients);
     }

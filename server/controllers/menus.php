@@ -33,6 +33,7 @@ class Menus extends REST_Controller
             unset($menus["activo"]);
             unset($menus["id"]);
             unset($menus["client_id"]);
+            unset($menus["pos"]);
             if(is_array($menus)){
                 $this->response($menus, 200);
             } else {
