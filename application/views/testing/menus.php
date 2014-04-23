@@ -11,11 +11,12 @@
                 <label>Menús</label>
 </div>
 <div class="container">
-		 <div class="input-append bootstrap-timepicker">
+		
+ <button class="add_date_btn btn btn-primary btn-sm" >Add</button>
+ <div class="input-append bootstrap-timepicker hidden" id="hola">
                 <input id="timepicker1" type="text" class="input-small">
-                <span class="add-on"><i class="glyphicon glyphicon-time"></i></span>
+                <span class="add-on"><i class="glyphicon glyphicon-time" ></i></span></input>
 </div>
- 
     <!-- Single button -->
     <ul id="lista-menus"  class="list-inline">
         <?php foreach ($menus as $m): ?>
@@ -176,10 +177,58 @@
                     }
                     	 
                 });
-                 $('#timepicker1').timepicker({
-                                showSeconds: true,
-                                showMeridian: false,
+//                   $('body').delegate('.add_date_btn','click', function () {
+//                       
+//                       
+//       bootbox.dialog({
+//           message: $('#hola').removeClass('hidden'),
+//           title: "Add Class",
+//           buttons: {
+//               cancelar: {
+//                   label: "Cancelar",
+//                   
+//                   className: "btn-default"
+//               }
+//           }
+//       });
+//   }); //End click
+//
+//                 $('#timepicker1').timepicker({
+//                                showSeconds: true,
+//                                showMeridian: false,
+//                                defaultTime:'00:00:00'
+//                                });
+
+   $('.add_date_btn').on('click', function () {
+       // Just create bootbox modal, but do not open it yet
+       console.log('hola');
+     yourModal= bootbox.dialog({
+           message: $('#hola').html(),
+           title: "Add Class",
+           buttons: {
+               cancelar: {
+                   label: "Cancelar",
+                   className: "btn-default"
+               }
+           },
+           show: false
+       });
+   
+       yourModal.on("shown.bs.modal", function() {
+           var datepickerSelector = '#timepicker1';
+
+           $(datepickerSelector, yourModal).timepicker({
+                                     showSeconds: true,
+                                     showMeridian: false,
                                 defaultTime:'00:00:00'
-                                });
+           }).prev('.btn').on('click', function (e) {
+               e && e.preventDefault();
+               $(datepickerSelector, yourModal).focus();
+           });
+       });
+        yourModal.modal("show");
+       
+   }); //End click
+       
        
 </script> 

@@ -46,7 +46,7 @@
         width: 880px;
     } 
 </style>
-<div class="container">
+<div class="container" style="margin-top: 80px">
     <form id="upload" method="post" action="<?php echo site_url(array("imagenes", "subir_banner", $idcliente)) ?>" enctype="multipart/form-data">
         <img id="img_banner" width="1024" height="227" src="<?php echo site_url(array("imagenes", "get_banner", $idcliente)) ?>" />
         <input type="file" id="inp_file" name="userfile" />

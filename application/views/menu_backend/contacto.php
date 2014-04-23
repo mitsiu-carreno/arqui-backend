@@ -119,7 +119,7 @@
             </div>    
         </div>
         -->
-        
+        <div class="container" style="margin-top: 80px">
         <br>
         <div id="contacto" class="borde" style="height: 400px">
             <div class="fondo_1">
@@ -148,6 +148,7 @@
                     </div>
                 </form>
             </div>
+        </div>
         </div>
         <!--
         <div id="menu">

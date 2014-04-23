@@ -3,9 +3,35 @@
 class Prueba extends CI_Controller {
 
     function index(){
-        $this->load->view('testing/header');
-        $this->load->view('testing/menus');
-
+        $this->load->view("header");
+        $this->load->view("navbar");
+        $this->load->view("footer"); 
+    }
+    function menus(){
+        $this->load->view("header");
+        $this->load->view("navbar");
+        $this->load->view("testing/menu");
+        $this->load->view("footer"); 
+    }
+    function banner($idcliente=3){
+        $data = array("idcliente"=>$idcliente);
+        $this->load->model("menu_model");
+        $data["menus"] = $this->menu_model->get($idcliente);
+        
+        $this->load->view("header");
+        $this->load->view("navbar");
+        $this->load->view("clients/banner",$data);
+        $this->load->view("footer"); 
+    }
+    function contacto($idcliente=3){
+        $data = array("idcliente"=>$idcliente);
+        $this->load->model("menu_model");
+        $data["menus"] = $this->menu_model->get($idcliente);
+        
+        $this->load->view("header");
+        $this->load->view("navbar");
+        $this->load->view("footer"); 
+        $this->load->view("menu_backend/contacto", $data);
     }
     
 }
