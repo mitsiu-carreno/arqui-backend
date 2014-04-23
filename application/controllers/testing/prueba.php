@@ -7,10 +7,14 @@ class Prueba extends CI_Controller {
         $this->load->view("navbar");
         $this->load->view("footer"); 
     }
-    function menus(){
+    function menus($idcliente=3){
+        $data = array("idcliente"=>$idcliente);
+        $this->load->model("menu_model");
+        $data["menus"] = $this->menu_model->get($idcliente);
+        
         $this->load->view("header");
         $this->load->view("navbar");
-        $this->load->view("testing/menu");
+        $this->load->view("testing/menu",$data);
         $this->load->view("footer"); 
     }
     function banner($idcliente=3){
