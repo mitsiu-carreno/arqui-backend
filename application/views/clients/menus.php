@@ -172,7 +172,7 @@
         $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
             loadSubmenuContent(data.tipo);
             
-            alert('menuid:'+ menuid + 'tipo:' + data.tipo);
+            console.log('menuid:'+ menuid + 'tipo:' + data.tipo);
         });
     });
     
