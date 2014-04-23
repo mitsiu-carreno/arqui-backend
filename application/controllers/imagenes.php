@@ -18,7 +18,7 @@ class Imagenes extends CI_Controller {
         $this->load->view("footer"); 
     }
     
-    function get_banner($idclient){
+    function get_banner($idclient, $name = "nada"){
         $filename= "./banners/" . $idclient . ".png";
         $filename = (file_exists($filename)) ? $filename : "./img/demo.png";
             header('Content-Length: '.filesize($filename)); //<-- sends filesize header
