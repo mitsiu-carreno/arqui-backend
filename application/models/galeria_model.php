@@ -8,7 +8,7 @@ class Galeria_model extends CI_Model {
     }
     
     function insert($idsubmenu, $titulo){
-        $submenu = R::load( 'submenu', $idmenu );
+        $submenu = R::load( 'submenu', $idsubmenu );
         
         $galeria = R::dispense( 'galeria' );
         $galeria->titulo = $titulo;

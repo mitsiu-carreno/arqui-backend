@@ -73,8 +73,8 @@ class Imagenes extends CI_Controller {
         	$config['upload_path'] = './galeria/' . $idsubmenu .'/';
 		$config['allowed_types'] = 'gif|jpg|png';
                 $this->load->model("galeria_model");
-                $idgaleria = $this->galeria_model->insert($idsubmenu,  $this->input->post("titulo"));
-                $config['file_name'] = $idgaleria;
+                $galeria = $this->galeria_model->insert($idsubmenu,  $this->input->post("titulo"));
+                $config['file_name'] = $galeria["id"];
                 $config['overwrite'] = TRUE;
                 
                 if(!file_exists($config['upload_path']))
@@ -94,7 +94,8 @@ class Imagenes extends CI_Controller {
                         $config2['image_library'] = 'ImageMagick';
                         $config2['library_path'] = '/usr/bin';
                         $config2['source_image']=$data["upload_data"]["full_path"];
-                        $config2['new_image']=$data["upload_data"]["file_path"] . $idgaleria . ".png";
+                        $config2['new_image']=$data["upload_data"]["file_path"] . $galeria["id"] . ".png";
+                        $config2['create_thumb'] = TRUE;
                         $this->load->library('image_lib',$config2);
                         $this->image_lib->resize();
                         $data["config"] = $config2;
