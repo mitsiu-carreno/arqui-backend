@@ -66,11 +66,9 @@ class Imagenes extends CI_Controller {
         $this->load->view("footer"); 
     }
     
-    function subir_galeria($idcliente,$idmenu = 0){
-        	$config['upload_path'] = './galeria/' . $idcliente . '/' . $idmenu .'/';
+    function subir_galeria($idcliente,$idsubmenu = 0){
+        	$config['upload_path'] = './galeria/' . $idcliente . '/' . $idsubmenu .'/';
 		$config['allowed_types'] = 'gif|jpg|png';
-//                $this->load->helper('file');
-//                var_dump(read_file($config['upload_path']));
                 if(!file_exists($config['upload_path']))
                     mkdir($config['upload_path'], 0775);
 
@@ -85,14 +83,6 @@ class Imagenes extends CI_Controller {
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
-//                        $config2['image_library'] = 'ImageMagick';
-//                        $config2['library_path'] = '/usr/bin';
-//                        $config2['source_image']=$data["upload_data"]["full_path"];
-//                        $config2['new_image']=$data["upload_data"]["file_path"] . $idcliente . ".png";
-//                        $this->load->library('image_lib',$config2);
-//                        $this->image_lib->resize();
-//                        $data["config"] = $config2;
-//                        $data["upload_data"]["src_uri"] = site_url(array("imagenes","get_banner",$idcliente));
 			echo json_encode($data);
 		}
     }
