@@ -13,21 +13,23 @@ class Submenu_model extends CI_Model {
         $submenu = R::dispense( 'submenu' );
         $submenu->titulo = $titulo;
         $submenu->tipo = 1;
+        $submenu->html = NULL;
         $submenu->videoURL = NULL;
         $submenu->tipo = 1; //1 -> video, 2 -> Galeria, 3 -> HTML
-        //$submenu->pos = ($this->getLastPosition($clientid))+1;
+        $submenu->pos = ($this->getLastPosition($idmenu))+1;
         
         $menu->ownSubmenu[] = $submenu;
         
-        $id = R::store($client); 
+        $id = R::store(menu); 
         //echo $id;
-        return $this->getLast($clientid);
+        $submenu["id"] = $id;
+        return $submenu;
     }
 
     //Falta editar
-    function getLastPosition($clientid){
-        $menu = R::findOne( 'menu', "client_id = ? ORDER BY pos DESC", array($clientid));
-        if ($menu)
+    function getLastPosition($idmenu){
+        $menu = R::findOne( 'submenu', "menu_id = ? ORDER BY pos DESC", array($idmenu));
+        if ($submenu)
             return $menu->pos;
         else
             return 0;
