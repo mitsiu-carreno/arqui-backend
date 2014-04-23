@@ -86,13 +86,18 @@
         //alert(tipo);
             if(tipo==0||tipo==null){
                 //alert('el tipo es 0 o null');
+                if($('#html').is(':checked') === true) {
                 $('#html').attr('checked', false);
                 $('#sub').attr('checked', true);
+            }
                 
                 $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
             }else{
+                
+                if($('#html').is(':checked') === flase) {
                 $('#sub').attr('checked', false);
                 $('#html').attr('checked', true);
+            }
             }
     };
     
@@ -172,7 +177,7 @@
         $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
             loadSubmenuContent(data.tipo);
             
-            alert('menuid:'+ menuid + 'tipo:' + data.tipo);
+            console.log('menuid:'+ menuid + 'tipo:' + data.tipo);
         });
     });
     
