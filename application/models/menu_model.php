@@ -12,11 +12,9 @@ class Menu_model extends CI_Model {
         
         $menu = R::dispense( 'menu' );
         $menu->titulo = $titulo;
-        $menu->activo = 1;
+        
         $menu->tipo = 0;
-        $menu->videosubmenu = 1;
-        $menu->videoURL = NULL;
-        $menu->submenu = 1; //1 -> video, 2 -> Galeria, 3 -> HTML
+        
         $menu->pos = ($this->getLastPosition($clientid))+1;
         
         $client->ownMenu[] = $menu;
@@ -35,7 +33,7 @@ class Menu_model extends CI_Model {
                 return $client->ownMenu[$id];
         } else {
             $menu = R::load("menu", $id);
-            return $menu->export();
+            return R::exportAll($menu);
         }
     }
     
