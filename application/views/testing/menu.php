@@ -14,6 +14,9 @@
                 <label>Menús</label>
 </div>
     <!-- Single button -->
+    <div class="row">
+  <div class="col-md-4" style>
+
     <ul id="lista-menus"  class="list-block">
         <?php foreach ($menus as $m): ?>
         <li class="li-menu" idmenu="<?php echo $m["id"] ?>">
@@ -24,10 +27,24 @@
               
                     <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <div class="col-md-5">
+                              <form id="tipo" role="form">
+                                  <div class="switch-toggle switch-candy large-1" style="width:160px;">
+					<input id="sub" name="tipo" type="radio" checked>
+					<label for="sub" onclick="">Submenu</label>
+
+					<input id="html" name="tipo" type="radio">
+					<label for="html" onclick="">HTML</label>
+
+					<a></a>
+				</div>
+                               </form> 
+                    </div>
+<!--                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
+   
                         <form id="tipo" role="form">
                             <div class="checkbox">
                                 <input type="radio" name="tipo" id="sub" value="0"> Submenú
@@ -35,11 +52,12 @@
                                 <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
                             </div>
                         </form>
-<!--                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>-->
-                    </ul>
+                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
+                    </ul>-->
                 </div>
             </li>
+         
         <?php endforeach; ?>
         <?php if (count($menus) == 0): ?>
             <li id="li_menus_empty">
@@ -72,12 +90,40 @@
                     </ul>
                 </div>
             </li>
-              
-<script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
+               </div>
+      
+            <div class="col-md-8">
+            <div class="panel panel-default" id="menu_content">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Menú</h3>
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+              </div>  
+                </div>
+    </div>
+        <div class="row">
+            <div class="col-md-4">
+                
+            </div>
+           <div class="col-md-8">
+            <div class="panel panel-default" id="submenu_content">
+                <div class="panel-heading">
+                  <h3 class="panel-title">submenú</h3>
+                </div>
+                <div class="panel-body">
+                    
+                </div>
+              </div>
+                </div>
+    </div>
+       
+</div> <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
 <script>
     
     var menuid = null;
-    
+       
     var loadSubmenuContent = function(tipo){
         //alert(tipo);
             if(tipo==0||tipo==null){
@@ -85,14 +131,17 @@
                 if($('#html').is(':checked') === true) {
                 $('#html').attr('checked', false);
                 $('#sub').attr('checked', true);
+                $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+    
             }
                 
-                $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
-            }else{
+                       }else{
                 
-                if($('#html').is(':checked') === flase) {
+                if($('#html').is(':checked') === false) {
                 $('#sub').attr('checked', false);
                 $('#html').attr('checked', true);
+                 $("#menu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+    
             }
             }
     };
@@ -111,6 +160,7 @@
             loadSubmenuContent(data.tipo);
         });
     });
+    
     
     
     
