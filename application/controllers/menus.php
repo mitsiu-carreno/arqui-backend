@@ -59,4 +59,9 @@ class Menus extends CI_Controller {
         $this->menu_model->updatePos($idcliente,  $this->input->post("menus"));
     }
 
+    function set_html ($idmenu){
+        $this->load->model("menu_model");
+        $this->menu_model->update($idmenu, "html", $this->input->post("contenido"));
+    }
+    
 }
