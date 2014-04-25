@@ -15,8 +15,8 @@ class Tipo extends CI_Controller {
             //var_dump($data["0"]);
            
             if (array_key_exists('ownSubmenu', $data["0"])) {
-                $this->load->view("recursos/submenus", $data["0"]);
-                //echo json_encode();
+                //$this->load->view("recursos/submenus", $data["0"]);
+                echo json_encode($data["0"]["ownSubmenu"]);
             } 
             else{
             echo json_encode("vacio");
