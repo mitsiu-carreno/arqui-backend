@@ -64,4 +64,9 @@ class Menus extends CI_Controller {
         $this->menu_model->update($idmenu, "html", $this->input->post("contenido"));
     }
     
+    function set_tipo($idmenu){
+        $this->load->model("menu_model");
+        //$this->menu_model->update($idmenu, "tipo", "0");
+        $this->menu_model->update($idmenu, "tipo", $this->input->post("tipo"));
+    }
 }
