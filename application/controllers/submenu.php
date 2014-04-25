@@ -55,4 +55,13 @@ class Submenu extends CI_Controller {
         echo json_encode($data);
     }
     
+      function insert($idmenu = NULL){
+        if ($idmenu === NULL){
+            echo "error";
+        } else {
+            $this->load->model("submenu_model");
+            $submenu = $this->submenu_model->insert($idmenu, $this->input->post("titulo"));
+            echo json_encode($submenu);
+        }
+    }
 }
