@@ -44,5 +44,11 @@ class Submenu_model extends CI_Model {
             return 0;
     }
     
+    function update($idsubmenu, $field, $value){
+        $submenu = R::load( 'submenu', $idsubmenu );
+        $submenu->$field = $value;
+        R::store($submenu);
+        return $submenu->export();
+    }
 }
     

@@ -64,4 +64,10 @@ class Submenu extends CI_Controller {
             echo json_encode($submenu);
         }
     }
+    
+    function set_html ($idsubmenu){
+        $this->load->model("submenu_model");
+        //$this->submenu_model->update($idsubmenu, "html", "test");
+        $this->submenu_model->update($idsubmenu, "html", $this->input->post("contenido"));
+    }
 }
