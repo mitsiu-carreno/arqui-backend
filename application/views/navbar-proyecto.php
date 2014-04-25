@@ -19,3 +19,23 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
+    
+    <script>
+        $(function(){
+            tinymce.init({
+                selector: ".textarea",
+                width: 550,
+                menubar : false,
+                height: 200,
+                language : 'es',
+                image_advtab: true,
+                plugins: [
+                     "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                     "save table contextmenu directionality emoticons template paste textcolor jbimages"
+               ],
+               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+               relative_urls: false
+            });
+        })
+        </script>

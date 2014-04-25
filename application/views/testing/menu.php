@@ -30,11 +30,11 @@
                     <div class="col-md-5">
                               <form id="tipo" role="form">
                                   <div class="switch-toggle switch-candy large-1" style="width:160px;">
-					<input id="sub" name="tipo" type="radio" checked>
-					<label for="sub" onclick="">Submenu</label>
+                                      <input id="sub" name="tipo" type="radio" value="0">
+					<label id="label-sub"  onclick="">Submenu</label>
 
-					<input id="html" name="tipo" type="radio">
-					<label for="html" onclick="">HTML</label>
+                                        <input id="html" name="tipo" type="radio" value="1" checked>
+					<label id="label-html" onclick="">HTML</label>
 
 					<a></a>
 				</div>
@@ -145,25 +145,7 @@
             }
             }
     };
-    
-    $( document ).ready(function() {
-         $("#submenu").hide();
-         $("#contenido").hide();
-        //$(".btn").slice(2,3).button("toggle");
-        //$(".btn_menus_titulo").first().button("toggle");
-        $(".btn_menus_titulo").first().addClass("active");
-        //$(".btn_menus_titulo").first().button("untoggle");
-        menuid=$("#lista-menus li").first().attr("idmenu");
-        //alert(<?php echo $idcliente?>);
-        //alert('antes');
-        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
-            loadSubmenuContent(data.tipo);
-        });
-    });
-    
-    
-    
-    
+
     $(".btn_menus_editar").click(function(e) {
         var btn_menu = $(this).closest("div");
         var menuid = btn_menu.closest("li").attr("idmenu");
@@ -220,6 +202,11 @@
         
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
+         
+         
+        $("#label-sub").prop('for','sub');
+        $("#label-html").prop('for','html');
+    
 //        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
 //            loadSubmenuContent(data.tipo);
 //            
@@ -228,21 +215,25 @@
     });
     
     $('#tipo input').on('change', function() {
-                    //alert($('input[name=tipo]:checked', '#tipo').val()); <-value de radio
+                    alert($('input[name=tipo]:checked', '#tipo').val()); 
                     var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
                         console.log($.param(parametros));
-                        alert(menuid);
+                        //alert(menuid);
                         $.post("<?php echo site_url(array("tipo","set")) ?>/" + menuid, $.param(parametros));
                         
                     if($('input[name=tipo]:checked', '#tipo').val()==1){
-                        $("#contenido").show();                        
-                        $("#submenu").hide();
+                        $("#menu_content").show();                     
+                        $("#submenu_content").hide();
                     }
                     else{
-                        $("#submenu").show();
-                        $("#contenido").hide();
+                        $("#submenu_content").show();
+                        $("#menu_content").hide();
                     }
                 });
+        
+             //$("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+    
+                
                 
                 $("body").delegate("#inp_videourl","keyup", function(){
                     console.log($(this).serialize());
