@@ -32,12 +32,6 @@ class Log extends REST_Controller
             if(is_array($user)){
                 $this->load->library('encrypt');
                 $user["token"] = base64_encode($this->encrypt->encode($user["id"]));
-                $filename= "./banners/" . $user["id"] . ".png";
-                if (file_exists($filename)) {
-                $user["banner"] = "http://cognosvideoapp.com.mx/index.php/imagenes/get_banner/imagenes/get_banner/".$idcliente."/banner.png";
-                }else{
-                    $user["banner"] = null;
-                }
                 $this->response($user, 200);
             } else {
                 $this->response(array('error' => 'No se encontró el usuario'), 404);
