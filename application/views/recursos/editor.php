@@ -1,1 +1,1 @@
-<textarea class="textarea" <?php echo $html?> ></textarea>
+<textarea class="textarea" id="editor" <?php echo $html?> ></textarea>

@@ -124,27 +124,27 @@
     
     var menuid = null;
        
-    var loadSubmenuContent = function(tipo){
-        //alert(tipo);
-            if(tipo==0||tipo==null){
-                //alert('el tipo es 0 o null');
-                if($('#html').is(':checked') === true) {
-                $('#html').attr('checked', false);
-                $('#sub').attr('checked', true);
-                $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
-    
-            }
-                
-                       }else{
-                
-                if($('#html').is(':checked') === false) {
-                $('#sub').attr('checked', false);
-                $('#html').attr('checked', true);
-                 $("#menu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
-    
-            }
-            }
-    };
+//    var loadSubmenuContent = function(tipo){
+//        //alert(tipo);
+//            if(tipo==0||tipo==null){
+//                //alert('el tipo es 0 o null');
+//                if($('#html').is(':checked') === true) {
+//                $('#html').attr('checked', false);
+//                $('#sub').attr('checked', true);
+//                 $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+//    
+//            }
+//               
+//                       }else{
+//                
+//                if($('#html').is(':checked') === false) {
+//                $('#sub').attr('checked', false);
+//                $('#html').attr('checked', true);
+//                 $("#menu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
+//    
+//            }
+//            }
+//    };
 
     $(".btn_menus_editar").click(function(e) {
         var btn_menu = $(this).closest("div");
@@ -203,7 +203,9 @@
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
          
+         $("#menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
          
+    
         $("#label-sub").prop('for','sub');
         $("#label-html").prop('for','html');
     
