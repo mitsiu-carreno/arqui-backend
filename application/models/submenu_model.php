@@ -22,8 +22,10 @@ class Submenu_model extends CI_Model {
         
         $id = R::store($menu); 
         //echo $id;
+        $submenu["idsubmenu"]=$submenu["id"];
         $submenu["id"] = $id;
-        return $submenu;
+        //echo $submenu;
+        return $submenu->export();
     }
     
     function getLastPosition($idmenu){
@@ -44,5 +46,11 @@ class Submenu_model extends CI_Model {
             return 0;
     }
     
+    function update($idsubmenu, $field, $value){
+        $submenu = R::load( 'submenu', $idsubmenu );
+        $submenu->$field = $value;
+        R::store($submenu);
+        return $submenu->export();
+    }
 }
     

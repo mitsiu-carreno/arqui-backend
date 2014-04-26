@@ -33,7 +33,7 @@ class Proyectos extends CI_Controller {
         $data["menus"] = $this->menu_model->get($idcliente);
         
         $this->load->view("header");
-        $this->load->view("navbar");
+        $this->load->view("navbar-proyecto",$data);
         $this->load->view("footer"); 
         $this->load->view("menu_backend/contacto", $data);
     }

@@ -8,7 +8,7 @@
             <ul class="nav navbar-nav">
                 
                 <li><a href="<?php echo site_url();?>/clients/index">inicio</a></li>
-                <li><a href="<?php echo site_url();?>/proyectos/contacto">contacto</a></li>
+                
             </ul>
           <ul class="nav navbar-nav navbar-right">
             
