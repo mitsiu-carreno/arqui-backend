@@ -11,7 +11,7 @@
     display: none;
 }
 
-#ajax-loader .ajax-loader-inner {
+#ajax-loader-app .ajax-loader-inner {
     opacity: 1;
     margin: 0px auto;
     -webkit-border-radius: 10px;
@@ -21,4 +21,4 @@ border-radius: 10px;
     text-align: center;
     width: 300px;
     margin-top: 20%;
-}
+} 

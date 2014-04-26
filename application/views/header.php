@@ -8,6 +8,7 @@
         <link href="<?php echo base_url() ?>css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>css/toggle-switch.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>css/ajax-loader.css" rel="stylesheet" type="text/css"/>
+        <script src="<?php echo base_url() ?>js/json2.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/jquery-1.11.0.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/bootstrap.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/bootbox.js" type="text/javascript"></script>

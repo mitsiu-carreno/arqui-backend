@@ -10,6 +10,13 @@ class Clients extends CI_Controller {
         $this->load->view("footer"); 
     }
     
+    function lista(){
+        $this->load->view("header");
+        $this->load->view("navbar");
+        $this->load->view("clients/app");
+        $this->load->view("footer");
+    }
+    
     function form(){
         $this->load->view("clients/new");
     }
@@ -25,6 +32,18 @@ class Clients extends CI_Controller {
     function update_status($idclient,$status){
         $this->load->model("client_model");
         $this->client_model->update_field($idclient,"activo",$status);
+    }
+    
+    function app($clientid = NULL){
+        switch ($_SERVER['REQUEST_METHOD']){
+            default :
+                echo $this->getclient($clientid);
+        }
+    }
+    
+    function getclient($clientid) {
+        $this->load->model("client_model");
+        return json_encode($this->client_model->get($clientid));
     }
     
 }
