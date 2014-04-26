@@ -22,6 +22,7 @@ class Submenu_model extends CI_Model {
         
         $id = R::store($menu); 
         //echo $id;
+        $submenu["idsubmenu"]=$submenu["id"];
         $submenu["id"] = $id;
         //echo $submenu;
         return $submenu->export();
