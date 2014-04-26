@@ -26,14 +26,14 @@
                         
               
                     <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                    <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
                     <div class="col-md-5">
                               <form id="tipo" role="form">
                                   <div class="switch-toggle switch-candy large-1" style="width:160px;">
-                                      <input id="sub" name="tipo" type="radio" value="0">
-					<label id="label-sub"  onclick="">Submenu</label>
+                                      <input id="<?php echo $m["id"]?>" name="tipo" idmenu="1" type="radio" value="0">
+                                      <label id="label-sub"  onclick="">Submenu</label>
 
-                                        <input id="html" name="tipo" type="radio" value="1" checked>
+                                        <input id="<?php echo $m["id"]?>html" name="tipo" type="radio" value="1" checked>
 					<label id="label-html" onclick="">HTML</label>
 
 					<a></a>
@@ -73,18 +73,18 @@
                     <button type="button" class="btn btn-default btn_menus_titulo" style="width:100px;">
                     </button>
                     <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                    <button type="button" class="btn btn-default "><span class="glyphicon glyphicon-remove-circle"></span></button>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <form id="tipo" role="form">
+<!--                        <form id="tipo" role="form">
                             <div class="checkbox">
-                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
+                                <input type="radio" name="sub" id="sub"  value="0"> Submenú
                                 <br>
                                 <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
                             </div>
-                        </form>
+                        </form>-->
 <!--                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
                         <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>-->
                     </ul>
@@ -93,14 +93,7 @@
                </div>
       
             <div class="col-md-8">
-            <div class="panel panel-default" id="menu_content">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Menú</h3>
-                </div>
-                <div class="panel-body">
-                    
-                </div>
-              </div>  
+               <div class="panel panel-default" id="menu_content">
                 </div>
     </div>
         <div class="row">
@@ -145,7 +138,23 @@
 //            }
 //            }
 //    };
+    $(".btn_menus_eliminar").click(function(e){
+          e.preventDefault();
+                 $('.btn_menus_titulo').removeClass('active');   
+        menuid=$(this).closest("li").attr("idmenu");
+         $parametros = {id:menuid};
+        
+        alert(menuid);
+       bootbox.confirm("Are you sure?", function(result) {
+         console.log("Confirmed: "+result);
+         if(result==true){  
+         
+        window.location="<?php echo site_url(array("menus","eliminar",$m['id']));?>";
 
+                }
+}); 
+}); 
+    
     $(".btn_menus_editar").click(function(e) {
         var btn_menu = $(this).closest("div");
         var menuid = btn_menu.closest("li").attr("idmenu");
@@ -197,23 +206,32 @@
             }
         });
     });
+    
+    
     $(".btn_menus_titulo").click(function(){
         menuid=$(this).closest("li").attr("idmenu");
-        
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
          
-         $("#menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+         $("#menu_content").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
          
-    
-        $("#label-sub").prop('for','sub');
-        $("#label-html").prop('for','html');
-    
+          
+         if(menuid){
+         alert(menuid);
+//    $("span").closest("ul").css({"color":"red","border":"2px solid red"});
+     
+      
+//     if(menuid==subid){
+      $("#label-sub").prop('for',menuid);
+//     
+        $("#label-html").prop('for',menuid+'html');
+//         }}
+    }
 //        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
 //            loadSubmenuContent(data.tipo);
 //            
-           // console.log('menuid:'+ menuid + 'tipo:' + data.tipo);
-        //});
+//            console.log('menuid:'+ menuid + 'tipo:' + data.tipo);
+//        });
     });
     
     $('#tipo input').on('change', function() {

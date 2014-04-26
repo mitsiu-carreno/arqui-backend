@@ -12,10 +12,12 @@ class Tipo extends CI_Controller {
             //submenu
 //            var_dump($data["0"]);
             $this->load->view("recursos/submenus", $data["0"]);
+             var_dump($data["0"]);
         }else{
             //html
-             $this->load->view("header");
+            $this->load->view("header");
             $this->load->view("recursos/editor", $data["0"]);
+           
         }
     }
 //    
