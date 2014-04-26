@@ -52,5 +52,10 @@ class Submenu_model extends CI_Model {
         R::store($submenu);
         return $submenu->export();
     }
+    
+    function getSubmenu($idsubmenu){
+        $submenu = R::findOne( 'submenu', "id = ?", array($idsubmenu));
+        return $submenu->export();
+    }
 }
     
