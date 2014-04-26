@@ -22,9 +22,9 @@ class Submenu_model extends CI_Model {
         
         $id = R::store($menu); 
         //echo $id;
-        //$submenu["id"] = $id;
-        echo $submenu;
-        return $submenu;
+        $submenu["id"] = $id;
+        //echo $submenu;
+        return $submenu->export();
     }
     
     function getLastPosition($idmenu){
