@@ -71,4 +71,9 @@ class Submenu extends CI_Controller {
         //$this->submenu_model->update($idsubmenu, "html", "test");
         $this->submenu_model->update($idsubmenu, "html", $this->input->post("contenido"));
     }
+    
+    function set_tipo($idsubmenu, $tipo){
+        $this->load->model("submenu_model");
+        $this->submenu_model->update($idsubmenu, "tipo", $tipo);
+    }
 }
