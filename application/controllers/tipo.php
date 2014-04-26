@@ -23,9 +23,8 @@ class Tipo extends CI_Controller {
             }
         }else{
             //html
-            $this->load->view("header");
+             $this->load->view("header");
             $this->load->view("recursos/editor", $data["0"]);
-           
         }
     }
 //    
