@@ -25,7 +25,7 @@ class Log extends REST_Controller
             
     function in_post(){
         if(!$this->post("email") || !$this->post("password")){
-            $this->response(NULL, 400);
+            $this->response(array("error" => "no data was recived"), 400);
         } else {
             $this->load->model("log_model");
             $user = $this->log_model->in($this->post("email"),$this->post("password"));
@@ -34,7 +34,7 @@ class Log extends REST_Controller
                 $user["token"] = base64_encode($this->encrypt->encode($user["id"]));
                 $this->response($user, 200);
             } else {
-                $this->response(array('error' => 'No se encontró el usuario'), 404);
+                $this->response(array('error' => 'No se encontró el usuario '), 404);
             }
         }
     }
