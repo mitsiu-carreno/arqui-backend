@@ -1,5 +1,6 @@
 <script src="<?php echo base_url() ?>js/underscore-min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>js/backbone-min.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>js/serializeObject.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>js/clients-app.js" type="text/javascript"></script>
 <style>
     #div_form_nuevo {

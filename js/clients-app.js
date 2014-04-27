@@ -1,5 +1,11 @@
 $(function() {
-
+    $("#btn-nuevo-cliente").click(function(){
+        $("#div_form_nuevo").toggle();
+        $("#tbl-list").toggle();
+    });
+    
+    Backbone.emulateJSON = true;
+    
     //Un cliente
     var Cliente = Backbone.Model.extend({
         // Default attributes for the todo item.
@@ -49,8 +55,11 @@ $(function() {
         // Instead of generating a new element, bind to the existing skeleton of
         // the App already present in the HTML.
         el: $("#clientsapp"),
+        events: {
+            "submit #form_nuevo_cliente":  "createOnSubmit"
+          },
         initialize: function() {
-
+            this.form = this.$("#form_nuevo_cliente");
             this.listenTo(Clientes, 'add', this.addOne);
             this.listenTo(Clientes, 'reset', this.addAll);
             this.listenTo(Clientes, 'all', this.render);
@@ -64,7 +73,15 @@ $(function() {
         // Add all items in the **clients** collection at once.
         addAll: function() {
             Clientes.each(this.addOne, this);
-        }
+        },
+        createOnSubmit: function(e) {
+            e.preventDefault();
+            console.log(this.form.serializeObject());
+            Clientes.create(this.form.serializeObject());
+            this.form[0].reset();;
+            $("#div_form_nuevo").toggle();
+        $("#tbl-list").toggle();
+          }
     });
     var App = new AppView;
 

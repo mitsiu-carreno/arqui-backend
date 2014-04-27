@@ -34,8 +34,12 @@ class Clients extends CI_Controller {
         $this->client_model->update_field($idclient,"activo",$status);
     }
     
+    //Backbone
     function app($clientid = NULL){
         switch ($_SERVER['REQUEST_METHOD']){
+            case 'POST':
+                echo $this->insertclient(json_decode($this->input->post("model")));
+                break;
             default :
                 echo $this->getclient($clientid);
         }
@@ -44,6 +48,14 @@ class Clients extends CI_Controller {
     function getclient($clientid) {
         $this->load->model("client_model");
         return json_encode($this->client_model->get($clientid));
+    }
+    
+    function insertclient($client){
+        $this->load->model("client_model");
+        $client = get_object_vars($client);
+        $id = $this->client_model->insert($client);
+        $client["id"] = $id;
+        return json_encode($client);
     }
     
 }
