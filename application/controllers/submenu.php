@@ -122,6 +122,11 @@ class Submenu extends CI_Controller {
         $this->submenu_model->update($idsubmenu, "video_html", $this->input->post("contenido"));
     }
     
+    function set_video_url($idsubmenu){
+        $this->load->model("submenu_model");
+        $this->submenu_model->update($idsubmenu, "video_url", $this->input->post("url"));
+    }
+    
     function set_indice(){
         $this->load->model("submenu_model");
         //var_dump("hecho");
