@@ -17,6 +17,7 @@ class Submenu_model extends CI_Model {
         $submenu->videoURL = NULL;
         $submenu->tipo = 1; //1 -> video, 2 -> Galeria, 3 -> HTML
         $submenu->pos = ($this->getLastPosition($idmenu))+1;
+        $submenu->video_html= NULL;
         
         $menu->ownSubmenu[] = $submenu;
         
@@ -56,6 +57,22 @@ class Submenu_model extends CI_Model {
     function getSubmenu($idsubmenu){
         $submenu = R::findOne( 'submenu', "id = ?", array($idsubmenu));
         return $submenu->export();
+    }
+    
+    function insertIndice($idsubmenu, $titulo, $contenido){
+       echo $titulo;
+        $submenu = R::load( 'submenu', $idsubmenu );
+        $indice = R::dispense( 'indice' );
+        $indice->titulo = $titulo;
+        $indice->contenido = $contenido;
+        
+        $submenu->ownIndice[] = $indice;
+        R::store($submenu);
+        //echo $id;
+//        var_dump($submenu);
+//        var_dump($queryLogger->getLogs());
+        //echo $indice;
+        return $indice->export();
     }
 }
     
