@@ -30,13 +30,24 @@ class Submenu extends CI_Controller {
         //var_dump($data);
         $this->load->view("submenu/botonera", array("submenu" => $data["tipo"]));
         switch($data["tipo"]){
+            //tipo: 1 -> video indice, 2->video html, 3 -> Galeria, 4->html
             case 1:
                 
+                $data["videosubmenu"] = 1;
+                //var_dump($data);
+                $this->load->view("submenu/video", $data);
                 break;
             case 2:
-                $this->galeria($idsubmenu);
+                
+                $data["videosubmenu"] = 2;
+                $this->load->view("submenu/video", $data);
+                echo json_encode($data["video_html"]);
                 break;
             case 3:
+                $data = array("idsubmenu" => $idsubmenu);
+                $this->load->view("galeria", $data);
+                break;
+            case 4:
                 echo json_encode($data["html"]);
                 break;
             default:
@@ -104,5 +115,16 @@ class Submenu extends CI_Controller {
     function set_tipo($idsubmenu, $tipo){
         $this->load->model("submenu_model");
         $this->submenu_model->update($idsubmenu, "tipo", $tipo);
+    }
+    
+    function set_video_html($idsubmenu){
+        $this->load->model("submenu_model");
+        $this->submenu_model->update($idsubmenu, "video_html", $this->input->post("contenido"));
+    }
+    
+    function set_indice(){
+        $this->load->model("submenu_model");
+        //var_dump("hecho");
+        $data=$this->submenu_model->insertIndice("23", "1:05", "Test_indice");
     }
 }
