@@ -6,6 +6,9 @@
     #div_form_nuevo {
         display: none;
     }
+    #div_form_editar {
+        display: none;
+    }
 </style>
 <div class="container" id="clientsapp" style="margin-top: 80px;">
     <button class="btn btn-success" id="btn-nuevo-cliente" ><span class="glyphicon glyphicon-plus"></span> Nuevo Proyecto</button>
@@ -49,19 +52,29 @@
         </form>
     </div>
     <!--Edit form-->
-    <div id="div_form_editar" class="hidden">
+    <div id="div_form_editar" >
+    </div>
+</div>
+<script type="text/template" id="item-template">
+                <td><%- id %></td>
+                <td><a href="<?php echo site_url(array("proyectos","menus")) ?>/<%- id %>"><%- nombre %></a></td>
+                <td><%- email %></td>
+                <td><button class="btn-editar btn btn-primary">Editar</button></td>
+                <td><button class="btn-eliminar btn btn-default tooltip-status"  data-toggle="tooltip" data-placement="left" title="eliminar" ><span class="glyphicon glyphicon-remove-circle text-danger"></span></button></td>
+</script>
+<script type="text/template" id="item-edit">
         <form method="post" action="<?php echo site_url(array("clients", "update")) ?>" id="form_editar_cliente">
             <div class="page-header">
                 <h4>Editar Proyecto</h4>
             </div>
                 <div class="form-group">
                     <label for="inp_editarNombre">Nombre</label>
-                    <input type="text" name="nombre" class="form-control" id="inp_editarNombre" placeholder="Escriba el nombre la cuenta">
+                    <input type="text" value="<%- nombre %>" name="nombre" class="form-control" id="inp_editarNombre" placeholder="Escriba el nombre la cuenta">
                     <small>Escriba un nombre significativo y descriptivo</small>
                 </div>
                 <div class="form-group">
                     <label for="inp_editarEmail">Email</label>
-                    <input type="email" name="email" class="form-control" id="inp_editarEmail" placeholder="Escriba el email de la cuenta">
+                    <input type="email" value="<%- email %>" name="email" class="form-control" id="inp_editarEmail" placeholder="Escriba el email de la cuenta">
                     <small>Este email servirá para ingresar a la plataforma junto con la contraseña</small>
                 </div>
                 <div class="form-group">
@@ -72,12 +85,4 @@
                 <button type="button" id="btn_editar_cancelar" class="btn btn-danger glyphicon glyphicon-remove">Cancelar</button>
                 <button type="submit" class="btn btn-success glyphicon glyphicon-ok">Editar</button>
         </form>
-    </div>
-</div>
-<script type="text/template" id="item-template">
-                <td><%- id %></td>
-                <td><a href="<?php echo site_url(array("proyectos","menus")) ?>/<%- id %>"><%- nombre %></a></td>
-                <td><%- email %></td>
-                <td><button class="btn-editar btn btn-primary">Editar</button></td>
-                <td><button class="btn-eliminar btn btn-default tooltip-status"  data-toggle="tooltip" data-placement="left" title="eliminar" ><span class="glyphicon glyphicon-remove-circle text-danger"></span></button></td>
 </script>

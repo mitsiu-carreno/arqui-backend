@@ -8,6 +8,7 @@ $(function() {
         $("#tbl-list").toggle();
     });
 
+    Backbone.emulateHTTP = true;
     Backbone.emulateJSON = true;
 
     //Un cliente
@@ -36,12 +37,14 @@ $(function() {
     var Clientes = new ClienteLista;
 
     var ClienteView = Backbone.View.extend({
-        //... is a list tag.
+        //... is a table row tag.
         tagName: "tr",
         // Cache the template function for a single item.
         template: _.template($('#item-template').html()),
+        editTemplate: _.template($('#item-edit').html()),
         events: {
-            "click .btn-eliminar": "clear"
+            "click .btn-eliminar": "clear",
+            "click .btn-editar" : "loadEditForm"
         },
         initialize: function() {
             this.listenTo(this.model, 'add', this.render);
@@ -62,9 +65,47 @@ $(function() {
                     bb_model.destroy();
                 }
             });
+        },
+        
+        loadEditForm : function(){
+            var view = new ClienteEditView({model: this.model});
+            $("#div_form_editar").html(view.render().el);
+//            $("#form_editar_cliente").html(this.editTemplate(this.model.toJSON()));
+            $("#div_form_editar").toggle();
+            $("#tbl-list").toggle();
         }
 
     });
+
+    var ClienteEditView = Backbone.View.extend({
+        //... is a table row tag.
+        tagName: "div",
+        // Cache the template function for a single item.
+        template: _.template($('#item-edit').html()),
+        events: {
+            "submit #form_editar_cliente": "updateClient"
+        },
+        initialize: function() {
+            this.form = this.$("#form_editar_cliente");
+        },
+        // Re-render the titles of the todo item.
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
+        },
+        updateClient : function(event){
+            console.log("entra al submit");
+            event.preventDefault();
+            console.log(event.target.id +":"+JSON.stringify(this.$("#"+event.target.id).serializeObject()));
+            this.model.save((this.$("#"+event.target.id).serializeObject()));
+            this.$("#"+event.target.id)[0].reset();
+            $("#div_form_editar").toggle();
+            $("#tbl-list").toggle();
+        }
+
+    });
+    
+    
 
     var AppView = Backbone.View.extend({
         // Instead of generating a new element, bind to the existing skeleton of
