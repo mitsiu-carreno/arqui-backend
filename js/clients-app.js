@@ -1,11 +1,15 @@
 $(function() {
-    $("#btn-nuevo-cliente").click(function(){
+    $("#btn-nuevo-cliente").click(function() {
         $("#div_form_nuevo").toggle();
         $("#tbl-list").toggle();
     });
-    
+    $("#btn_nuevo_cancelar").click(function() {
+        $("#div_form_nuevo").toggle();
+        $("#tbl-list").toggle();
+    });
+
     Backbone.emulateJSON = true;
-    
+
     //Un cliente
     var Cliente = Backbone.Model.extend({
         // Default attributes for the todo item.
@@ -36,10 +40,13 @@ $(function() {
         tagName: "tr",
         // Cache the template function for a single item.
         template: _.template($('#item-template').html()),
+        events: {
+            "click .btn-eliminar": "clear"
+        },
         initialize: function() {
             this.listenTo(this.model, 'add', this.render);
             this.listenTo(this.model, 'change', this.render);
-//      this.listenTo(this.model, 'destroy', this.remove);
+            this.listenTo(this.model, 'destroy', this.remove);
         },
         // Re-render the titles of the todo item.
         render: function() {
@@ -47,6 +54,14 @@ $(function() {
 //      this.$el.toggleClass('done', this.model.get('done'));
 //      this.input = this.$('.edit');
             return this;
+        },
+        clear: function() {
+            var bb_model = this.model;
+            bootbox.confirm('¿Estás seguro de <strong><span class="text-danger">eliminar</span></strong> este proyecto?', function(result){
+                if(result){
+                    bb_model.destroy();
+                }
+            });
         }
 
     });
@@ -56,8 +71,8 @@ $(function() {
         // the App already present in the HTML.
         el: $("#clientsapp"),
         events: {
-            "submit #form_nuevo_cliente":  "createOnSubmit"
-          },
+            "submit #form_nuevo_cliente": "createOnSubmit"
+        },
         initialize: function() {
             this.form = this.$("#form_nuevo_cliente");
             this.listenTo(Clientes, 'add', this.addOne);
@@ -78,10 +93,10 @@ $(function() {
             e.preventDefault();
             console.log(this.form.serializeObject());
             Clientes.create(this.form.serializeObject());
-            this.form[0].reset();;
+            this.form[0].reset();
             $("#div_form_nuevo").toggle();
-        $("#tbl-list").toggle();
-          }
+            $("#tbl-list").toggle();
+        }
     });
     var App = new AppView;
 
