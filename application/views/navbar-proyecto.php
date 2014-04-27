@@ -7,10 +7,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 
-                <li><a href="<?php echo site_url();?>/clients/index">inicio</a></li>
-                <li><a href="<?php echo site_url(array("proyectos","menus",$idcliente)) ?>">menús</a></li>
-                <li><a href="<?php echo site_url(array("proyectos","banner",$idcliente)) ?>">banner</a></li>
-                <li><a href="<?php echo site_url(array("proyectos","contacto",$idcliente)) ?>">contacto</a></li>
+                <li><a href="<?php echo site_url();?>/clients/index">Inicio</a></li>
+                <li><a href="<?php echo site_url(array("proyectos","banner",$idcliente)) ?>">Banner</a></li>
+                <li><a href="<?php echo site_url(array("proyectos","contacto",$idcliente)) ?>">Contacto</a></li>
+                <li><a href="<?php echo site_url(array("proyectos","menus",$idcliente)) ?>">Menús</a></li>
             </ul>
           <ul class="nav navbar-nav navbar-right">
             
