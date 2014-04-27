@@ -60,7 +60,8 @@ class Submenu_model extends CI_Model {
     }
     
     function insertIndice($idsubmenu, $indice, $contenido){
-        $submenu = R::load( 'submenu', $idsubmenu );
+        //echo $idsubmenu, $indice, $contenido;
+        //$submenu = R::load( 'submenu', $idsubmenu );
         //echo $submenu;
         $indice = R::dispense( 'indice' );
         $indice->idSubmenu = $idsubmenu;
@@ -68,9 +69,9 @@ class Submenu_model extends CI_Model {
         $indice->contenido = $contenido;
         
         
-        $submenu->ownIndice[] = $indice;
+        //$submenu->ownIndice[] = $indice;
         
-        R::store($submenu); 
+        R::store($indice); 
         //echo $id;
         
         //echo $indice;
