@@ -15,11 +15,14 @@ class Tipo extends CI_Controller {
             //var_dump($data["0"]);
            
             if (array_key_exists('ownSubmenu', $data["0"])) {
-                //$this->load->view("recursos/submenus", $data["0"]);
-                echo json_encode($data["0"]["ownSubmenu"]);
+                $this->load->view("recursos/submenus", $data["0"]);
+                //echo json_encode($data["0"]["ownSubmenu"]);
             } 
             else{
-            echo json_encode("vacio");
+            //echo json_encode("vacio");
+                 $this->load->view("header");
+                $this->load->view("recursos/lista_submenus");
+              
             }
         }else{
             //html
