@@ -68,10 +68,7 @@ class Submenu_model extends CI_Model {
         
         $submenu->ownIndice[] = $indice;
         R::store($submenu);
-        //echo $id;
-//        var_dump($submenu);
-//        var_dump($queryLogger->getLogs());
-        //echo $indice;
+
         return $indice->export();
     }
 }
