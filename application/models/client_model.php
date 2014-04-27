@@ -67,4 +67,9 @@ class Client_model extends CI_Model {
         $menu->tipo = $tipo;
         R::store($menu);
     }
+    
+        function delete($clienteid){
+        $client = R::load( 'client', $clienteid );
+        R::trash($client);
+    }
 }

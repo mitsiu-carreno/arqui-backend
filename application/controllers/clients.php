@@ -37,6 +37,10 @@ class Clients extends CI_Controller {
     //Backbone
     function app($clientid = NULL){
         switch ($_SERVER['REQUEST_METHOD']){
+            case "DELETE":
+                $this->load->model("client_model");
+                $this->client_model->delete($clientid);
+                break;
             case 'POST':
                 echo $this->insertclient(json_decode($this->input->post("model")));
                 break;
