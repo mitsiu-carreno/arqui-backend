@@ -22,6 +22,7 @@ class Submenu_model extends CI_Model {
         
         $id = R::store($menu); 
         //echo $id;
+        $submenu["idsubmenu"]=$submenu["id"];
         $submenu["id"] = $id;
         //echo $submenu;
         return $submenu->export();
@@ -49,6 +50,11 @@ class Submenu_model extends CI_Model {
         $submenu = R::load( 'submenu', $idsubmenu );
         $submenu->$field = $value;
         R::store($submenu);
+        return $submenu->export();
+    }
+    
+    function getSubmenu($idsubmenu){
+        $submenu = R::findOne( 'submenu', "id = ?", array($idsubmenu));
         return $submenu->export();
     }
 }

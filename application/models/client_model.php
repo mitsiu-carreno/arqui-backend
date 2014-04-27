@@ -13,13 +13,13 @@ class Client_model extends CI_Model {
         } else {
             $client = R::load( 'client', $id );
             unset($client->password);
-            return $client;
+            return $client->export();
         }
     }
     
     function getAll(){
         $clients = R::findAll("client");
-        return $clients;
+        return R::exportAll($clients);
     }
             
     function insert($data){

@@ -224,7 +224,7 @@
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
          
-         $("#menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+       
       
           
          if(menuid){
@@ -232,7 +232,7 @@
          //alert(menuid);
 //    $("span").closest("ul").css({"color":"red","border":"2px solid red"});
      
-      
+        $("#menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
 //     if(menuid==subid){
       $("#label-sub").prop('for',menuid);
 //     
