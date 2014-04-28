@@ -32,12 +32,13 @@ class Submenu extends CI_Controller {
         switch($data["tipo"]){
             //tipo: 1 -> video indice, 2->video html, 3 -> Galeria, 4->html
             case 1:
-                echo 'case 1';
-                $data = $this->submenu_model->getIndice($idsubmenu);
+                //echo 'case 1';
+                $indices = $this->submenu_model->getIndice($idsubmenu);
+                //var_dump($indices);
                 $data["videosubmenu"] = 1;
                 //var_dump($data);
                 $this->load->view("submenu/video", $data);
-                //echo json_encode($indices);
+                echo json_encode($indices);
                 break;
             case 2:
                 

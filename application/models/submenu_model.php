@@ -72,14 +72,18 @@ class Submenu_model extends CI_Model {
         return $indice->export();
     }
     
-    function getIndice($idsubmenu){
-        echo $idsubmenu;
-        //$indices = R::findAll( 'indice', "submenu_id = ?", array($idsubmenu));
-        //$indices = R::find( 'indice', "submenu_id = ? ORDER BY id DESC", array($idsubmenu));
-        $indices = R::find( 'indices', "submenu_id = ?", array($idsubmenu));
+        function getIndice($idsubmenu){
         
-        return $indices->export();
-
+            //$indices = R::findAll( 'indice', "submenu_id = ?", array($idsubmenu));
+            //$indices = R::find( 'indice', "submenu_id = ? ORDER BY id DESC", array($idsubmenu));
+        //$indices = R::find( 'indices', "submenu_id = ?", array($idsubmenu));
+            //echo $indices;
+        //return $indices->export();
+        $indices = R::find('indice',' submenu_id = ? ', array( $idsubmenu ));    
+        //$indices = R::load( 'indice', 1 );
+        //return $indices->exportAll;
+        return R::exportAll($indices);
     }
+
 }
     
