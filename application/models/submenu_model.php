@@ -59,22 +59,16 @@ class Submenu_model extends CI_Model {
         return $submenu->export();
     }
     
-    function insertIndice($idsubmenu, $indice, $contenido){
-        //echo $idsubmenu, $indice, $contenido;
-        //$submenu = R::load( 'submenu', $idsubmenu );
-        //echo $submenu;
+    function insertIndice($idsubmenu, $titulo, $contenido){
+       echo $titulo;
+        $submenu = R::load( 'submenu', $idsubmenu );
         $indice = R::dispense( 'indice' );
-        $indice->idSubmenu = $idsubmenu;
-        $indice->indice = $indice;
+        $indice->titulo = $titulo;
         $indice->contenido = $contenido;
         
-        
-        //$submenu->ownIndice[] = $indice;
-        
-        R::store($indice); 
-        //echo $id;
-        
-        //echo $indice;
+        $submenu->ownIndice[] = $indice;
+        R::store($submenu);
+
         return $indice->export();
     }
 }

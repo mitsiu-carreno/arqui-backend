@@ -308,7 +308,7 @@
             e.preventDefault();
             var nombreDelMenu = $.trim(btn_menu.find(".btn_menus_titulo").html());
         
-            console.log(nombreDelMenu);
+            console.log('je'+nombreDelMenu);
             var selector ='#editar';
             $(selector).removeAttr("type");
             $(this).attr('type','text');

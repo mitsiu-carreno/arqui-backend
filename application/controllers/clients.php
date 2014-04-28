@@ -1,5 +1,4 @@
 <?php
-
 class Clients extends CI_Controller {
     function index(){
         $this->load->model("client_model");
@@ -37,6 +36,9 @@ class Clients extends CI_Controller {
     //Backbone
     function app($clientid = NULL){
         switch ($_SERVER['REQUEST_METHOD']){
+            case "PUT":
+                echo $this->updateclient($clientid,json_decode($this->input->post("model")));
+                break;
             case "DELETE":
                 $this->load->model("client_model");
                 $this->client_model->delete($clientid);
@@ -47,6 +49,14 @@ class Clients extends CI_Controller {
             default :
                 echo $this->getclient($clientid);
         }
+    }
+    
+    function updateclient($clientid, $client){
+        $this->load->model("client_model");
+        $client = get_object_vars($client);
+        unset($client["ownMenu"]);
+        $id = $this->client_model->update($client);
+        return $this->getclient($clientid);
     }
     
     function getclient($clientid) {

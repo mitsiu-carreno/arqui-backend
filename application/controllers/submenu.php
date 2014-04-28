@@ -129,7 +129,7 @@ class Submenu extends CI_Controller {
     
     function set_indice(){
         $this->load->model("submenu_model");
-        //var_dump("hecho");
-        $data=$this->submenu_model->insertIndice(23, 1, "Test_indice");
+        // var_dump("hecho");
+        $this->submenu_model->insertIndice(23, "01:00", "Test_indice");
     }
 }

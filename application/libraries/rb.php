@@ -7,7 +7,7 @@ class Rb {
 		include(APPPATH.'config' . ((ENVIRONMENT == 'testing')?'/'.ENVIRONMENT : '')  . '/database.php');
 		
 		// Get Redbean
-		include(APPPATH.'third_party/rb.php');
+		include(APPPATH.'third_party/rb.phar');
 		
 		// Database data
 		$host = $db[$active_group]['hostname'];
