@@ -11,13 +11,14 @@ class Galeria_model extends CI_Model {
         $submenu = R::load( 'submenu', $idsubmenu );
         
         $galeria = R::dispense( 'galeria' );
-        $galeria->titulo = $titulo;
+        $galeria->titulo = $titulo."";
         $galeria->pos = ($this->getLastPosition($idsubmenu))+1;
         
         $submenu->ownGaleria[] = $galeria;
         
         $id = R::store($submenu); 
-        //echo $id;
+        //echo $id;va¡¡¡
+//        var_dump($galeria);
         $galeria["id"] = $id;
         return $galeria;
     }

@@ -73,6 +73,7 @@ class Imagenes extends CI_Controller {
         	$config['upload_path'] = './galeria/' . $idsubmenu .'/';
 		$config['allowed_types'] = 'gif|jpg|png';
                 $this->load->model("galeria_model");
+//                var_dump($this->input->post());
                 $galeria = $this->galeria_model->insert($idsubmenu,  $this->input->post("titulo"));
                 $config['file_name'] = $galeria["id"];
                 $config['overwrite'] = TRUE;

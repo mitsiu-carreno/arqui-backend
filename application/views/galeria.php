@@ -29,6 +29,7 @@
                     <ul id="ul_filelist" class="list-group">
                     </ul>
                     <form id="upload"  method="post" action="<?php echo site_url(array("imagenes", "subir_galeria", $idsubmenu)) ?>" enctype="multipart/form-data">
+                        <input type="hidden" id="img_titulo" name="titulo" value="mil" />
                         <input type="file" id="inp_file" name="userfile" />
                         <div id="status"></div>
                         <button class="btn btn-default btn-large btn-block" id="btn_subir"><span class="glyphicon glyphicon-circle-arrow-up"></span> Subir Imagen</button>
@@ -41,10 +42,22 @@
 <script>
     
             $("#btn_subir").click(function() {
-            $("#inp_file").click();
+                bootbox.prompt({
+                    title: "Título de la imagen",
+        //            value: nombreDelMenu,
+                    callback: function(result) {
+                        if (result === null) {
+                            console.log("Prompt dismissed");
+                        } else {
+                            $("#img_titulo").val(result);
+                            $("#inp_file").click();
+                        }
+                    }
+                });
         });
 
         $("#upload").submit(function(e) {
+            
             e.preventDefault();
                         $("#status").empty();
         });
