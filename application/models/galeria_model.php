@@ -19,7 +19,6 @@ class Galeria_model extends CI_Model {
         $id = R::store($submenu); 
         //echo $id;va¡¡¡
 //        var_dump($galeria);
-        $galeria["id"] = $id;
         return $galeria;
     }
     
@@ -32,7 +31,7 @@ class Galeria_model extends CI_Model {
     }
     
     function get($idsubmenu){
-        $submenu = R::load( 'submenu', $idsubmenu );
-        return $submenu->ownGaleria;
+        $galerias = R::find( 'galeria', "submenu_id = ? ORDER BY pos ASC", array($idsubmenu));
+        return R::exportAll($galerias);
     }
 }

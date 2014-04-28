@@ -42,18 +42,8 @@
 <script>
     
             $("#btn_subir").click(function() {
-                bootbox.prompt({
-                    title: "Título de la imagen",
-        //            value: nombreDelMenu,
-                    callback: function(result) {
-                        if (result === null) {
-                            console.log("Prompt dismissed");
-                        } else {
-                            $("#img_titulo").val(result);
+
                             $("#inp_file").click();
-                        }
-                    }
-                });
         });
 
         $("#upload").submit(function(e) {
@@ -67,7 +57,9 @@
             $.getJSON("<?php echo site_url(array("imagenes","galeria_files",$idsubmenu)) ?>", function(data){
                 var first = true;
                 $.each(data.archivos, function(index, value){
-                    $("#ul_filelist").append($("<li />").html(value.name).addClass("list-group-item").append($("<a />").attr("href","<?php echo site_url(array("imagenes","del_galeria")) ?>/").append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
+                    var titulo = $("<a />").html(value.titulo).attr("href", "<?php echo base_url()  ?>galeria/" + value.submenu_id + "/" + value.id + ".png");
+                    var thumbnail = $("<a />").html(' <small> Thumbnail</small>').attr("href", "<?php echo base_url()  ?>galeria/" + value.submenu_id + "/" + value.id + "_thumb.png");
+                    $("#ul_filelist").append($("<li />").addClass("list-group-item").append(titulo).append(thumbnail).append($("<a />").attr("href","<?php echo site_url(array("imagenes","del_galeria")) ?>/").append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
                     first = false;
                 });
             });
