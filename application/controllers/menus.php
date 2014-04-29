@@ -33,7 +33,7 @@ class Menus extends CI_Controller {
         }
     }
     
-    function lista($idcliente = 1){
+    function lista($idcliente){
         $data = array("idcliente"=>$idcliente);
         $this->load->model("menu_model");
         $data["menus"] = $this->menu_model->get($idcliente);
