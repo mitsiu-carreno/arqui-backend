@@ -304,7 +304,9 @@
                 $("body").delegate("#btn_agregar_indice_video","click", function(){
                     console.log("bumm");
                     bootbox.dialog({
-                        message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
+                        //message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
+                        //message: "Tiempo <br> Minutos: <br><input type='number' id='inp_min_time' step='1' min='0'></input> <br> Segundos: <br><input type='number' id='inp_seg_time' step='1' min='0'></input> <br> <hr> Botón <br><input type='text' id='id_msg_new_boton_video'/>",
+                        message: "<div style='width:50px; float:left; height:35px;'>Min<br><input type='number' id='inp_min_time' step='1' min='0' style='width:80%'></input> : </div><div  style='width:40px; height:35px; float:left'>Seg<br><input type='number' id='inp_min_time' step='1' min='0' style='width:100%'></input></div> <br> <br> <br>Botón <br><input type='text' id='id_msg_new_boton_video'/>", 
                          buttons: {
                             main: {
                               label: "Insertar",
