@@ -40,7 +40,6 @@
     </div>
 </div>
 <script>
-    
             $("#btn_subir").click(function() {
 
                             $("#inp_file").click();

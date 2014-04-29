@@ -14,6 +14,11 @@
         <script src="<?php echo base_url() ?>js/bootbox.js" type="text/javascript"></script>
          <script src="<?php echo base_url() ?>js/moment.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+/* <![CDATA[ */
+    var global_baseurl = "<?php echo base_url(); ?>";
+/* ]]> */
+</script> 
     </head>
     <body>
  <script src="<?php echo base_url() ?>js/tinymce/tinymce.min.js"></script>

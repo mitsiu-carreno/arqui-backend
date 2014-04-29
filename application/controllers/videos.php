@@ -15,4 +15,8 @@ class Videos extends CI_Controller {
         $upload_handler = new UploadHandler();
     }
     
+    function insert($submenuid){
+        $this->load->model("submenu_model");
+        $this->submenu_model->update($submenuid,"video",  $this->input->post("url"));
+    }
 }

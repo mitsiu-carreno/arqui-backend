@@ -1,7 +1,7 @@
 $(function() {
 
     // Initialize the jQuery File Upload plugin
-    $('#upload').fileupload({
+    $('#upload-video').fileupload({
         // This element will accept file drag/drop uploading
         dropZone: $('#panel_list_files'),
         dataType: 'json',
@@ -9,6 +9,19 @@ $(function() {
         maxChunkSize: 10000000, // 10 MB
         // This function is called when a file is added to the queue;
         // either via the browse button, or via drag/drop:
+        done : function (e,data){
+            console.log(data);
+            var parametros={"url":data.result.files[0].url,"id":submenuid};
+            var enlace = $("<a />").attr({
+               "href": data.result.files[0].url,
+               "target": "_blank"
+            }).html(data.result.files[0].name);
+            $("#url_video").empty().append(enlace);
+            
+            $.post(global_baseurl + "index.php/videos/insert/" + submenuid, $.param(parametros), function(success){
+                    console.log(success);
+                },"json");
+        },
         add: function(e, data) {
             console.log("entra");
             var progressBar = $("<div />").addClass("progress progress-striped active").attr("style", "width:328px")
