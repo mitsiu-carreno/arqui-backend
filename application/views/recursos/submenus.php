@@ -14,23 +14,23 @@
                 <label>Submenús</label>
 </div>
  <div class="row">
-  <div class="col-md-4" style>
+     <div style="padding-left:3%">
 
     <ul id="lista-submenus"  class="list-block">
         <?php foreach ($ownSubmenu as $submenu): ?>
         <li class="li-menu" idmenu="<?php echo $submenu["id"] ?>">
             <div class="btn-group" style="vertical-align: baseline">
                     
-                    <input type="button"  id="editar" class="btn btn-default btn_submenus_titulo" value="<?php echo $submenu["titulo"] ?>" style="width:100px;">
+                    <input type="button"  id="editar_sub" class="btn btn-default btn_submenus_titulo" value="<?php echo $submenu["titulo"] ?>" style="width:100px;">
                         
               
-                    <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                    <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                    <button type="button" class="btn btn-default btn_submenus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                    <button type="button" class="btn btn-default btn_submenus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
                    
-<!--                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
+                    <button type="button" class="btn btn-default btn_submenus_editar dropdown-toggle">
+                        <span class="glyphicon glyphicon-edit"></span>
                     </button>
-                    <ul class="dropdown-menu" role="menu">
+<!--                    <ul class="dropdown-menu" role="menu">
    
                         <form id="tipo" role="form">
                             <div class="checkbox">
@@ -39,7 +39,8 @@
                                 <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
                             </div>
                         </form>
-                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+-->                  
+<!--<li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
                         <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
                     </ul>-->
                 </div>
@@ -58,7 +59,7 @@
     </ul>
 <li id="li_to_clone" class="hidden li-menu" idmenu="">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default btn_submenus_titulo" style="width:100px;">
+                    <button type="button" class="btn btn-default btn_submenus_titul" style="width:100px;">
                     </button>
                    <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
                     <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
@@ -78,9 +79,9 @@
                 </div>
             </li>
                </div>
-      <div class="col-md-5">
+<!--      <div class="col-md-5">
                               <form id="tipo" role="form">
-                                  submenú seleccionado: <input type="text" value="<?php echo $submenu["titulo"];?>" id="submenu-titulo" readonly="" width="100px"/>
+                                  submenú seleccionado: <input type="text" value="no ha seleccionado" id="submenu-titulo" readonly="" width="100px"/>
                               <div class="switch-toggle switch-3 switch-candy switch-candy-blue">
                                   
                                   <input class="video" name="tipo" type="radio" checked>
@@ -96,56 +97,146 @@
 				</div>
                                </form> 
                     </div>
+      <div class="col-md-8">
+            <div class="panel panel-primary" id="submenu_content">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Menú</h3>
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+    </div>-->
  </div>
 <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
 <script>
  $(".btn_submenus_titulo").click(function(){
       btn_menu = $(this).closest("div");
-        menuid=$(this).closest("li").attr("idmenu");
+        submenuid=$(this).closest("li").attr("idmenu");
         $(".btn_submenus_titulo").removeClass("active");
         
         $(this).button().addClass("active");
           
-        nombreDelSubmenu = $.trim(btn_menu.find(".btn_submenus_titulo").html());
-       console.log(nombreDelSubmenu);
-      $('#submenu-titulo').attr('value',nombreDelSubmenu);
-        $(".video").attr('id',menuid+'vid');
-        $(".galeria").prop('id',menuid+'galeria');
-        $(".HTML").prop('id',menuid+'HTML');
+         $(".btn_submenus_titulo").attr("idmenu");
+         nombreDelsubMenu=$(this).val();
+    
+      $('#submenu-titulo').attr('value',nombreDelsubMenu);
+        $(".video").attr('id',submenuid+'vid');
+        $(".galeria").prop('id',submenuid+'galeria');
+        $(".HTML").prop('id',submenuid+'HTML');
         
-         if(menuid){
-             console.log('sub:'+menuid);
+         if(submenuid){
+             console.log('sub:'+submenuid);
             
          //alert(menuid);
 //    $("span").closest("ul").css({"color":"red","border":"2px solid red"});
      
-       
+       $("#menu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + submenuid);
+ 
 //     if(menuid==subid){
       
-      $("#label-video").prop('for',menuid+'vid');
-        $("#label-galeria").prop('for',menuid+'galeria');
-        $("#label-HTML").prop('for',menuid+'HTML');
+      $("#label-video").prop('for',submenuid+'vid');
+        $("#label-galeria").prop('for',submenuid+'galeria');
+        $("#label-HTML").prop('for',submenuid+'HTML');
 //         }}
     }
 
     });
+    $(".btn_submenus_editar").click(function(e) {
+        var btn_submenu = $(this).closest("div");
+        e.preventDefault();
+
+        console.log(nombreDelsubMenu);
+        bootbox.prompt({
+            title: "Editar submenú",
+            value: nombreDelsubMenu,
+            callback: function(result) {
+                if (result === null) {
+                    console.log("Prompt dismissed");
+                } else {
+         
+                    var parametros = {id:submenuid,"titulo": result};
+                    console.log(parametros);
+                    $.post("<?php echo site_url(array("submenu", "editar")) ?>/"+ submenuid, $.param(parametros),"json");
+                      
+                }
+            }
+        });
+    });
+    
+         $(".btn_submenus_titulo").dblclick(function(e){
+            console.log('editar');
+                 
+            var btn_menu = $(this).closest("div");
+            submenuid = btn_menu.closest("li").attr("idmenu");
+            e.preventDefault();
+            var nombreDelsubMenu = $.trim(btn_menu.find(".btn_submenus_titulo").html());
+        
+            console.log('je'+nombreDelsubMenu);
+            var selector ='#editar_sub';
+            $(selector).removeAttr("type");
+            $(this).attr('type','text');
+            $(this).keypress(function(key){
+      
+        var unicode
+            if (key.charCode)
+                unicode=key.charCode;
+            else
+                unicode=key.keyCode;
+            if (unicode == 13){
+//                 
+                    btn_menu.find(".btn_submenus_titulo").html();
+                    var result=$(this).val();
+                    var parametros = {id:submenuid,"titulo": result};
+                    console.log(parametros);
+                    $.post("<?php echo site_url(array("submenu", "editar")) ?>/"+ submenuid, $.param(parametros),"json");
+                    $(this).prop('type','button');
+    }
+             });
+
+             
+                });
+                
+      $(".btn_submenus_eliminar").click(function(e){
+          e.preventDefault();
+        $('.btn_submenus_titulo').removeClass('active');   
+        submenuid=$(this).closest("li").attr("idmenu");
+         var parametros = submenuid;
+        
+      //  alert(menuid);
+      console.log(submenuid);
+       bootbox.confirm("Está seguro de eliminar el submenú?", function(result) {
+         console.log("Confirmed: "+result);
+         if(result==true){  
+         
+      
+      
+      $.get("<?php echo site_url(array("submenu", "eliminar")) ?>/" + submenuid);
+       window.location.reload();
+         
+        
+                }
+}); 
+});  
     $("#btn_submenus_add").click(function() {
         bootbox.prompt("Crear nuevo submenú", function(data) {
             console.log(data);
             
-              var parametros={"titulo":data,"id":menuid};
+              var parametros={"titulo":data};
              
         
       //  alert(menuid);
-      console.log(menuid);
+      console.log(parametros);
             if (data && data.length > 0) {
               $.post("<?php echo site_url(array("submenu", "insert")) ?>/"+menuid, $.param(parametros), function(success){
                     console.log(success);
                   window.location.reload();
+                  $('.btn_menus_titulo').addClass('active');   
                 },"json");
-                if(menuid){
-                     $('.btn_menus_titulo').removeClass('active');   
-                }
+                    if(submenuid){
+                     $('.btn_submenus_titulo').removeClass('active');   
+
+                 }
             }
         });
     });

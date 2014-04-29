@@ -32,10 +32,13 @@ class Submenu extends CI_Controller {
         switch($data["tipo"]){
             //tipo: 1 -> video indice, 2->video html, 3 -> Galeria, 4->html
             case 1:
-                
+                //echo 'case 1';
+                $indices = $this->submenu_model->getIndice($idsubmenu);
+                //var_dump($indices);
                 $data["videosubmenu"] = 1;
                 //var_dump($data);
                 $this->load->view("submenu/video", $data);
+                echo json_encode($indices);
                 break;
             case 2:
                 
@@ -52,7 +55,12 @@ class Submenu extends CI_Controller {
                 break;
             default:
                 //$this->video();
-                echo "default";
+                $indices = $this->submenu_model->getIndice($idsubmenu);
+                //var_dump($indices);
+                $data["videosubmenu"] = 1;
+                //var_dump($data);
+                $this->load->view("submenu/video", $data);
+                echo json_encode($indices);
         }
         
     }
@@ -127,9 +135,21 @@ class Submenu extends CI_Controller {
         $this->submenu_model->update($idsubmenu, "video_url", $this->input->post("url"));
     }
     
-    function set_indice(){
+    function set_indice($idsubmenu){
         $this->load->model("submenu_model");
         // var_dump("hecho");
-        $this->submenu_model->insertIndice(23, "01:00", "Test_indice");
+        $this->submenu_model->insertIndice($idsubmenu, $this->input->post("titulo"), $this->input->post("contenido"));
+    }
+    
+    function eliminar($idsubmenu){
+        $this->load->model("submenu_model");
+       $menu = $this->submenu_model->delete($idsubmenu);
+       //redirect('menus/lista');
+    }
+    
+    function editar($idsubmenu){
+       $this->load->model("submenu_model");
+       $submenu = $this->submenu_model->update($idsubmenu, "titulo", $this->input->post("titulo"));
+       
     }
 }

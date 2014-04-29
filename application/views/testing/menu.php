@@ -15,7 +15,7 @@
 </div>
     <!-- Single button -->
     <div class="row">
-  <div class="col-md-4" style>
+  <div class="col-md-3" style>
 
     <ul id="lista-menus"  class="list-block">
         <?php foreach ($menus as $m): ?>
@@ -26,8 +26,22 @@
                         
               
                     <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                    <button type="button" class="btn btn-default " data-toggle="dropdown">
+                       Tipo
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+   
+                        <form id="tipo" role="form">
+                            <div class="checkbox">
+                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
+                                <br>
+                                <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
+                            </div>
+                        </form>
+                    </ul>
                     <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
-                    <div class="col-md-5">
+<!--                    <div class="col-md-5">
                               <form id="tipo" role="form">
                                   <div class="switch-toggle switch-candy switch-candy-blue large-1" style="width:160px;">
                                       <input id="<?php echo $m["id"]?>" name="tipo" idmenu="1" type="radio" value="0">
@@ -39,7 +53,7 @@
 					<a></a>
 				</div>
                                </form> 
-                    </div>
+                    </div>-->
 <!--                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
                     </button>
@@ -90,11 +104,20 @@
                 </div>
             </li>
                </div>
-      
-        <div class="col-md-8">
+       <div class="col-md-3">
+               <div class="panel panel-primary" id="sub-menu_content">
+                <div class="panel-heading">
+                    <h3 class="panel-title">submenú</h3>
+                </div>
+                <div class="panel-body">
+
+                </div>
+                    </div>
+           </div>
+        <div class="col-md-6">
             <div class="panel panel-primary" id="menu_content">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Menú</h3>
+                    <h3 class="panel-title">Edición</h3>
                 </div>
                 <div class="panel-body">
 
@@ -105,16 +128,7 @@
             <div class="col-md-4">
                 
             </div>
-           <div class="col-md-8">
-            <div class="panel panel-default" id="submenu_content">
-                <div class="panel-heading">
-                  <h3 class="panel-title">submenú</h3>
-                </div>
-                <div class="panel-body">
-                    
-                </div>
-              </div>
-                </div>
+
     </div>
        
 </div> <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
@@ -122,27 +136,26 @@
     
     var menuid = null;
        
-//    var loadSubmenuContent = function(tipo){
-//        //alert(tipo);
-//            if(tipo==0||tipo==null){
-//                //alert('el tipo es 0 o null');
-//                if($('#html').is(':checked') === true) {
-//                $('#html').attr('checked', false);
-//                $('#sub').attr('checked', true);
-//                 $("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
-//    
-//            }
-//               
-//                       }else{
-//                
-//                if($('#html').is(':checked') === false) {
-//                $('#sub').attr('checked', false);
-//                $('#html').attr('checked', true);
-//                 $("#menu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
-//    
-//            }
-//            }
-//    };
+    var loadSubmenuContent = function(tipo){
+            if(tipo==0||tipo==null){
+                $('#sub').attr('checked', true);
+                $("#submenu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+            }else{
+                $('#html').attr('checked', true);
+            }
+    };
+    $( document ).ready(function() {
+        //$(".btn").slice(2,3).button("toggle");
+        //$(".btn_menus_titulo").first().button("toggle");
+        $(".btn_menus_titulo").first().addClass("active");
+        //$(".btn_menus_titulo").first().button("untoggle");
+        menuid=$("#lista-menus li").first().attr("idmenu");
+        //alert(<?php echo $idcliente?>);
+        //alert('antes');
+        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
+            loadSubmenuContent(data.tipo);
+        });
+    });
     $(".btn_menus_eliminar").click(function(e){
           e.preventDefault();
         $('.btn_menus_titulo').removeClass('active');   
@@ -219,7 +232,7 @@
     });
     
     
-    $(".btn_menus_titulo").click(function(){
+    $(".btn_menus_titulo").click(function(tipo){
         menuid=$(this).closest("li").attr("idmenu");
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
@@ -231,35 +244,36 @@
              console.log(menuid);
          //alert(menuid);
 //    $("span").closest("ul").css({"color":"red","border":"2px solid red"});
-     
-        $("#menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
-//     if(menuid==subid){
-      $("#label-sub").prop('for',menuid);
-//     
-        $("#label-html").prop('for',menuid+'html');
-//         }}
+        
+ 
+ if(loadSubmenuContent){
+    $("#sub-menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+ }
+ else{
+     console.log("nooooooo");
+ }
+ $.getJSON("<?php echo site_url(array("tipo","get"));?>/"+menuid,function(data){
+     console.log(data);
+ });
+       
+            
     }
-//        $.getJSON("<?php echo site_url(array("tipo","get")) ?>/" + menuid, function(data){
-//            loadSubmenuContent(data.tipo);
-//            
-//            console.log('menuid:'+ menuid + 'tipo:' + data.tipo);
-//        });
+
     });
     
-    $('#tipo input').on('change', function() {
-                    alert($('input[name=tipo]:checked', '#tipo').val()); 
+       $('#tipo input').on('change', function() {
+                    //alert($('input[name=tipo]:checked', '#tipo').val()); <!--value de radio-->
                     var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
                         console.log($.param(parametros));
-                        //alert(menuid);
+                      //  alert(menuid);
                         $.post("<?php echo site_url(array("tipo","set")) ?>/" + menuid, $.param(parametros));
-                        
                     if($('input[name=tipo]:checked', '#tipo').val()==1){
                         $("#menu_content").show();                     
-                        $("#submenu_content").hide();
+                        $("#sub-menu_content").hide();
                     }
                     else{
-                        $("#submenu_content").show();
-                        $("#menu_content").hide();
+                        $("#sub-menu_content").show();
+                        $("#menu_content").show();
                     }
                 });
         

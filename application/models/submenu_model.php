@@ -55,12 +55,12 @@ class Submenu_model extends CI_Model {
     }
     
     function getSubmenu($idsubmenu){
-        $submenu = R::findOne( 'submenu', "id = ?", array($idsubmenu));
+        $submenu = R::load( 'submenu', $idsubmenu);
         return $submenu->export();
     }
     
     function insertIndice($idsubmenu, $titulo, $contenido){
-       echo $titulo;
+       //echo $titulo;
         $submenu = R::load( 'submenu', $idsubmenu );
         $indice = R::dispense( 'indice' );
         $indice->titulo = $titulo;
@@ -71,5 +71,19 @@ class Submenu_model extends CI_Model {
 
         return $indice->export();
     }
+    
+        function getIndice($idsubmenu){
+        
+            //$indices = R::findAll( 'indice', "submenu_id = ?", array($idsubmenu));
+            //$indices = R::find( 'indice', "submenu_id = ? ORDER BY id DESC", array($idsubmenu));
+        //$indices = R::find( 'indices', "submenu_id = ?", array($idsubmenu));
+            //echo $indices;
+        //return $indices->export();
+        $indices = R::find('indice',' submenu_id = ? ', array( $idsubmenu ));    
+        //$indices = R::load( 'indice', 1 );
+        //return $indices->exportAll;
+        return R::exportAll($indices);
+    }
+
 }
     

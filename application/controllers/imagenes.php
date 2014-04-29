@@ -73,6 +73,7 @@ class Imagenes extends CI_Controller {
         	$config['upload_path'] = './galeria/' . $idsubmenu .'/';
 		$config['allowed_types'] = 'gif|jpg|png';
                 $this->load->model("galeria_model");
+//                var_dump($this->input->post());
                 $galeria = $this->galeria_model->insert($idsubmenu,  $this->input->post("titulo"));
                 $config['file_name'] = $galeria["id"];
                 $config['overwrite'] = TRUE;
@@ -95,10 +96,17 @@ class Imagenes extends CI_Controller {
                         $config2['library_path'] = '/usr/bin';
                         $config2['source_image']=$data["upload_data"]["full_path"];
                         $config2['new_image']=$data["upload_data"]["file_path"] . $galeria["id"] . ".png";
-                        $config2['create_thumb'] = TRUE;
                         $this->load->library('image_lib',$config2);
                         $this->image_lib->resize();
-                        $data["config"] = $config2;
+                        $this->image_lib->clear();
+                        $config3['image_library'] = 'ImageMagick';
+                        $config3['library_path'] = '/usr/bin';
+                        $config3['width'] = '90';
+                        $config3['source_image']=$data["upload_data"]["full_path"];
+                        $config3['new_image']=$data["upload_data"]["file_path"] . $galeria["id"] . "_thumb.png";
+                        $config3['create_thumb'] = TRUE;
+                        $this->image_lib->initialize($config3);
+                        $this->image_lib->resize();
 			echo json_encode($data);
 		}
     }

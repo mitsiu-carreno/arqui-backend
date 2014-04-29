@@ -11,14 +11,14 @@ class Galeria_model extends CI_Model {
         $submenu = R::load( 'submenu', $idsubmenu );
         
         $galeria = R::dispense( 'galeria' );
-        $galeria->titulo = $titulo;
+        $galeria->titulo = $titulo."";
         $galeria->pos = ($this->getLastPosition($idsubmenu))+1;
         
         $submenu->ownGaleria[] = $galeria;
         
         $id = R::store($submenu); 
-        //echo $id;
-        $galeria["id"] = $id;
+        //echo $id;va¡¡¡
+//        var_dump($galeria);
         return $galeria;
     }
     
@@ -31,7 +31,7 @@ class Galeria_model extends CI_Model {
     }
     
     function get($idsubmenu){
-        $submenu = R::load( 'submenu', $idsubmenu );
-        return $submenu->ownGaleria;
+        $galerias = R::find( 'galeria', "submenu_id = ? ORDER BY pos ASC", array($idsubmenu));
+        return R::exportAll($galerias);
     }
 }
