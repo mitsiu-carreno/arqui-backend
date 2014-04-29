@@ -84,6 +84,11 @@ class Submenu_model extends CI_Model {
         //return $indices->exportAll;
         return R::exportAll($indices);
     }
+    
+    function delete($idsubmenu){
+        $submenu = R::load( 'submenu', $idsubmenu );
+        R::trash($submenu);
+    }
 
 }
     
