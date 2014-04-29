@@ -20,7 +20,7 @@ class Tipo extends CI_Controller {
             } 
             else{
             //echo json_encode("vacio");
-                 $this->load->view("header");
+                //$this->load->view("header");
                 $this->load->view("recursos/lista_submenus");
               
             }
