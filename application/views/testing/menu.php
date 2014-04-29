@@ -145,6 +145,8 @@
             }
     };
     $( document ).ready(function() {
+        
+        
         //$(".btn").slice(2,3).button("toggle");
         //$(".btn_menus_titulo").first().button("toggle");
         $(".btn_menus_titulo").first().addClass("active");
@@ -240,24 +242,36 @@
        
       
           
-         if(menuid){
-             console.log(menuid);
+       //  if(menuid){
+             console.log(menuid + "test");
+             $.getJSON("<?php echo site_url(array("tipo","getTipo")) ?>/" + menuid, function(data){
+            console.log(data);
+            if(data=="1"){
+                 $("#menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+            }
+            else{
+                $("#sub-menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+            }
+            });
+            
          //alert(menuid);
 //    $("span").closest("ul").css({"color":"red","border":"2px solid red"});
         
- 
+ /*
  if(loadSubmenuContent){
     $("#sub-menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
  }
  else{
      console.log("nooooooo");
  }
+ 
  $.getJSON("<?php echo site_url(array("tipo","get"));?>/"+menuid,function(data){
      console.log(data);
+     
  });
-       
+       */
             
-    }
+  //  }
 
     });
     

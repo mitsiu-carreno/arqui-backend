@@ -43,4 +43,11 @@ class Tipo extends CI_Controller {
         echo json_encode(array($data));
     }
     
+    function getTipo($idmenu){
+        $this->load->model("menu_model");
+        $data = $this->menu_model->get(null, $idmenu);
+        echo json_encode(array($data["0"]["tipo"]));
+        
+        
+    }
 }
