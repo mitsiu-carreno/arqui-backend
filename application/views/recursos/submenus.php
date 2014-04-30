@@ -10,9 +10,6 @@
         width: 50%;
     }
 </style>
- <div class="fondo_1">
-                <label>Submenús</label>
-</div>
  <div class="row">
      <div style="padding-left:3%">
 
@@ -116,7 +113,7 @@
         $(".btn_submenus_titulo").removeClass("active");
         
         $(this).button().addClass("active");
-          
+             $("#menu_content").show();
          $(".btn_submenus_titulo").attr("idmenu");
          nombreDelsubMenu=$(this).val();
     
@@ -143,10 +140,11 @@
 
     });
     $(".btn_submenus_editar").click(function(e) {
-        var btn_submenu = $(this).closest("div");
-        e.preventDefault();
+      
 
-        console.log(nombreDelsubMenu);
+        e.preventDefault();
+                  
+        console.log('name'+nombreDelsubMenu);
         bootbox.prompt({
             title: "Editar submenú",
             value: nombreDelsubMenu,

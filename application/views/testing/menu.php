@@ -9,130 +9,134 @@
     }
 </style>
 <body>    
-<div class="container" style="margin-top: 80px">
-    <div class="fondo_1">
-                <label>Menús</label>
-</div>
-    <!-- Single button -->
-    <div class="row">
-  <div class="col-md-3" style>
+    <div class="container" style="margin-top: 80px">
 
-    <ul id="lista-menus"  class="list-block">
-        <?php foreach ($menus as $m): ?>
-        <li class="li-menu" idmenu="<?php echo $m["id"] ?>">
-            <div class="btn-group" style="vertical-align: baseline">
-                    
-                    <input type="button"  id="editar" class="btn btn-default btn_menus_titulo" value="<?php echo $m["titulo"] ?>" style="width:100px;">
-                        
-              
-                    <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                    <button type="button" class="btn btn-default " data-toggle="dropdown">
-                       Tipo
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-   
-                        <form id="tipo" role="form">
-                            <div class="checkbox">
-                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
-                                <br>
-                                <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
-                            </div>
-                        </form>
-                    </ul>
-                    <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
-<!--                    <div class="col-md-5">
-                              <form id="tipo" role="form">
-                                  <div class="switch-toggle switch-candy switch-candy-blue large-1" style="width:160px;">
-                                      <input id="<?php echo $m["id"]?>" name="tipo" idmenu="1" type="radio" value="0">
-                                      <label id="label-sub"  onclick="">Submenu</label>
-
-                                        <input id="<?php echo $m["id"]?>html" name="tipo" type="radio" value="1" checked>
-					<label id="label-html" onclick="">HTML</label>
-
-					<a></a>
-				</div>
-                               </form> 
-                    </div>-->
-<!--                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-   
-                        <form id="tipo" role="form">
-                            <div class="checkbox">
-                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
-                                <br>
-                                <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
-                            </div>
-                        </form>
-                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                        <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                    </ul>-->
-                </div>
-            </li>
-         
-        <?php endforeach; ?>
-        <?php if (count($menus) == 0): ?>
-            <li id="li_menus_empty">
-                <small><i>No hay menús, haga click en el siguiente botón para agregar uno -></i></small>
-            </li>
-        <?php endif; ?>
-        <li id="li_menus_add">
-            <button class="btn btn-success" id="btn_menus_add">Nuevo menú <span class="glyphicon glyphicon-plus"></span></button>
-        </li>
-    </ul>
-<li id="li_to_clone" class="hidden li-menu" idmenu="">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default btn_menus_titulo" style="width:100px;">
-                    </button>
-                   <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                    <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
-                    <div class="col-md-5">
-                              <form id="tipo" role="form">
-                                  <div class="switch-toggle switch-candy switch-candy-blue large-1" style="width:160px;">
-                                      <input id="<?php echo $m["id"]?>" name="tipo" idmenu="1" type="radio" value="0">
-                                      <label id="label-sub"  onclick="">Submenu</label>
-
-                                        <input id="<?php echo $m["id"]?>html" name="tipo" type="radio" value="1" checked>
-					<label id="label-html" onclick="">HTML</label>
-
-					<a></a>
-				</div>
-                               </form> 
-                    </div>
-                </div>
-            </li>
-               </div>
-       <div class="col-md-3">
-               <div class="panel panel-primary" id="sub-menu_content">
-                <div class="panel-heading">
-                    <h3 class="panel-title">submenú</h3>
-                </div>
-                <div class="panel-body">
-
-                </div>
-                    </div>
-           </div>
-        <div class="col-md-6">
-            <div class="panel panel-primary" id="menu_content">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Edición</h3>
-                </div>
-                <div class="panel-body">
-
-                </div>
-            </div>
-    </div>
+        <!-- Single button -->
         <div class="row">
-            <div class="col-md-4">
-                
+  
+            <div class="col-md-3" style>
+                  <div class="fondo_1">
+            <label>Menús</label>
+        </div>
+                <ul id="lista-menus"  class="list-block">
+                    <?php foreach ($menus as $m): ?>
+                        <li class="li-menu" idmenu="<?php echo $m["id"] ?>">
+                            <div class="btn-group" style="vertical-align: baseline">
+
+                                <input type="button"  id="editar" class="btn btn-default btn_menus_titulo" value="<?php echo $m["titulo"] ?>" style="width:100px;">
+
+
+                                <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                                <button type="button" class="btn btn-default btn_menus_tipo" data-toggle="dropdown">
+                                    <?php 
+                                    if($m['tipo']==0){
+                                    echo 'Sub';       
+                                    }
+                                    else{ echo 'Html';}?>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+
+                                    <form id="tipo" role="form">
+                                        <div class="checkbox">
+                                            <input type="radio" name="tipo" id="sub" value="0"> Submenú
+                                            <br>
+                                            <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
+                                        </div>
+                                    </form>
+                                </ul>
+                                <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                <!--                    <div class="col-md-5">
+                                                              <form id="tipo" role="form">
+                                                                  <div class="switch-toggle switch-candy switch-candy-blue large-1" style="width:160px;">
+                                                                      <input id="<?php echo $m["id"] ?>" name="tipo" idmenu="1" type="radio" value="0">
+                                                                      <label id="label-sub"  onclick="">Submenu</label>
+                                
+                                                                        <input id="<?php echo $m["id"] ?>html" name="tipo" type="radio" value="1" checked>
+                                                                        <label id="label-html" onclick="">HTML</label>
+                                
+                                                                        <a></a>
+                                                                </div>
+                                                               </form> 
+                                                    </div>-->
+                                <!--                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="glyphicon glyphicon-cog"></span><span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                   
+                                                        <form id="tipo" role="form">
+                                                            <div class="checkbox">
+                                                                <input type="radio" name="tipo" id="sub" value="0"> Submenú
+                                                                <br>
+                                                                <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
+                                                            </div>
+                                                        </form>
+                                                    <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                                                        <li><a href="<?php echo base_url(); ?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
+                                                    </ul>-->
+                            </div>
+                        </li>
+
+                    <?php endforeach; ?>
+                    <?php if (count($menus) == 0): ?>
+                        <li id="li_menus_empty">
+                            <small><i>No hay menús, haga click en el siguiente botón para agregar uno -></i></small>
+                        </li>
+                    <?php endif; ?>
+                    <li id="li_menus_add">
+                        <button class="btn btn-success" id="btn_menus_add">Nuevo menú <span class="glyphicon glyphicon-plus"></span></button>
+                    </li>
+                </ul>
+                <li id="li_to_clone" class="hidden li-menu" idmenu="">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn_menus_titulo" style="width:100px;">
+                        </button>
+                        <button type="button" class="btn btn-default btn_menus_mover"><span class="glyphicon glyphicon-move"></span></button>
+                        <button type="button" class="btn btn-default btn_menus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                        <div class="col-md-5">
+                            <form id="tipo" role="form">
+                                <div class="switch-toggle switch-candy switch-candy-blue large-1" style="width:160px;">
+                                    <input id="<?php echo $m["id"] ?>" name="tipo" idmenu="1" type="radio" value="0">
+                                    <label id="label-sub"  onclick="">Submenu</label>
+
+                                    <input id="<?php echo $m["id"] ?>html" name="tipo" type="radio" value="1" checked>
+                                    <label id="label-html" onclick="">HTML</label>
+
+                                    <a></a>
+                                </div>
+                            </form> 
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="fondo_1">
+                <label>Submenús</label>
+            </div>
+            <div class="col-md-3">
+                <div id="sub-menu_content">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-primary" id="menu_content">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Edición</h3>
+                    </div>
+                    <div class="panel-body">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+
+                </div>
+
             </div>
 
-    </div>
-       
-</div> <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
-<script>
+        </div> 
+        <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
+        <script>
     
     var menuid = null;
        
@@ -239,7 +243,7 @@
         $(".btn_menus_titulo").removeClass("active");
         $(this).button().addClass("active");
          
-       
+         
       
           
        //  if(menuid){
@@ -247,10 +251,16 @@
              $.getJSON("<?php echo site_url(array("tipo","getTipo")) ?>/" + menuid, function(data){
             console.log(data);
             if(data=="1"){
+                $('input[id=html]').attr('checked','checked');
                  $("#menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+                 $("#menu_content").show();
+                 $("#sub-menu_content").hide();
             }
             else{
-                $("#sub-menu_content .panel-body").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+                 $('input[id=sub]').attr('checked','checked');
+                $("#sub-menu_content").load("<?php echo site_url(array("tipo","get")) ?>/" + menuid);
+                $("#menu_content").hide();
+                $("#sub-menu_content").show();
             }
             });
             
@@ -274,13 +284,24 @@
   //  }
 
     });
-    
-       $('#tipo input').on('change', function() {
-                    //alert($('input[name=tipo]:checked', '#tipo').val()); <!--value de radio-->
-                    var parametros = {tipo: $('input[name=tipo]:checked', '#tipo').val()};
-                        console.log($.param(parametros));
-                      //  alert(menuid);
+   
+                
+            $('input[name=tipo]').change( function() {
+                    //alert($('input[name=tipo]:checked', '#tipo').val()); <-value de radio
+                    
+                  
+                    
+                    var parametros = {tipo: $(this).val()};
+                        console.log('id '+menuid +$.param(parametros));
+//        if($(this).val()==0){                
+//        $(".btn_menus_tipo").text('Sub');
+//    }else{
+//        $(".btn_menus_tipo").text('Html');
+//    }
+window.location.reload();
+                        //alert(menuid);
                         $.post("<?php echo site_url(array("tipo","set")) ?>/" + menuid, $.param(parametros));
+                        
                     if($('input[name=tipo]:checked', '#tipo').val()==1){
                         $("#menu_content").show();                     
                         $("#sub-menu_content").hide();
@@ -289,6 +310,7 @@
                         $("#sub-menu_content").show();
                         $("#menu_content").show();
                     }
+                    	 
                 });
         
              //$("#submenu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + menuid);
