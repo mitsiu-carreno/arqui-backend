@@ -34,12 +34,12 @@
             </div>
                 <div class="form-group">
                     <label for="inp_nuevoNombre">Nombre</label>
-                    <input type="text" name="nombre" class="form-control" id="inp_nuevoNombre" placeholder="Escriba el nombre la cuenta">
+                    <input type="text" name="nombre" class="form-control" id="inp_nuevoNombre" placeholder="Escriba el nombre la cuenta"  autocomplete="off">
                     <small>Escriba un nombre significativo y descriptivo</small>
                 </div>
                 <div class="form-group">
                     <label for="inp_nuevoEmail">Email</label>
-                    <input type="email" name="email" class="form-control" id="inp_nuevoEmail" placeholder="Escriba el email de la cuenta">
+                    <input type="email" name="email" class="form-control" id="inp_nuevoEmail" placeholder="Escriba el email de la cuenta"  autocomplete="off">
                     <small>Este email servirá para ingresar a la plataforma junto con la contraseña</small>
                 </div>
                 <div class="form-group">
@@ -69,12 +69,12 @@
             </div>
                 <div class="form-group">
                     <label for="inp_editarNombre">Nombre</label>
-                    <input type="text" value="<%- nombre %>" name="nombre" class="form-control" id="inp_editarNombre" placeholder="Escriba el nombre la cuenta">
+                    <input type="text" value="<%- nombre %>" name="nombre" class="form-control" id="inp_editarNombre" placeholder="Escriba el nombre la cuenta"  autocomplete="off">
                     <small>Escriba un nombre significativo y descriptivo</small>
                 </div>
                 <div class="form-group">
                     <label for="inp_editarEmail">Email</label>
-                    <input type="email" value="<%- email %>" name="email" class="form-control" id="inp_editarEmail" placeholder="Escriba el email de la cuenta">
+                    <input type="email" value="<%- email %>" name="email" class="form-control" id="inp_editarEmail" placeholder="Escriba el email de la cuenta" autocomplete="off">
                     <small>Este email servirá para ingresar a la plataforma junto con la contraseña</small>
                 </div>
                 <div class="form-group">
