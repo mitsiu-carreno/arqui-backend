@@ -319,7 +319,7 @@
                                   var min= parseInt($("#inp_min_time").val() *60);
                                   var seg= parseInt($("#inp_seg_time").val());
                                   var boton = $("#id_msg_new_boton_video").val()
-                                  var tiempo = seg + min;
+                                  var tiempo = seg + min; 
                                  
                                   console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + "");
                                   //console.log("Hi "+ $('#inp_new_time_video').val());
