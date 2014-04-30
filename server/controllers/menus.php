@@ -30,7 +30,7 @@ class Menus extends REST_Controller
         } else {
             $this->load->model("menu_model");
             $data = array();
-            $data["banner"] = "http://cognosvideoapp.com.mx/index.php/imagenes/get_banner/imagenes/get_banner/".$idcliente;
+            $data["banner"] = "http://cognosvideoapp.com.mx/index.php/imagenes/get_banner/imagenes/get_banner/".$idcliente."/banner.png";
             $data["menus"] = $this->menu_model->get($idcliente);
             if(is_array($data["menus"])){
                 $this->response($data, 200);
