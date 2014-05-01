@@ -1,9 +1,7 @@
- <div class="fondo_1">
-                <label>Submenús</label>
-</div>
+
 <ul id="lista-menus" class="list-block">
      <li id="li_menus_empty2">
-                <small><i>No hay submenús, haga click en el siguiente botón para agregar uno -></i></small>
+                <small><i>No hay submenús, haga click en el siguiente botón para agregar uno</i></small>
             </li>
      
         <li id="li_menus_add">
