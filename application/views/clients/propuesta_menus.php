@@ -8,8 +8,11 @@
     .menu-title-input{
         display: none;
     }
+    .lista-menus{
+        font-size: small;
+    }
 </style>
-<ul id="lista-menus" class="list-group col-md-4" style="margin: 20px">
+<ul id="lista-menus" class="list-group col-md-3" style="margin: 20px">
     <li class="list-group-item"><span class="menu-title">Cras justo odio </span>
         <input type="text" value="Cras justo odio" class=" menu-title-input" />
         <a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-trash"></span></a>

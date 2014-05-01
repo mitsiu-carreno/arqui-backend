@@ -13,7 +13,7 @@ class Menu_model extends CI_Model {
         $menu = R::dispense( 'menu' );
         $menu->titulo = $titulo;
         
-        $menu->tipo = 0;
+        $menu->tipo = 1;
         
         $menu->pos = ($this->getLastPosition($clientid))+1;
         
