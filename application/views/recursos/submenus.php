@@ -9,13 +9,35 @@
     .btn-ta{
         width: 50%;
     }
+    
+        .btn-submenu-opcion{
+        float: right;
+        margin-bottom: 5px;
+    }
+    
+    .submenu-title-input{
+        display: none;
+    }
+    #lista-submenus{
+        font-size: small;
+    }
+    #lista-submenus .list-group-item {
+        padding: 10px 5px;
+    }
+    #lista-submenus .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+        background-color: #F7F7F7;
+        background-image: none !important;
+        border-color: #fff;
+        border: 1px solid #ddd;
+    }
+    
 </style>
  <div class="row">
      <div style="padding-left:3%">
 
     <ul id="lista-submenus"  class="list-block">
         <?php foreach ($ownSubmenu as $submenu): ?>
-        <li class="li-menu" idmenu="<?php echo $submenu["id"] ?>">
+<!--        <li class="li-menu" idmenu="<?php echo $submenu["id"] ?>">
             <div class="btn-group" style="vertical-align: baseline">
                     
                     <input type="button"  id="editar_sub" class="btn btn-default btn_submenus_titulo" value="<?php echo $submenu["titulo"] ?>" style="width:100px;">
@@ -27,7 +49,7 @@
                     <button type="button" class="btn btn-default btn_submenus_editar dropdown-toggle">
                         <span class="glyphicon glyphicon-edit"></span>
                     </button>
-<!--                    <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu" role="menu">
    
                         <form id="tipo" role="form">
                             <div class="checkbox">
@@ -36,13 +58,24 @@
                                 <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
                             </div>
                         </form>
--->                  
-<!--<li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
+                  
+<li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
                         <li><a href="<?php echo base_url();?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                    </ul>-->
+                    </ul>
                 </div>
-            </li>
-         
+            </li>-->
+          <li class="list-group-item" idsubmenu="<?php echo $submenu["id"] ?>">
+                            <a href="#" class="btn-submenu-detail"><span class="submenu-title"><?php echo $submenu["titulo"] ?></span></a>
+                            <input type="text" value="<?php echo $submenu["titulo"] ?>" class=" submenu-title-input" />
+                            <a href="#" class="btn_submenus_eliminar btn-menu-opcion"><span class="glyphicon glyphicon-trash"></span></a>
+                            <!--<a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-resize-vertical"></span></a>-->
+                            <a href="#" class="btn-submenu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $submenu["tipo"] == "0" ? "sub" : "video" ?></span><span class="caret"></span></a>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="#" class="submenu-tipo-selectable">video</a></li>
+                                <li><a href="#" class="submenu-tipo-selectable">galeria</a></li>
+                                <li><a href="#" class="submenu-tipo-selectable">html</a></li>
+                            </ul>
+                        </li>
         <?php endforeach; ?>
         <?php if (count($ownSubmenu) == 0): ?>
            <li id="li_menus_empty2">
@@ -51,10 +84,11 @@
     
         <?php endif; ?>
          <li id="li_menus_add">
-            <button class="btn btn-success" id="btn_submenus_add">Nuevo submenú <span class="glyphicon glyphicon-plus"></span></button>
-        </li>
+            <button class="btn btn-success btn-block" id="btn_submenus_add">Nuevo submenú <span class="glyphicon glyphicon-plus"></span></button>
+              <small>- Doble click sobre el título para editarlo</small>
+         </li>
     </ul>
-<li id="li_to_clone" class="hidden li-menu" idmenu="">
+<li id="li_to_clone" class="hidden li-menu" idsubmenu="">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default btn_submenus_titul" style="width:100px;">
                     </button>
@@ -63,7 +97,7 @@
                     <div class="col-md-5">
                               <form id="tipo" role="form">
                                   <div class="switch-toggle switch-candy switch-candy-blue large-1" style="width:160px;">
-                                      <input id="<?php echo $submenu["id"]?>" name="tipo" idmenu="1" type="radio" value="0">
+                                      <input id="<?php echo $submenu["id"]?>" name="tipo" idsubmenu="1" type="radio" value="0">
                                       <label id="label-sub"  onclick="">Submenu</label>
 
                                         <input id="<?php echo $submenu["id"]?>html" name="tipo" type="radio" value="1" checked>
@@ -107,135 +141,221 @@
  </div>
 <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
 <script>
- $(".btn_submenus_titulo").click(function(){
-      btn_menu = $(this).closest("div");
-        submenuid=$(this).closest("li").attr("idmenu");
-        $(".btn_submenus_titulo").removeClass("active");
-        
-        $(this).button().addClass("active");
-             $("#menu_content").show();
-         $(".btn_submenus_titulo").attr("idmenu");
-         nombreDelsubMenu=$(this).val();
-    
-      $('#submenu-titulo').attr('value',nombreDelsubMenu);
-        $(".video").attr('id',submenuid+'vid');
-        $(".galeria").prop('id',submenuid+'galeria');
-        $(".HTML").prop('id',submenuid+'HTML');
-        
-         if(submenuid){
-             console.log('sub:'+submenuid);
-            
-         //alert(menuid);
-//    $("span").closest("ul").css({"color":"red","border":"2px solid red"});
-     
-       $("#menu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + submenuid);
- 
-//     if(menuid==subid){
-      
-      $("#label-video").prop('for',submenuid+'vid');
-        $("#label-galeria").prop('for',submenuid+'galeria');
-        $("#label-HTML").prop('for',submenuid+'HTML');
-//         }}
-    }
-
-    });
-    $(".btn_submenus_editar").click(function(e) {
-      
-
-        e.preventDefault();
-                  
-        console.log('name'+nombreDelsubMenu);
-        bootbox.prompt({
-            title: "Editar submenú",
-            value: nombreDelsubMenu,
-            callback: function(result) {
-                if (result === null) {
-                    console.log("Prompt dismissed");
-                } else {
-         
-                    var parametros = {id:submenuid,"titulo": result};
-                    console.log(parametros);
-                    $.post("<?php echo site_url(array("submenu", "editar")) ?>/"+ submenuid, $.param(parametros),"json");
-                      
-                }
-            }
-        });
-    });
-    
-         $(".btn_submenus_titulo").dblclick(function(e){
-            console.log('editar');
-                 
-            var btn_menu = $(this).closest("div");
-            submenuid = btn_menu.closest("li").attr("idmenu");
-            e.preventDefault();
-            var nombreDelsubMenu = $.trim(btn_menu.find(".btn_submenus_titulo").html());
-        
-            console.log('je'+nombreDelsubMenu);
-            var selector ='#editar_sub';
-            $(selector).removeAttr("type");
-            $(this).attr('type','text');
-            $(this).keypress(function(key){
-      
-        var unicode
-            if (key.charCode)
-                unicode=key.charCode;
-            else
-                unicode=key.keyCode;
-            if (unicode == 13){
+// $(".btn_submenus_titulo").click(function(){
+//      btn_menu = $(this).closest("div");
+//        submenuid=$(this).closest("li").attr("idmenu");
+//        $(".btn_submenus_titulo").removeClass("active");
+//        
+//        $(this).button().addClass("active");
+//             $("#menu_content").show();
+//         $(".btn_submenus_titulo").attr("idmenu");
+//         nombreDelsubMenu=$(this).val();
+//    
+//      $('#submenu-titulo').attr('value',nombreDelsubMenu);
+//        $(".video").attr('id',submenuid+'vid');
+//        $(".galeria").prop('id',submenuid+'galeria');
+//        $(".HTML").prop('id',submenuid+'HTML');
+//        
+//         if(submenuid){
+//             console.log('sub:'+submenuid);
+//            
+//         //alert(menuid);
+////    $("span").closest("ul").css({"color":"red","border":"2px solid red"});
+//     
+//       $("#menu_content .panel-body").load("<?php echo site_url(array("submenu","get")) ?>/" + submenuid);
+// 
+////     if(menuid==subid){
+//      
+//      $("#label-video").prop('for',submenuid+'vid');
+//        $("#label-galeria").prop('for',submenuid+'galeria');
+//        $("#label-HTML").prop('for',submenuid+'HTML');
+////         }}
+//    }
+//
+//    });
+//    $(".btn_submenus_editar").click(function(e) {
+//      
+//
+//        e.preventDefault();
+//                  
+//        console.log('name'+nombreDelsubMenu);
+//        bootbox.prompt({
+//            title: "Editar submenú",
+//            value: nombreDelsubMenu,
+//            callback: function(result) {
+//                if (result === null) {
+//                    console.log("Prompt dismissed");
+//                } else {
+//         
+//                    var parametros = {id:submenuid,"titulo": result};
+//                    console.log(parametros);
+//                    $.post("<?php echo site_url(array("submenu", "editar")) ?>/"+ submenuid, $.param(parametros),"json");
+//                      
+//                }
+//            }
+//        });
+//    });
+//    
+//         $(".btn_submenus_titulo").dblclick(function(e){
+//            console.log('editar');
 //                 
-                    btn_menu.find(".btn_submenus_titulo").html();
-                    var result=$(this).val();
-                    var parametros = {id:submenuid,"titulo": result};
-                    console.log(parametros);
-                    $.post("<?php echo site_url(array("submenu", "editar")) ?>/"+ submenuid, $.param(parametros),"json");
-                    $(this).prop('type','button');
-    }
-             });
-
-             
-                });
-                
-      $(".btn_submenus_eliminar").click(function(e){
-          e.preventDefault();
-        $('.btn_submenus_titulo').removeClass('active');   
-        submenuid=$(this).closest("li").attr("idmenu");
-         var parametros = submenuid;
-        
-      //  alert(menuid);
-      console.log(submenuid);
-       bootbox.confirm("Está seguro de eliminar el submenú?", function(result) {
-         console.log("Confirmed: "+result);
-         if(result==true){  
-         
-      
-      
-      $.get("<?php echo site_url(array("submenu", "eliminar")) ?>/" + submenuid);
-       window.location.reload();
-         
-        
-                }
-}); 
-});  
-    $("#btn_submenus_add").click(function() {
-        bootbox.prompt("Crear nuevo submenú", function(data) {
-            console.log(data);
-            
-              var parametros={"titulo":data};
-             
-        
-      //  alert(menuid);
-      console.log(parametros);
-            if (data && data.length > 0) {
-              $.post("<?php echo site_url(array("submenu", "insert")) ?>/"+menuid, $.param(parametros), function(success){
-                    console.log(success);
-                  window.location.reload();
-                  $('.btn_menus_titulo').addClass('active');   
-                },"json");
-                    if(submenuid){
-                     $('.btn_submenus_titulo').removeClass('active');   
-
-                 }
+//            var btn_menu = $(this).closest("div");
+//            submenuid = btn_menu.closest("li").attr("idmenu");
+//            e.preventDefault();
+//            var nombreDelsubMenu = $.trim(btn_menu.find(".btn_submenus_titulo").html());
+//        
+//            console.log('je'+nombreDelsubMenu);
+//            var selector ='#editar_sub';
+//            $(selector).removeAttr("type");
+//            $(this).attr('type','text');
+//            $(this).keypress(function(key){
+//      
+//        var unicode
+//            if (key.charCode)
+//                unicode=key.charCode;
+//            else
+//                unicode=key.keyCode;
+//            if (unicode == 13){
+////                 
+//                    btn_menu.find(".btn_submenus_titulo").html();
+//                    var result=$(this).val();
+//                    var parametros = {id:submenuid,"titulo": result};
+//                    console.log(parametros);
+//                    $.post("<?php echo site_url(array("submenu", "editar")) ?>/"+ submenuid, $.param(parametros),"json");
+//                    $(this).prop('type','button');
+//    }
+//             });
+//
+//             
+//                });
+//                
+//      $(".btn_submenus_eliminar").click(function(e){
+//          e.preventDefault();
+//        $('.btn_submenus_titulo').removeClass('active');   
+//        submenuid=$(this).closest("li").attr("idmenu");
+//         var parametros = submenuid;
+//        
+//      //  alert(menuid);
+//      console.log(submenuid);
+//       bootbox.confirm("Está seguro de eliminar el submenú?", function(result) {
+//         console.log("Confirmed: "+result);
+//         if(result==true){  
+//         
+//      
+//      
+//      $.get("<?php echo site_url(array("submenu", "eliminar")) ?>/" + submenuid);
+//       window.location.reload();
+//         
+//        
+//                }
+//}); 
+//});  
+//    $("#btn_submenus_add").click(function() {
+//        bootbox.prompt("Crear nuevo submenú", function(data) {
+//            console.log(data);
+//            
+//              var parametros={"titulo":data};
+//             
+//        
+//      //  alert(menuid);
+//      console.log(parametros);
+//            if (data && data.length > 0) {
+//              $.post("<?php echo site_url(array("submenu", "insert")) ?>/"+menuid, $.param(parametros), function(success){
+//                    console.log(success);
+//                  window.location.reload();
+//                  $('.btn_menus_titulo').addClass('active');   
+//                },"json");
+//                    if(submenuid){
+//                     $('.btn_submenus_titulo').removeClass('active');   
+//
+//                 }
+//            }
+//        });
+//    });
+//    
+//    
+  
+          
+    //////////submenus/////
+    $("#lista-submenus").delegate(".btn-submenu-opcion","click",function(e){
+        e.preventDefault();
+    });
+    
+    $("#lista-submenus").delegate(".submenu-tipo-selectable","click",function(e){
+        e.preventDefault();
+        var tipo = $(e.target).html() == "video" ? 1 : 0;
+        var this_submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
+        var parametros = {"tipo": tipo};
+        console.log('id ' + this_submenuid + $.param(parametros));
+         $.post("<?php echo site_url(array("submenu", "set")) ?>/" +menuid, $.param(parametros));
+        $(this).closest(".list-group-item").find(".submenu-tipo").html($(e.target).html());
+    });
+        $("#lista-submenus").delegate("li","dblclick",function(){
+        var that = this;
+        $(that).find(".submenu-title").hide();
+        $(that).find("input").blur(function(){
+                $(this).hide();
+                $(that).find(".submenu-title").html($(this).val()).show();
+        });
+        $(that).find("input").show().focus().keyup(function(e){
+            if(e.keyCode == 13){
+                $(this).hide();
+                $(that).find(".submenu-title").html($(this).val()).show();
+                var this_submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
+                var parametros = {"titulo": $(this).val()};
+                 $.post("<?php echo site_url(array("submenu", "editar")) ?>/"+ this_submenuid, $.param(parametros),"json");
+            } else  if(e.keyCode == 27) {
+                $(this).hide().val($(that).text());
+                $(that).find(".submenu-title").show();
             }
         });
     });
+    $("#btn_submenus_add").click(function() {
+                bootbox.prompt("Crear nuevo submenú", function(data) {
+                    if (data && data.length > 0) {
+                        var parametros = {"titulo": data};
+                        console.log(data);
+                       $.post("<?php echo site_url(array("submenu", "insert")) ?>/"+menuid, $.param(parametros), function(success) {
+                            console.log(success);
+                            var li = $("#li_to_clone").clone().attr("id", "").removeClass("hidden").attr("idsubmenu", success.id);
+                            li.find(".submenu-title").html(success.titulo);
+                            $("#lista-submenus li:last").before(li);
+                        }, "json");
+
+                        $("#li_submenus_empty").remove();
+                    }
+                });
+            });
+             $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
+        e.preventDefault();
+        $(".list-group-item").removeClass("active");
+        $(this).closest(".list-group-item").addClass("active");
+        var tipo  = $(this).closest(".list-group-item").find(".submenu-tipo").text();
+        submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
+        console.log(submenuid);
+        if (tipo == "video") {
+            $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
+            $("#menu_content").css("display","inline");
+            $("#sub-menu_content").css("display","none");
+        } else {
+            $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
+            //$("#menu_content").css("display","none");
+            $("#menu_content").css("display","inline");
+        }
+    });
+     $("#lista-submenus").delegate(".btn_submenus_eliminar", "click", function(e) {
+                e.preventDefault();
+                $('.btn_submenus_titulo').removeClass('active');
+                var this_submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
+                var that = this;
+                bootbox.confirm("Está seguro de eliminar el submenú?", function(result) {
+                    console.log("Confirmed: " + result);
+                    if (result == true) {
+                        $.get("<?php echo site_url(array("submenu", "eliminar")) ?>/" + this_submenuid);
+                        $(that).closest(".list-group-item").remove();
+                    }
+                });
+            });
+            $("#lista-submenus li").first().find(".btn-menu-detail").click();
+
     </script>      

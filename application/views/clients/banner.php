@@ -2,9 +2,29 @@
 <script src="<?php echo base_url(); ?>js/jquery.iframe-transport.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/jquery.fileupload.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/upload-banner.js" type="text/javascript"></script>
-<script>
-    $(function() {
+<script src="<?php echo base_url() ?>js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" >
 
+            
+    $(function() {
+     
+            tinymce.init({
+                selector: ".textarea",
+                width: 550,
+                menubar : false,
+                height: 200,
+                language : 'es',
+                image_advtab: true,
+                plugins: [
+                     "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                     "save table contextmenu directionality emoticons template paste textcolor jbimages"
+               ],
+               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+               relative_urls: false,
+               
+            });
+            
         $("#btn_subir").click(function() {
             $("#inp_file").click();
         });
@@ -56,6 +76,9 @@
         </div>
     </form>
 </div>
+  <div class="col-sm-2 col-sm-offset-3 borde" style="margin-top:3%;">
+                            <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."></textarea>
+                        </div>
     <div id="error-message" class="text-danger"><span class="glyphicon glyphicon-warning-sign" style="float:left;margin-right: 5px;"></span><i></i></div>
     <div id="success-message" class="text-success"><span class="glyphicon glyphicon-ok-circle" style="float:left;margin-right: 5px;"></span><i></i></div>
 </div>

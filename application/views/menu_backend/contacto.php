@@ -120,7 +120,7 @@
         </div>
         -->
         <div class="container" style="margin-top: 80px">
-        <br>
+        <br>$(function(){
         <div id="contacto" class="borde" style="height: 400px">
             <div class="fondo_1">
                 <label>Contacto</label>
