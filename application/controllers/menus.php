@@ -69,4 +69,12 @@ class Menus extends CI_Controller {
         //$this->menu_model->update($idmenu, "tipo", "0");
         $this->menu_model->update($idmenu, "tipo", $this->input->post("tipo"));
     }
+    
+    function lista2($idcliente=1){
+        
+        $this->load->view("header");
+        
+        $this->load->view("clients/propuesta_menus");
+        $this->load->view("footer");
+    }
 }
