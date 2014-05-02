@@ -75,6 +75,7 @@
             <div class="col-md-6">
                 <label>Contenido</label>
                 <div id="menu_content"></div>
+                <div><input type="submit" value="guardar" class="btn btn-primary hidden btn_guardar_html" style="margin:3% 40%;"/></div>
             </div>
 
         </div>
@@ -191,13 +192,20 @@
         menuid = $(this).closest(".list-group-item").attr("idmenu");
         if (tipo == "html") {
             $("#menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
+            $(".btn_guardar_html").removeClass('hidden');
             $("#menu_content").css("display","inline");
             $("#sub-menu_content").css("display","none");
         } else {
             $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
+            $(".btn_guardar_html").addClass('hidden');
             $("#menu_content").css("display","none");
             $("#sub-menu_content").css("display","inline");
         }
+    });
+    $(".btn_guardar_html").click(function(){
+    hola=$(".textarea").text();
+    console.log('menid='+menuid + "texto " + hola);
+       $.post("<?php echo site_url(array("menus","set_html"));?>/")+menuid;
     });
     $("#lista-menus").delegate(".btn_menus_eliminar", "click", function(e) {
                 e.preventDefault();
