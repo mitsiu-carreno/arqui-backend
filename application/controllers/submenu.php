@@ -1,29 +1,7 @@
 <?php
 
 class Submenu extends CI_Controller {
-   
-//    IR A TIPO/GET($idmenu);
-//    function get($idmenu){
-//        $this->load->model("menu_model");
-//        $data = $this->menu_model->getTipo($idmenu);
-//        var_dump($data);
-//        //echo json_encode(array("tipo" => $data["tipo"]));
-//        if($data["tipo"] == 0){
-//            //Cargar el submenu
-//            switch($data["submenu"]){
-//                case 1:
-//                    $this->video($idmenu);
-//                    break;
-//                case 2:
-//                    $this->galeria($data["client_id"],$idmenu);
-//                    break;
-//                default :
-//                    $this->video($idmenu);
-//            }
-//        } else {
-//            //Cargar lo de solo html
-//        }
-//    }
+
     function get($idsubmenu){
         $this->load->model("submenu_model");
         $data = $this->submenu_model->getSubmenu($idsubmenu);
@@ -32,7 +10,6 @@ class Submenu extends CI_Controller {
         switch($data["tipo"]){
             //tipo: 1 -> video indice, 2->video html, 3 -> Galeria, 4->html
             case 1:
-                //echo 'case 1';
                 $nombre_array = explode("/", $data["video"]);
                 $data["nombre_video"] = end($nombre_array);
                 $indices = $this->submenu_model->getIndice($idsubmenu);
@@ -67,7 +44,6 @@ class Submenu extends CI_Controller {
                 $this->load->view("submenu/video", $data);
                 echo json_encode($indices);
         }
-        
     }
     
     function video($idmenu){
