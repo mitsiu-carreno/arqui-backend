@@ -5,7 +5,7 @@
             </li>
      
         <li id="li_menus_add">
-            <button class="btn btn-success" id="btn_submenus_add">Nuevo submenú <span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-success btn-block" id="btn_submenus_add">Nuevo submenú <span class="glyphicon glyphicon-plus"></span></button>
         </li>
         
         <li id="li_to_clone2" class="hidden li-menu" idmenu="">
