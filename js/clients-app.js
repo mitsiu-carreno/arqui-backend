@@ -83,7 +83,8 @@ $(function() {
         // Cache the template function for a single item.
         template: _.template($('#item-edit').html()),
         events: {
-            "submit #form_editar_cliente": "updateClient"
+            "submit #form_editar_cliente": "updateClient",
+            "click #btn_editar_cancelar" : "cancelUpdate"
         },
         initialize: function() {
             this.form = this.$("#form_editar_cliente");
@@ -99,6 +100,10 @@ $(function() {
             console.log(event.target.id +":"+JSON.stringify(this.$("#"+event.target.id).serializeObject()));
             this.model.save((this.$("#"+event.target.id).serializeObject()));
             this.$("#"+event.target.id)[0].reset();
+            $("#div_form_editar").toggle();
+            $("#tbl-list").toggle();
+        },
+        cancelUpdate : function(event){
             $("#div_form_editar").toggle();
             $("#tbl-list").toggle();
         }
