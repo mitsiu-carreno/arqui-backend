@@ -11,16 +11,10 @@ class Tipo extends CI_Controller {
         //echo json_encode(array("tipo" => $data["tipo"]));
 //        var_dump($data["0"]["ownSubmenu"]);
         if($data["0"]["tipo"]==0){
-            //submenu
-            //var_dump($data["0"]);
-           
             if (array_key_exists('ownSubmenu', $data["0"])) {
                 $this->load->view("recursos/submenus", $data["0"]);
-                //echo json_encode($data["0"]["ownSubmenu"]);
             } 
             else{
-            //echo json_encode("vacio");
-                //$this->load->view("header");
                 $this->load->view("recursos/lista_submenus");
               
             }
