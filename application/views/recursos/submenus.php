@@ -283,11 +283,11 @@
     
     $("#lista-submenus").delegate(".submenu-tipo-selectable","click",function(e){
         e.preventDefault();
-        var tipo = $(e.target).html() == "video" ? 1 : 0;
+        var tipo = $(e.target).html() == "video" ? 1 : 3;
         var this_submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
         var parametros = {"tipo": tipo};
         console.log('id ' + this_submenuid + $.param(parametros));
-         $.post("<?php echo site_url(array("submenu", "set")) ?>/" +menuid, $.param(parametros));
+         $.post("<?php echo site_url(array("submenu", "set_tipo")) ?>/" + this_submenuid, $.param(parametros));
         $(this).closest(".list-group-item").find(".submenu-tipo").html($(e.target).html());
     });
         $("#lista-submenus").delegate("li","dblclick",function(){
