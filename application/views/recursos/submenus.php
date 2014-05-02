@@ -109,6 +109,7 @@
                             } else if ($submenu["tipo"] == "3") {
                                 echo "galeria";
                             } else {
+                                
                                 echo "video";
                             }
                             ?>
@@ -136,7 +137,11 @@
         } else if($(e.target).html() == "galeria"){
             tipo = 3;
         } else {
+            
             tipo = 1;
+            console.log("hola");
+            $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
+          
         }
         var this_submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
         var parametros = {"tipo": tipo};
@@ -173,7 +178,7 @@
                             console.log(success);
                             var li = $("#li_to_clone_sub").clone().attr("id", "").removeClass("hidden").attr("idsubmenu", success.id);
                             li.find(".submenu-title").html(success.titulo);
-                            $("#lista-submenus li:last").before(li);
+                            $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
                         }, "json");
                         $("#lista-submenus li").first().find(".btn-submenu-detail").click();
                         $("#li_submenus_empty").remove();
@@ -191,7 +196,7 @@ $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
         if (tipo == "video") {
             $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
             $("#menu_content").css("display","inline");
-            $("#sub-menu_content").css("display","none");
+            
         } else {
             $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
             //$("#menu_content").css("display","none");
