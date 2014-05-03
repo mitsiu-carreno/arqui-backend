@@ -244,7 +244,10 @@ $("#lista-menus li").first().find(".btn-menu-detail").click();
                                 var boton = $("#id_msg_new_boton_video").val()
                                 var tiempo = seg + min;
 
-                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + "");
+                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + submenuid);
+                                var parametros = {"titulo": tiempo, "contenido": boton};
+                                console.log(parametros);
+                                $.post("<?php echo site_url(array("submenu", "set_indice"))?>/" + submenuid, $.param(parametros), "json");
                                 //console.log("Hi "+ $('#inp_new_time_video').val());
                             }
                         },
