@@ -52,7 +52,7 @@ class Clients extends CI_Controller {
     
     function getclient($clientid) {
         $this->load->model("client_model");
-        return json_encode($this->client_model->get($clientid));
+        echo json_encode($this->client_model->get($clientid));
     }
     
     function insertclient($client){

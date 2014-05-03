@@ -5,7 +5,7 @@
 <script src="<?php echo base_url() ?>js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" >
 
-            
+
     $(function() {
      
             tinymce.init({
@@ -33,6 +33,11 @@
             e.preventDefault();
                         $("#status").empty();
         });
+        idcliente=<?php echo $idcliente;?>;
+                    $.getJSON("<?php echo site_url(array("clients","getclient"));?>/"+ idcliente, function(data){
+               console.log(data.nombre); 
+               $(".h3").text("Proyecto: "+ data.nombre);
+            });
 
 //    $("#inp_file").change(function(){
 //        $("#alert_subir").fadeOut("slow");
@@ -48,7 +53,15 @@
     #error-message{
         display: none;
     }
-    
+     .titulo{
+        width: 100%;
+        height: 20%;
+       border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    .h3{
+        margin:1% 35%; 
+    }
     #success-message{
         display: none;
     }
@@ -67,6 +80,7 @@
     } 
 </style>
 <div class="container" style="margin-top: 80px">
+    <label class="titulo"><h3 class="h3"></h3></label>
     <form id="upload" method="post" action="<?php echo site_url(array("imagenes", "subir_banner", $idcliente)) ?>" enctype="multipart/form-data">
         <img id="img_banner" width="1024" height="227" src="<?php echo site_url(array("imagenes", "get_banner", $idcliente)) ?>" />
         <input type="file" id="inp_file" name="userfile" />

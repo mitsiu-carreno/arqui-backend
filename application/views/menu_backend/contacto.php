@@ -53,7 +53,12 @@
 //                $("#inp_email").val(data.contacto);
 //                
 //            });
-            
+             idcliente=<?php echo $idcliente;?>;
+       
+            $.getJSON("<?php echo site_url(array("clients","getclient"));?>/"+ idcliente, function(data){
+               console.log(data.nombre); 
+               $(".h3").text("Proyecto: "+ data.nombre);
+            });
             $("#inp_email").keyup(function(){
                 var parametros = {contacto: $("#inp_email").val(), contacto_texto:tinymce.get('txt_contacto').getContent()};
                         console.log($.param(parametros));
@@ -75,7 +80,15 @@
                 margin: 0 auto;
                 margin-top: 15px;
             }
-            
+            .titulo{
+        width: 100%;
+        height: 20%;
+       border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    .h3{
+        margin:1% 35%; 
+    }
             #contacto{
                 height: 100px;
             }
@@ -121,6 +134,7 @@
         -->
         <div class="container" style="margin-top: 80px">
         <br>$(function(){
+        <label class="titulo"><h3 class="h3"></h3></label>
         <div id="contacto" class="borde" style="height: 400px">
             <div class="fondo_1">
                 <label>Contacto</label>
