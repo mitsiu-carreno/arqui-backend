@@ -9,7 +9,8 @@ class Submenu extends CI_Controller {
         $this->load->view("submenu/botonera", array("submenu" => $data["tipo"]));
         switch($data["tipo"]){
             //tipo: 1 -> video indice, 2->video html, 3 -> Galeria, 4->html
-            case 1:
+
+            case 2:
                 $nombre_array = explode("/", $data["video"]);
                 $data["nombre_video"] = end($nombre_array);
                 $indices = $this->submenu_model->getIndice($idsubmenu);
@@ -19,7 +20,7 @@ class Submenu extends CI_Controller {
                 $this->load->view("submenu/video", $data);
                 echo json_encode($indices);
                 break;
-            case 2:
+            case 1:
                 
                 $data["videosubmenu"] = 2;
                 $nombre_array = explode("/", $data["video"]);
@@ -32,7 +33,7 @@ class Submenu extends CI_Controller {
                 $data = array("idsubmenu" => $idsubmenu);
                 $this->load->view("galeria", $data);
                 break;
-            case 4:
+            case 0:
                 echo json_encode($data["html"]);
                 break;
             default:

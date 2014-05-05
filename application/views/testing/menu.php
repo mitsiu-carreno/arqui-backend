@@ -7,7 +7,15 @@
     .btn-ta{
         width: 50%;
     }
-    
+    .titulo{
+        width: 100%;
+        height: 20%;
+       border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    .h3{
+        margin:1% 35%; 
+    }
         .btn-menu-opcion{
         float: right;
         margin-bottom: 5px;
@@ -31,16 +39,17 @@
 </style>
 <body>    
     <div class="container" style="margin-top: 80px">
-
+        <label class="titulo"><h3 class="h3"></h3></label>
         <!-- Single button -->
-        <div class="row">
-
+        <div class="row" style="margin-top:3%;">
+           
             <div class="col-md-3" style>
                 <div class="fondo_1">
                     <label>Menús</label>
                 </div>
                 <ul id="lista-menus" class="list-group">
                     <?php foreach ($menus as $m): ?>
+                    <span><?php echo $m["nombre"]?></span>
                         <li class="list-group-item" idmenu="<?php echo $m["id"] ?>">
                             <a href="#" class="btn-menu-detail"><span class="menu-title"><?php echo $m["titulo"] ?></span></a>
                             <input type="text" value="<?php echo $m["titulo"] ?>" class=" menu-title-input" />
@@ -75,6 +84,7 @@
             <div class="col-md-6">
                 <label>Contenido</label>
                 <div id="menu_content"></div>
+                <div><input type="submit" value="guardar" class="btn btn-primary hidden btn_guardar_html" style="margin:3% 40%;"/></div>
             </div>
 
         </div>
@@ -93,7 +103,7 @@
         <script>
 
             var menuid = null;
-            
+
             var loadSubmenuContent = function(tipo) {
                 if (tipo == 0 || tipo == null) {
                     $('#sub').attr('checked', true);
@@ -103,6 +113,7 @@
                 }
             };
             $(document).ready(function() {
+                        
                 menuid = $(".btn_menus_titulo").first().closest("li").attr("idmenu");
                 if(menuid){
     //                $(".btn_menus_titulo").first().addClass("active");
@@ -191,13 +202,27 @@
         menuid = $(this).closest(".list-group-item").attr("idmenu");
         if (tipo == "html") {
             $("#menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
+            $(".btn_guardar_html").removeClass('hidden');
             $("#menu_content").css("display","inline");
             $("#sub-menu_content").css("display","none");
         } else {
             $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
+            $(".btn_guardar_html").addClass('hidden');
             $("#menu_content").css("display","none");
             $("#sub-menu_content").css("display","inline");
-        }
+        }  
+
+    });
+     idcliente=<?php echo $idcliente;?>;
+       
+            $.getJSON("<?php echo site_url(array("clients","getclient"));?>/"+ idcliente, function(data){
+               console.log(data.nombre); 
+               $(".h3").text("Proyecto: "+ data.nombre);
+            });
+    $(".btn_guardar_html").click(function(){
+    hola=$(".textarea").text();
+    console.log('menid='+menuid + "texto " + hola);
+       $.post("<?php echo site_url(array("menus","set_html"));?>/")+menuid;
     });
     $("#lista-menus").delegate(".btn_menus_eliminar", "click", function(e) {
                 e.preventDefault();
@@ -236,7 +261,10 @@ $("#lista-menus li").first().find(".btn-menu-detail").click();
                                 var boton = $("#id_msg_new_boton_video").val()
                                 var tiempo = seg + min;
 
-                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + "");
+                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + submenuid);
+                                var parametros = {"titulo": tiempo, "contenido": boton};
+                                console.log(parametros);
+                                $.post("<?php echo site_url(array("submenu", "set_indice"))?>/" + submenuid, $.param(parametros), "json");
                                 //console.log("Hi "+ $('#inp_new_time_video').val());
                             }
                         },

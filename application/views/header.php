@@ -25,7 +25,7 @@
     <script>
         $(function(){
             tinymce.init({
-                selector: ".textarea",
+                selector: ".txtarea",
                 width: 550,
                 menubar : false,
                 height: 200,
@@ -37,8 +37,30 @@
                      "save table contextmenu directionality emoticons template paste textcolor jbimages"
                ],
                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
-               relative_urls: false
+               relative_urls: false,
+                   
+                    setup : function(editor){
+                      editor.on('Init', function(ed) {
                
+                            //tinymce.activeEditor.setContent(data.contacto_texto);
+                          });
+                    
+          
+                   
+                    editor.on('keyup', function(e) {
+                        //$contenido = 'contacto_text: ' + tinymce.activeEditor.getContent();
+                        //alert($contenido);
+//                        alert(tinymce.get('txt_contacto').getContent());
+                        //$value=tinymce.get('txt_contacto').getContent();
+                        //$value=tinymce.get('txt_contacto').getContent()
+                        //$('txt_contacto').val($value);
+                        
+                        //tinymce.get('txt_contacto').setContent($value);
+                        var parametros = {html: tinymce.get('txt').getContent()};
+                        console.log($.param(parametros));
+                        
+                    });  
+                    }
             });
             
         });

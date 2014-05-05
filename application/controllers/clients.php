@@ -1,15 +1,6 @@
 <?php
 class Clients extends CI_Controller {
     function index(){
-        $this->load->model("client_model");
-        $data["clientes"] = $this->client_model->get();
-        $this->load->view("header");
-        $this->load->view("navbar");
-        $this->load->view("clients/list", $data);
-        $this->load->view("footer"); 
-    }
-    
-    function lista(){
         $this->load->view("header");
         $this->load->view("navbar");
         $this->load->view("clients/app");
@@ -61,7 +52,7 @@ class Clients extends CI_Controller {
     
     function getclient($clientid) {
         $this->load->model("client_model");
-        return json_encode($this->client_model->get($clientid));
+        echo json_encode($this->client_model->get($clientid));
     }
     
     function insertclient($client){
@@ -73,3 +64,5 @@ class Clients extends CI_Controller {
     }
     
 }
+
+
