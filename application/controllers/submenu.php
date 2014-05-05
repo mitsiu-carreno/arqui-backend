@@ -52,7 +52,7 @@ class Submenu extends CI_Controller {
 //    function getIndices($indices){
 //        var_dump($indices);
 //        $this->load->view("recursos/lista_Indices", $indices);
-//    }
+//    } 
     
     function video($idmenu){
         $this->load->model("menu_model");
