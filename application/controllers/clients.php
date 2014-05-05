@@ -35,7 +35,14 @@ class Clients extends CI_Controller {
                 $this->client_model->delete($clientid);
                 break;
             case 'POST':
+                if(isset($this->input->post("_method")) && $this->input->post("_method") === "DELETE"){
+                    $this->load->model("client_model");
+                    $this->client_model->delete($clientid);
+                }else if(isset($this->input->post("_method")) && $this->input->post("_method") === "DELETE"){
+                    echo $this->updateclient($clientid,json_decode($this->input->post("model")));
+                } else {
                 echo $this->insertclient(json_decode($this->input->post("model")));
+                }
                 break;
             default :
                 echo $this->getclient($clientid);
