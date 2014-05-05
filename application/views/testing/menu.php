@@ -71,11 +71,11 @@
                     <?php endif; ?>
                    
                 </ul>
- <li id="li_menus_add">
+                   
                         <button class="btn btn-success btn-block" id="btn_menus_add">Nuevo menú <span class="glyphicon glyphicon-plus"></span></button>
                         <small>- Doble click sobre el título para editarlo</small><br />
                         <small>- Arrastre los títulos para reordenar</small>
-                    </li>
+                    
             </div>
             <div class="col-md-3">
                 <label>Submenús</label>
@@ -188,9 +188,10 @@
                         console.log(data);
                         $.post("<?php echo site_url(array("menus", "insert", $idcliente)) ?>", $.param(parametros), function(success) {
                             console.log(success);
+                            console.log('prueba');
                             var li = $("#li_to_clone").clone().attr("id", "").removeClass("hidden").attr("idmenu", success.id);
                             li.find(".menu-title").html(success.titulo);
-                            $("#lista-menus li:last").before(li);
+                            $("#lista-menus li:last-of-type").after(li);
                         }, "json");
 
                         $("#li_menus_empty").remove();

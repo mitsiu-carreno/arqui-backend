@@ -26,7 +26,6 @@ class Submenu extends CI_Controller {
                 $nombre_array = explode("/", $data["video"]);
                 $data["nombre_video"] = end($nombre_array);
                 $this->load->view("submenu/video", $data);
-                
                 echo json_encode($data["video_html"]);
                 break;
             case 3:
