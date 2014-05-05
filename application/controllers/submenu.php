@@ -19,7 +19,6 @@ class Submenu extends CI_Controller {
                 //var_dump($data);
                 $this->load->view("submenu/video", $data);
                 //echo json_encode($indices);
-                //$this->getIndices($indices); 
                 break;
             case 1:
                 
@@ -48,11 +47,6 @@ class Submenu extends CI_Controller {
                 //echo json_encode($indices);
         }
     }
-    
-//    function getIndices($indices){
-//        var_dump($indices);
-//        $this->load->view("recursos/lista_Indices", $indices);
-//    } 
     
     function video($idmenu){
         $this->load->model("menu_model");
