@@ -41,8 +41,9 @@
         <li><button class="btn btn-success btn-block" id="btn_agregar_indice_video"><span class="glyphicon glyphicon-plus"></span> Agregar Indice</button></li>
     </ul>
 </div>
-
-<?php echo $indices?>
+<?php foreach ($indices as $i):
+    echo $i["titulo"];
+endforeach; ?>
             </div><!--cierra el body-->
     </div><!--cierra el row-->
 </div>

@@ -16,7 +16,7 @@ class Submenu extends CI_Controller {
                 $data["indices"] = $this->submenu_model->getIndice($idsubmenu);
                 //var_dump($indices);
                 $data["videosubmenu"] = 1; 
-                //var_dump($data);
+                //var_dump($data["indices"]);
                 $this->load->view("submenu/video", $data);
                 //echo json_encode($indices);
                 break;
@@ -26,6 +26,7 @@ class Submenu extends CI_Controller {
                 $nombre_array = explode("/", $data["video"]);
                 $data["nombre_video"] = end($nombre_array);
                 $this->load->view("submenu/video", $data);
+                
                 echo json_encode($data["video_html"]);
                 break;
             case 3:
