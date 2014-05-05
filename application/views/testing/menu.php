@@ -223,10 +223,11 @@
                console.log(data.nombre); 
                $(".h3").text("Proyecto: "+ data.nombre);
             });
+
     $(".btn_guardar_html").click(function(){
-    hola=$(".textarea").text();
-    console.log('menid='+menuid + "texto " + hola);
-       $.post("<?php echo site_url(array("menus","set_html"));?>/")+menuid;
+        var parametros={html:contenido_menu_html};
+console.log(parametros);    
+        $.post("<?php echo site_url(array("menus","set_html")) ?>/"+ menuid, $.param(parametros));
     });
     $("#lista-menus").delegate(".btn_menus_eliminar", "click", function(e) {
                 e.preventDefault();
