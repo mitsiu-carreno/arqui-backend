@@ -42,7 +42,7 @@
     </ul>
 </div>
 <?php foreach ($indices as $i):
-    echo $titulo;
+    echo $i["titulo"];
 endforeach; ?>
             </div><!--cierra el body-->
     </div><!--cierra el row-->
