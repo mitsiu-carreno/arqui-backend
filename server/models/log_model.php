@@ -4,7 +4,12 @@ class Log_model extends CI_Model {
     function __construct() {
         parent::__construct();
         $this->load->library('rb');
-//        R::freeze( TRUE );
+        R::freeze( TRUE );
+    }
+    
+    function activo($clientid){
+        $client =R::load("client", $clientid);
+        return $client->activo == 1 ? true : false;
     }
     
     function in($email,$password){

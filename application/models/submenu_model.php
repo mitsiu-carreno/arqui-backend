@@ -15,6 +15,7 @@ class Submenu_model extends CI_Model {
         $submenu->tipo = 1;
         $submenu->html = NULL;
         $submenu->video = NULL;
+        $submenu->fav = FALSE;
         $submenu->tipo = 1;
         $submenu->pos = ($this->getLastPosition($idmenu))+1;
         $submenu->video_html= NULL;

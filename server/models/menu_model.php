@@ -27,7 +27,7 @@ class Menu_model extends CI_Model {
                 });
                 $p["Submenus"] = array();
                 foreach($p["ownSubmenu"] as $s){
-                    unset($s["id"]);
+//                    unset($s["id"]);
                     unset($s["pos"]);
                     unset($s["menu_id"]);
                     $s["html"] = $s["tipo"] == 1 ? $s["video_html"] : $s["html"];
