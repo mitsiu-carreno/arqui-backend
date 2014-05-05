@@ -42,7 +42,7 @@
     </ul>
 </div>
 
-
+<?php echo $indices?>
             </div><!--cierra el body-->
     </div><!--cierra el row-->
 </div>
