@@ -46,10 +46,7 @@
 endforeach;
 ?>
 
-<div class="hidden editor">
-    <textarea  class="textarea" ></textarea>
-</div>
-
+<?php echo $indices?>
             </div><!--cierra el body-->
     </div><!--cierra el row-->
 </div>
