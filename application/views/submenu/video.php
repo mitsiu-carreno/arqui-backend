@@ -33,13 +33,16 @@
                     </form>
 </div>
 <div class="btn-group col-md-12">
-            <button class="btn btn-default <?php echo ($videosubmenu == 1) ? "active" : "" ?>"><span class="glyphicon glyphicon-th-list"></span> Índice</button>
-            <button class="btn btn-default <?php echo ($videosubmenu == 2) ? "active" : "" ?>"><span class="glyphicon glyphicon-align-left"></span> HTML</button>
+            <button class="btn btn-default btn_video <?php echo ($videosubmenu == 1) ? "active" : "" ?>"><span class="glyphicon glyphicon-th-list"></span> Índice</button>
+            <button class="btn btn-default btn_video_html <?php echo ($videosubmenu == 2) ? "active" : "" ?>"><span class="glyphicon glyphicon-align-left"></span> HTML</button>
         </div>
 <div id="panel_indice_video">
     <ul id="list_marcadores_video" class="list-group">
         <li><button class="btn btn-success btn-block" id="btn_agregar_indice_video"><span class="glyphicon glyphicon-plus"></span> Agregar Indice</button></li>
     </ul>
+</div>
+<div class="hidden editor">
+    <textarea  class="textarea" ></textarea>
 </div>
 
             </div><!--cierra el body-->
@@ -50,6 +53,9 @@
     <input type="type" class="col-md-12" name="txt_boton_video" />
 </li>
 <script>
+    tinymce.init({selector:'.textarea',
+   
+});
     console.log(submenuid);
             $("#btn_subir").click(function() {
 
@@ -60,6 +66,30 @@
             
             e.preventDefault();
                         $("#status").empty();
+        });
+        $(".btn_video_html").click(function(){
+        $(this).addClass('active');
+          $(".btn_video").removeClass('active');
+                var tipo=2;
+           var parametros={'tipo': tipo};
+           console.log("editorr video" + submenuid + tipo); 
+           $.post("<?php echo site_url(array("submenu","set_tipo"))?>/"+ submenuid, $.param(parametros));
+           if(tipo==2){
+               $(".editor").removeClass('hidden');
+           }
+   
+        });
+                $(".btn_video").click(function(){
+                   $(this).addClass('active');
+                  
+                   var tipo=1;
+           var parametros={'tipo': tipo};
+           console.log("editorr video" + submenuid + tipo); 
+           $.post("<?php echo site_url(array("submenu","set_tipo"))?>/"+ submenuid, $.param(parametros));
+           if(tipo==1){
+               $(".editor").addClass('hidden');
+           }
+   
         });
 
 </script>

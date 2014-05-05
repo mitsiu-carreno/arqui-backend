@@ -47,6 +47,7 @@
                 <div class="fondo_1">
                     <label>Menús</label>
                 </div>
+                
                 <ul id="lista-menus" class="list-group">
                     <?php foreach ($menus as $m): ?>
                     <span><?php echo $m["nombre"]?></span>
@@ -68,13 +69,13 @@
                             <small><i>No hay menús, haga click en el siguiente botón para agregar uno -></i></small>
                         </li>
                     <?php endif; ?>
-                    <li id="li_menus_add">
+                   
+                </ul>
+ <li id="li_menus_add">
                         <button class="btn btn-success btn-block" id="btn_menus_add">Nuevo menú <span class="glyphicon glyphicon-plus"></span></button>
                         <small>- Doble click sobre el título para editarlo</small><br />
                         <small>- Arrastre los títulos para reordenar</small>
                     </li>
-                </ul>
-
             </div>
             <div class="col-md-3">
                 <label>Submenús</label>
@@ -134,9 +135,11 @@
             ///////////////////////////
             
      $("#lista-menus").sortable({
+     
         update: function(event, ui) {
             var elementos = {};
             $.each($("#lista-menus .list-group-item"), function(index, value) {
+                
                 elementos[index + 1] = $(value).attr("idmenu");
             });
             var parametros = {"menus": elementos};
