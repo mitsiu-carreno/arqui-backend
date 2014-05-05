@@ -35,7 +35,14 @@ class Clients extends CI_Controller {
                 $this->client_model->delete($clientid);
                 break;
             case 'POST':
+                if(($this->input->post("_method") == "DELETE")){
+                    $this->load->model("client_model");
+                    $this->client_model->delete($clientid);
+                }else if($this->input->post("_method") === "PUT"){
+                    echo $this->updateclient($clientid,json_decode($this->input->post("model")));
+                } else {
                 echo $this->insertclient(json_decode($this->input->post("model")));
+                }
                 break;
             default :
                 echo $this->getclient($clientid);
@@ -46,13 +53,15 @@ class Clients extends CI_Controller {
         $this->load->model("client_model");
         $client = get_object_vars($client);
         unset($client["ownMenu"]);
-        $id = $this->client_model->update($client);
+//        $client["activo"] = $client["activo"] ? 1 : 0;
+        $id = $this->client_model->update($clientid,$client);
         return $this->getclient($clientid);
     }
     
     function getclient($clientid) {
         $this->load->model("client_model");
-        echo json_encode($this->client_model->get($clientid));
+        $cliente = $this->client_model->get($clientid);
+        echo json_encode($cliente);
     }
     
     function insertclient($client){

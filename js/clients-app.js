@@ -19,11 +19,19 @@ $(function() {
                 nombre: "Sin nombre",
                 email: "Sin email",
                 password: "",
+                activo : 1,
                 id: null
             };
-        }
+        },
+        isActivo : function(){
+                    return this.get("activo") == 1 ? true : false;
+                },
+        toggle: function() {
+            console.log(this.get("activo"));
+            console.log(this.isActivo());
+            this.save({activo: this.isActivo() ? 0 : 1});
+          }
     });
-
 
     //Lista de clientes
     var ClienteLista = Backbone.Collection.extend({
@@ -44,7 +52,8 @@ $(function() {
         editTemplate: _.template($('#item-edit').html()),
         events: {
             "click .btn-eliminar": "clear",
-            "click .btn-editar" : "loadEditForm"
+            "click .btn-editar" : "loadEditForm",
+            "click .btn-activar"   : "toggleActivar"
         },
         initialize: function() {
             this.listenTo(this.model, 'add', this.render);
@@ -58,6 +67,9 @@ $(function() {
 //      this.input = this.$('.edit');
             return this;
         },
+        toggleActivar: function() {
+            this.model.toggle();
+          },
         clear: function() {
             var bb_model = this.model;
             bootbox.confirm('¿Estás seguro de <strong><span class="text-danger">eliminar</span></strong> este proyecto?', function(result){
