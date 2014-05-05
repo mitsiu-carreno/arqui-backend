@@ -47,8 +47,8 @@ class Submenu extends CI_Controller {
                 $data["videosubmenu"] = 2;
                 $nombre_array = explode("/", $data["video"]);
                 $data["nombre_video"] = end($nombre_array);
-                $this->load->view("submenu/video", $data);
-                
+                //$this->load->view("submenu/video", $data);
+                $this->load->view("recursos/editor", $data);
                 echo json_encode($data["video_html"]);
                 break;
             case 3:
@@ -158,4 +158,5 @@ class Submenu extends CI_Controller {
        $submenu = $this->submenu_model->update($idsubmenu, "titulo", $this->input->post("titulo"));
        
     }
+
 }
