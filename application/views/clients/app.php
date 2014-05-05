@@ -20,7 +20,8 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>&nbsp;</th>
-                <th>Status</th>
+                <th>Activar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +61,7 @@
                 <td><a href="<?php echo site_url(array("proyectos","menus")) ?>/<%- id %>"><%- nombre %></a></td>
                 <td><%- email %></td>
                 <td><button class="btn-editar btn btn-primary">Editar</button></td>
+                <td><button class="btn-activar btn btn-default tooltip-status"  data-toggle="tooltip" data-placement="left" title="Dar click para <%= activo == 1 ? 'Desactivar' : 'Activar' %>" ><span class="glyphicon glyphicon-<%= activo == 1 ? 'ok-sign' : 'exclamation-sign' %> text-<%= activo == 1 ? 'success' : 'danger' %>"></span></button></td>
                 <td><button class="btn-eliminar btn btn-default tooltip-status"  data-toggle="tooltip" data-placement="left" title="eliminar" ><span class="glyphicon glyphicon-remove-circle text-danger"></span></button></td>
 </script>
 <script type="text/template" id="item-edit">

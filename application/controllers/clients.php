@@ -53,13 +53,15 @@ class Clients extends CI_Controller {
         $this->load->model("client_model");
         $client = get_object_vars($client);
         unset($client["ownMenu"]);
-        $id = $this->client_model->update($clienteid,$client);
+//        $client["activo"] = $client["activo"] ? 1 : 0;
+        $id = $this->client_model->update($clientid,$client);
         return $this->getclient($clientid);
     }
     
     function getclient($clientid) {
         $this->load->model("client_model");
-        echo json_encode($this->client_model->get($clientid));
+        $cliente = $this->client_model->get($clientid);
+        echo json_encode($cliente);
     }
     
     function insertclient($client){
