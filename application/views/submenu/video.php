@@ -41,19 +41,22 @@
         <li><button class="btn btn-success btn-block" id="btn_agregar_indice_video"><span class="glyphicon glyphicon-plus"></span> Agregar Indice</button></li>
     </ul>
 </div>
+<?php foreach ($indices as $i) : 
+    echo $i;
+endforeach;
+?>
 
+<div class="hidden editor">
+    <textarea  class="textarea" ></textarea>
+</div>
 
             </div><!--cierra el body-->
     </div><!--cierra el row-->
 </div>
-
 <li class="hidden" id="tpl_li_indice_video" idmarcador="">
 <span class="col-md-6">Marcador:</span> <input type="time" class="col-md-6" step="1" name="txt_time_video" />
     <input type="type" class="col-md-12" name="txt_boton_video" />
 </li>
-<div class="hidden editor">
-    <textarea  class="textarea" ></textarea>
-</div>
 <script>
     tinymce.init({selector:'.textarea',
    
@@ -69,7 +72,7 @@
             e.preventDefault();
                         $("#status").empty();
         });
-        $(".btn_video_html").click(function(){
+                $(".btn_video_html").click(function(){
         $(this).addClass('active');
           $(".btn_video").removeClass('active');
                 var tipo=2;
