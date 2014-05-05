@@ -34,8 +34,18 @@ class Proyectos extends CI_Controller {
         
         $this->load->view("header");
         $this->load->view("navbar-proyecto",$data);
-        $this->load->view("footer"); 
         $this->load->view("menu_backend/contacto", $data);
+        $this->load->view("footer"); 
+    }
+    
+    function html($idcliente){
+        $data = array("idcliente"=>$idcliente);
+        $this->load->model("client_model");
+        if($_SERVER['REQUEST_METHOD'] === "POST") {
+            $this->client_model->update_field($idcliente,"html",  $this->input->post("html"));
+        }else {
+            echo json_encode($this->client_model->get($idcliente));
+        }
     }
     
 }

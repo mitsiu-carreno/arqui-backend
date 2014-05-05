@@ -23,10 +23,31 @@
                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
                relative_urls: false,
                
+               setup : function(editor){
+                      editor.on('Init', function(ed) {
+                          $.getJSON("<?php echo site_url(array("proyectos","html",$idcliente)) ?>", function(data){
+                            tinymce.get('txt_contacto').setContent(data.html);
+                          });
+                      });
+          
+                   
+//                    editor.on('keyup', function(e) {
+//                        var parametros = {html: tinymce.get('txt_contacto').getContent()};
+//                        console.log($.param(parametros));
+//                        $.post("<?php echo site_url(array("proyectos","html",$idcliente)) ?>", $.param(parametros));
+//                    });                 
+               }
+               
             });
             
         $("#btn_subir").click(function() {
             $("#inp_file").click();
+        });
+        
+        $("#btn_guardar_txt").click(function(){
+            var parametros = {html: tinymce.get('txt_contacto').getContent()};
+                        console.log($.param(parametros));
+                        $.post("<?php echo site_url(array("proyectos","html",$idcliente)) ?>", $.param(parametros));
         });
 
         $("#upload").submit(function(e) {
@@ -89,10 +110,12 @@
         <div id="status">
         </div>
     </form>
-</div>
-  <div class="col-sm-2 col-sm-offset-3 borde" style="margin-top:3%;">
-                            <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."></textarea>
-                        </div>
     <div id="error-message" class="text-danger"><span class="glyphicon glyphicon-warning-sign" style="float:left;margin-right: 5px;"></span><i></i></div>
     <div id="success-message" class="text-success"><span class="glyphicon glyphicon-ok-circle" style="float:left;margin-right: 5px;"></span><i></i></div>
+    <br /><hr />
+    <h2>Editar mensaje de inicio</h2>
+  <div class="col-sm-2 col-sm-offset-3 borde" style="margin-top:3%;">
+                            <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."></textarea>
+                            <button id="btn_guardar_txt" class="btn btn-success btn-large">Guardar</button>
+                        </div>
 </div>

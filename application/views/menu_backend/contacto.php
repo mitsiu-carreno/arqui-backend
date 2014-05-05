@@ -28,14 +28,6 @@
           
                    
                     editor.on('keyup', function(e) {
-                        //$contenido = 'contacto_text: ' + tinymce.activeEditor.getContent();
-                        //alert($contenido);
-//                        alert(tinymce.get('txt_contacto').getContent());
-                        //$value=tinymce.get('txt_contacto').getContent();
-                        //$value=tinymce.get('txt_contacto').getContent()
-                        //$('txt_contacto').val($value);
-                        
-                        //tinymce.get('txt_contacto').setContent($value);
                         var parametros = {contacto: $("#inp_email").val(), contacto_texto: tinymce.get('txt_contacto').getContent()};
                         console.log($.param(parametros));
                         $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $.param(parametros));
@@ -113,27 +105,9 @@
 		border-radius: 6px;
 	}
         </style>
-        
-        <!--
-        <div id="encabezado" class="borde">
-            <div class="fondo_1">
-                <label>Encabezado</label>
-            </div>
-            <div id="imagen_logo" class="borde"></div>
-            <div class="row">
-                <div class="col-sm-7 col-sm-offset-1 borde">
-                    <label>Cambiar</label>
-                    <button type="button" class="btn btn-primary">Buscar</button>
-                </div>
-                <div class="col-sm-3  borde">
-                    <!--<span class="glyphicon glyphicon-info-sign"></span>    ->
-                    <label>Esta imagen debe ser de 1024 x 200</label>
-                </div>
-            </div>    
-        </div>
-        -->
+
         <div class="container" style="margin-top: 80px">
-        <br>$(function(){
+        <br>
         <label class="titulo"><h3 class="h3"></h3></label>
         <div id="contacto" class="borde" style="height: 400px">
             <div class="fondo_1">
