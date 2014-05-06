@@ -132,54 +132,78 @@
            }
    
         });
-         $(".btn-indice-detail2").dblclick(function(){
-        //var that2 = this;
-        $(this).addClass("hidden");
-        $("#indice-contenido").show();
-        });
+//        
+//         $(".btn-indice-detail2").click(function(){
+//        //var that2 = this;
+//        $(this).addClass("hidden");
+//        $("#indice-contenido").show().closest().focus();
+//        });
+//        
+//        $("#indice-contenido").keyup(function(e){
+//            if(e.keyCode == 13){
+//                $("#indice-contenido").hide();
+//                $(".btn-indice-detail2").html($(this).val());
+//                $(".btn-indice-detail2").removeClass("hidden");
+//               // var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
+//                //var parametros = {id: this_idIndice, "titulo": $(this).val()};
+//                //$.post("http://cognosvideoapp.com.mx/index.php/menus/editar/5", $.param(parametros), "json");
+//            } else  if(e.keyCode == 27) {
+//                //console.log("entrooooooo");
+//                $("#indice-contenido").hide(); 
+//                $("#indice-contenido").val()
+//                //$(this).hide().val($(that2).text());
+//                $(".btn-indice-detail2").removeClass("hidden");
+//            }
+//        });
+//        
+//        $(".btn-indice-detail").click(function(){
+//        //var that2 = this;
+//        $(this).addClass("hidden");
+//        $("#time").show().focus();
+////        $(that2).find("time").blur(function(){
+////                $(this).hide();
+////               // $(that2).find(".indice-title").html($(this).val()).show();
+//        });
+//        
+//        $("#time").keyup(function(e){
+//            if(e.keyCode == 13){
+//                $("#time").hide();
+//                $(".btn-indice-detail").html($(this).val());
+//                $(".btn-indice-detail").removeClass("hidden");
+//               // var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
+//                //var parametros = {id: this_idIndice, "titulo": $(this).val()};
+//                //$.post("http://cognosvideoapp.com.mx/index.php/menus/editar/5", $.param(parametros), "json");
+//            } else  if(e.keyCode == 27) {
+//                //console.log("entrooooooo");
+//                $("#time").hide(); 
+//                $("#time").val()
+//                //$(this).hide().val($(that2).text());
+//                $(".btn-indice-detail").removeClass("hidden");
+//            }
+//        });
         
-        $("#indice-contenido").keyup(function(e){
+        $("#lista-indices").delegate("li","click",function(){
+        var that2 = this;
+        console.log(that2);
+        $(that2).find(".indice-title").hide();
+        $(that2).find("input").blur(function(){
+                $(this).hide();
+                $(that2).find(".indice-title").html($(this).val()).show();
+        });
+        $(that2).find("input").show().focus().keyup(function(e){
             if(e.keyCode == 13){
-                $("#indice-contenido").hide();
-                $(".btn-indice-detail2").html($(this).val());
-                $(".btn-indice-detail2").removeClass("hidden");
-               // var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
-                //var parametros = {id: this_idIndice, "titulo": $(this).val()};
-                //$.post("http://cognosvideoapp.com.mx/index.php/menus/editar/5", $.param(parametros), "json");
+                $(this).hide();
+                $(that2).find(".indice-title").html($(this).val()).show();
+                var this_indiceid = $(this).closest(".list-group-item").attr("idmenu");
+                var parametros = {id: this_indiceid, "titulo": $(this).val()};
+                //POST
             } else  if(e.keyCode == 27) {
-                //console.log("entrooooooo");
-                $("#indice-contenido").hide(); 
-                $("#indice-contenido").val()
-                //$(this).hide().val($(that2).text());
-                $(".btn-indice-detail2").removeClass("hidden");
+                $(this).hide().val($(that2).text());
+                $(that).find(".indice-title").show();
             }
         });
-        
-        $(".btn-indice-detail").dblclick(function(){
-        //var that2 = this;
-        $(this).addClass("hidden");
-        $("#time").show();
-//        $(that2).find("time").blur(function(){
-//                $(this).hide();
-//               // $(that2).find(".indice-title").html($(this).val()).show();
-        });
-        
-        $("#time").keyup(function(e){
-            if(e.keyCode == 13){
-                $("#time").hide();
-                $(".btn-indice-detail").html($(this).val());
-                $(".btn-indice-detail").removeClass("hidden");
-               // var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
-                //var parametros = {id: this_idIndice, "titulo": $(this).val()};
-                //$.post("http://cognosvideoapp.com.mx/index.php/menus/editar/5", $.param(parametros), "json");
-            } else  if(e.keyCode == 27) {
-                //console.log("entrooooooo");
-                $("#time").hide(); 
-                $("#time").val()
-                //$(this).hide().val($(that2).text());
-                $(".btn-indice-detail").removeClass("hidden");
-            }
-        });
+    });
+    
 </script>
 <script src="<?php echo base_url(); ?>js/jquery.ui.widget.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/jquery.iframe-transport.js" type="text/javascript"></script>
