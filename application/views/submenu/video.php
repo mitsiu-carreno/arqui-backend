@@ -134,6 +134,7 @@
         });
         $("#lista-indices").delegate("li","dblclick",function(){
         var that2 = this;
+        console.log($(this).val()); 
         $(that2).find(".indice-title").hide();
         $(that2).find("input").blur(function(){
                 $(this).hide();
