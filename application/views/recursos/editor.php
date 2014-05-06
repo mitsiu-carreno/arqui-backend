@@ -5,7 +5,7 @@ tinymce.init({selector:'.textarea',
    
                   setup : function(editor){
                       editor.on('Init', function(ed) {
-
+                         
                       });
           
                     editor.on('keyup', function(e) {

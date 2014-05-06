@@ -215,7 +215,11 @@
             $("#menu_content").css("display","none");
             $("#sub-menu_content").css("display","inline");
         }  
-
+    $.getJSON("<?php echo site_url(array("menus","get")) ?>/"+null+ menuid, function(data){
+                            console.log("hola");
+                            
+                            //tinymce.activeEditor.setContent(data.contacto_texto);
+                          });
     });
      idcliente=<?php echo $idcliente;?>;
        
@@ -225,7 +229,7 @@
             });
 
     $(".btn_guardar_html").click(function(){
-        var parametros={html:contenido_menu_html};
+        var parametros={contenido:contenido_menu_html};
 console.log(parametros);    
         $.post("<?php echo site_url(array("menus","set_html")) ?>/"+ menuid, $.param(parametros));
     });
