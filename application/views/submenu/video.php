@@ -41,9 +41,33 @@
         <li><button class="btn btn-success btn-block" id="btn_agregar_indice_video"><span class="glyphicon glyphicon-plus"></span> Agregar Indice</button></li>
     </ul>
 </div>
-<?php foreach ($indices as $i):
-    echo $i["titulo"];
-endforeach; ?>
+<!--Indices-->
+            <ul id="lista-indices" class="list-group">
+                    <?php foreach ($indices as $i): ?>
+                    <!--<span><?php echo $i["contenido"]?></span>-->
+                        <li class="list-group-item" idIndice="<?php echo $i["id"] ?>">
+                            <a href="#" class="btn-menu-detail"><span class="menu-title"><?php echo $i["contenido"] ?></span></a>
+                            <input type="text" value="<?php echo $i["titulo"] ?>" class=" menu-title-input" />
+                            <a href="#" class="btn-menu"><span class="menu-title"><?php echo $i["titulo"] /60 ?></span></a>
+                            <a href="#" class="btn_menus_eliminar btn-menu-opcion"><span class="glyphicon glyphicon-trash"></span></a>
+                            <!--<a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-resize-vertical"></span></a>-->
+<!--                            <a href="#" class="btn-menu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $m["tipo"] == "0" ? "sub" : "html" ?></span><span class="caret"></span></a>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="#" class="menu-tipo-selectable">html</a></li>
+                                <li><a href="#" class="menu-tipo-selectable">sub</a></li>
+                            </ul>-->
+                        </li>
+
+                    <?php endforeach; ?>
+                    <?php if (count($indices) == 0): ?>
+                        <li id="li_menus_empty">
+                            <small><i>No hay indices, haga click en el siguiente botón para agregar uno -></i></small>
+                        </li>
+                    <?php endif; ?>
+                   
+                </ul>
+
+<!--Fin-Indices-->
             </div><!--cierra el body-->
     </div><!--cierra el row-->
 </div>
