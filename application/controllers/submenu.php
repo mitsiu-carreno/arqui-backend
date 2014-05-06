@@ -35,7 +35,7 @@ class Submenu extends CI_Controller {
                 $this->load->view("galeria", $data);
                 break;
             case 0:
-                $this->load->view("recursos/editor", $data);
+                //$this->load->view("recursos/editor", $data);
                 echo json_encode($data["html"]);
                 break;
             default:
