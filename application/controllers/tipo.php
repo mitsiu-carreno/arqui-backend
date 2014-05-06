@@ -8,29 +8,24 @@ class Tipo extends CI_Controller {
         //$data["0"]["ownSubmenu"]=null;
         //var_dump($data);
         $data = $this->menu_model->get(null, $idmenu);
-        //echo json_encode(array("tipo" => $data["tipo"]));
-//        var_dump($data["0"]["ownSubmenu"]);
-        if($data["0"]["tipo"]==0){
+/*
+
+ * En el menú:
+si el tipo = 0  será html,
+si tipo = 1 será tipo submenu
+ * 
+ *  */
+        if($data["0"]["tipo"]>0){
             if (array_key_exists('ownSubmenu', $data["0"])) {
                 $this->load->view("recursos/submenus", $data["0"]);
-            } 
-            else{
+            } else {
                 $this->load->view("recursos/lista_submenus");
-              
             }
         }else{
-            //html
-//             $this->load->view("header");
             $this->load->view("recursos/editor", $data["0"]);
         }
     }
-//    
-//    function get_first($idcliente){
-//        $this->load->model("menu_model");
-//        $data = $this->menu_model->getFirst($idcliente);
-//        echo json_encode(array("tipo" => $data["tipo"]));
-//    }
-//            
+          
     function set($idmenu){
         $this->load->model("menu_model");
         $data =$this->menu_model->updateTipo($idmenu, $this->input->post("tipo"));

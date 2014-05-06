@@ -56,7 +56,7 @@
                             <input type="text" value="<?php echo $m["titulo"] ?>" class=" menu-title-input" />
                             <a href="#" class="btn_menus_eliminar btn-menu-opcion"><span class="glyphicon glyphicon-trash"></span></a>
                             <!--<a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-resize-vertical"></span></a>-->
-                            <a href="#" class="btn-menu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $m["tipo"] == "0" ? "sub" : "html" ?></span><span class="caret"></span></a>
+                            <a href="#" class="btn-menu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $m["tipo"] == "0" ? "html" : "sub" ?></span><span class="caret"></span></a>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li><a href="#" class="menu-tipo-selectable">html</a></li>
                                 <li><a href="#" class="menu-tipo-selectable">sub</a></li>
@@ -107,12 +107,13 @@
 
             var loadSubmenuContent = function(tipo) {
                 if (tipo == 0 || tipo == null) {
-                    $('#html').attr('checked', true);
-                } else {
-                    
-                    $('#sub').attr('checked', true);
+                     $('#sub').attr('checked', true);
                     $("#submenu_content .panel-body").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
-                }
+           
+                   
+                } else {
+                     $('#html').attr('checked', true);
+                        }
             };
             $(document).ready(function() {
                         
@@ -155,7 +156,7 @@
     
     $("#lista-menus").delegate(".menu-tipo-selectable","click",function(e){
         e.preventDefault();
-        var tipo = $(e.target).html() == "html" ? 1 : 0;
+        var tipo = $(e.target).html() == "html" ? 0 : 1;
         var this_menuid = $(this).closest(".list-group-item").attr("idmenu");
         var parametros = {"tipo": tipo};
         console.log('id ' + menuid + $.param(parametros));
@@ -216,10 +217,12 @@
             $("#menu_content").css("display","none");
             $("#sub-menu_content").css("display","inline");
         }  
-    $.getJSON("<?php echo site_url(array("menus","get")) ?>/"+null+ menuid, function(data){
-                            console.log("hola");
+    $.getJSON("<?php echo site_url(array("menus","get_html")) ?>/"+ menuid, function(data){
                             
-                            //tinymce.activeEditor.setContent(data.contacto_texto);
+                            if(data==null){
+                                tinymce.activeEditor.setContent(" ");
+                            }
+                            else{tinymce.activeEditor.setContent(data);}
                           });
     });
      idcliente=<?php echo $idcliente;?>;
@@ -232,7 +235,16 @@
     $(".btn_guardar_html").click(function(){
         var parametros={contenido:contenido_menu_html};
 console.log(parametros);    
-        $.post("<?php echo site_url(array("menus","set_html")) ?>/"+ menuid, $.param(parametros));
+        $.post("<?php echo site_url(array("menus", "set_html")) ?>/"+ menuid, $.param(parametros));
+          $.getJSON("<?php echo site_url(array("menus", "get_html")) ?>/"+ menuid, function(data){
+                            
+                            if(data==null){
+                                bootbox.alert("Los datos no se guardaron correctamente", function(){});
+                                
+                            }
+                            else{bootbox.alert("Datos guardados exitosamente!", function() {
+});}
+                          });
     });
     $("#lista-menus").delegate(".btn_menus_eliminar", "click", function(e) {
                 e.preventDefault();

@@ -196,12 +196,21 @@ $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
         if (tipo == "video") {
             $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
             $("#menu_content").css("display","inline");
-            
+            $(".btn_guardar_html").addClass('hidden'); 
         } else {
             $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
-            //$("#menu_content").css("display","none");
+            $(".btn_guardar_html").removeClass('hidden');
             $("#menu_content").css("display","inline");
         }
+    });
+        $(".btn_guardar_html").click(function(){
+        var parametros={contenido:contenido_menu_html};
+        console.log(parametros);    
+            $.post("<?php echo site_url(array("submenu", "set_html")) ?>/"+ submenuid, $.param(parametros));
+                   $.getJSON("<?php echo site_url(array("submenu", "get")) ?>/"+ submenuid, function(data){
+                            
+                           console.log("data"+ data)
+                          });
     });
      $("#lista-submenus").delegate(".btn_submenus_eliminar", "click", function(e) {
                 e.preventDefault();
