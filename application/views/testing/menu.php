@@ -56,7 +56,7 @@
                             <input type="text" value="<?php echo $m["titulo"] ?>" class=" menu-title-input" />
                             <a href="#" class="btn_menus_eliminar btn-menu-opcion"><span class="glyphicon glyphicon-trash"></span></a>
                             <!--<a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-resize-vertical"></span></a>-->
-                            <a href="#" class="btn-menu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $m["tipo"] == "0" ? "sub" : "html" ?></span><span class="caret"></span></a>
+                            <a href="#" class="btn-menu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $m["tipo"] == "1" ? "sub" : "html" ?></span><span class="caret"></span></a>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li><a href="#" class="menu-tipo-selectable">html</a></li>
                                 <li><a href="#" class="menu-tipo-selectable">sub</a></li>
@@ -154,7 +154,7 @@
     
     $("#lista-menus").delegate(".menu-tipo-selectable","click",function(e){
         e.preventDefault();
-        var tipo = $(e.target).html() == "html" ? 1 : 0;
+        var tipo = $(e.target).html() == "html" ? 0 : 1;
         var this_menuid = $(this).closest(".list-group-item").attr("idmenu");
         var parametros = {"tipo": tipo};
         console.log('id ' + menuid + $.param(parametros));

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Arqui</title>
+        <title>Cognos App</title>
         <link href="<?php echo base_url() ?>css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url() ?>css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
