@@ -48,7 +48,7 @@
                         <li class="list-group-item" idIndice="<?php echo $i["id"] ?>">
                             <a href="#" class="btn-menu-detail"><span class="menu-title"><?php echo $i["contenido"] ?></span></a>
                             <input type="text" value="<?php echo $i["titulo"] ?>" class=" menu-title-input" />
-                            <a href="#" class="btn-menu"><span class="menu-title"><?php echo $i["titulo"] /60 ?></span></a>
+                            <a href="#" class="btn-menu"><span class="menu-title"><?php echo floor($i["titulo"] /60); echo ":"; echo ($i["titulo"]%60 <10) ? "0":""; echo  $i["titulo"]%60 ?></span></a>
                             <a href="#" class="btn_menus_eliminar btn-menu-opcion"><span class="glyphicon glyphicon-trash"></span></a>
                             <!--<a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-resize-vertical"></span></a>-->
 <!--                            <a href="#" class="btn-menu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $m["tipo"] == "0" ? "sub" : "html" ?></span><span class="caret"></span></a>
