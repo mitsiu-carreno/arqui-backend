@@ -77,4 +77,10 @@ class Menus extends CI_Controller {
         $this->load->view("clients/propuesta_menus");
         $this->load->view("footer");
     }
+    
+    function get_html($idmenu){
+        $this->load->model("menu_model");
+        $data = $this->menu_model->get(null, $idmenu);
+        echo json_encode($data[0]["html"]);
+    }
 }
