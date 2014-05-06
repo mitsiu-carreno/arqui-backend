@@ -202,15 +202,21 @@ $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
             $(".btn_guardar_html").removeClass('hidden');
             $("#menu_content").css("display","inline");
         }
+            $.getJSON("<?php echo site_url(array("submenu", "get_html")) ?>/"+ submenuid, function(data){
+                            
+                           console.log("data"+ data);
+                            if(data==null){
+                                tinymce.activeEditor.setContent(" ");
+                            }
+                            else{tinymce.activeEditor.setContent(data);}
+                       
+                          });
     });
         $(".btn_guardar_html").click(function(){
         var parametros={contenido:contenido_menu_html};
         console.log(parametros);    
             $.post("<?php echo site_url(array("submenu", "set_html")) ?>/"+ submenuid, $.param(parametros));
-                   $.getJSON("<?php echo site_url(array("submenu", "get")) ?>/"+ submenuid, function(data){
-                            
-                           console.log("data"+ data)
-                          });
+
     });
      $("#lista-submenus").delegate(".btn_submenus_eliminar", "click", function(e) {
                 e.preventDefault();
