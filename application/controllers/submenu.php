@@ -49,6 +49,13 @@ class Submenu extends CI_Controller {
         }
     }
     
+    function get_html($idsubmenu){
+        $this->load->model("submenu_model");
+        $data = $this->submenu_model->getSubmenu($idsubmenu);
+        echo json_encode($data["html"]);
+        //var_dump($data);
+    }
+    
     function video($idmenu){
         $this->load->model("menu_model");
         $data = $this->menu_model->getTipo($idmenu);
