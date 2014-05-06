@@ -91,5 +91,11 @@ class Submenu_model extends CI_Model {
         R::trash($submenu);
     }
 
+    function updateIndice($idIndice, $titulo, $contenido){
+        $indice = R::load( 'indice', $idIndice );
+        $indice->titulo = $titulo;
+        $indice->contenido = $contenido;
+        R::store($indice);
+    }
 }
     
