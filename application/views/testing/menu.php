@@ -107,10 +107,11 @@
 
             var loadSubmenuContent = function(tipo) {
                 if (tipo == 0 || tipo == null) {
+                    $('#html').attr('checked', true);
+                } else {
+                    
                     $('#sub').attr('checked', true);
                     $("#submenu_content .panel-body").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
-                } else {
-                    $('#html').attr('checked', true);
                 }
             };
             $(document).ready(function() {
