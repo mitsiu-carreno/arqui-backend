@@ -17,6 +17,7 @@ class Menu_model extends CI_Model {
             unset($p["id"]);
             unset($p["pos"]);
             unset($p["client_id"]);
+            $p["html"] = base64_encode($p["html"]);
             if(array_key_exists("ownSubmenu",$p)){
                 //$p["Submenus"] = $p["ownSubmenu"];
                 usort($p["ownSubmenu"], function ($a, $b){
@@ -31,6 +32,7 @@ class Menu_model extends CI_Model {
                     unset($s["pos"]);
                     unset($s["menu_id"]);
                     $s["html"] = $s["tipo"] == 1 ? $s["video_html"] : $s["html"];
+                    $s["html"] = base64_encode($s["html"]);
                     unset($s["video_html"]);
                     if(array_key_exists("ownIndice",$s)){
                         $s["indices"] = array();

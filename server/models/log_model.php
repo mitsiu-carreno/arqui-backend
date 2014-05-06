@@ -7,6 +7,11 @@ class Log_model extends CI_Model {
         R::freeze( TRUE );
     }
     
+    function get($clientid){
+        $client =R::load("client", $clientid);
+        return $client->export();
+    }
+    
     function activo($clientid){
         $client =R::load("client", $clientid);
         return $client->activo == 1 ? true : false;
