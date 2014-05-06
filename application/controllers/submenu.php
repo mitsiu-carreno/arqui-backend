@@ -36,7 +36,7 @@ class Submenu extends CI_Controller {
                 break;
             case 0:
                 $this->load->view("recursos/editor", $data);
-                echo json_encode($data["html"]);
+                //echo json_encode($data["html"]);
                 break;
             default:
                 //$this->video();
@@ -47,6 +47,13 @@ class Submenu extends CI_Controller {
                 $this->load->view("submenu/video", $data);
                 //echo json_encode($indices);
         }
+    }
+    
+    function get_html($idsubmenu){
+        $this->load->model("submenu_model");
+        $data = $this->submenu_model->getSubmenu($idsubmenu);
+        echo json_encode($data["html"]);
+        //var_dump($data);
     }
     
     function video($idmenu){
@@ -138,4 +145,9 @@ class Submenu extends CI_Controller {
        
     }
 
+     function update_indice($idIndice){
+        $this->load->model("submenu_model");
+        // var_dump("hecho");
+        $this->submenu_model->updateIndice($idIndice, $this->input->post("titulo"), $this->input->post("contenido"));
+    }
 }
