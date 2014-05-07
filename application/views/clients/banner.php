@@ -2,11 +2,9 @@
 <script src="<?php echo base_url(); ?>js/jquery.iframe-transport.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/jquery.fileupload.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/upload-banner.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript" >
-
-
-    $(function() {
+    
+    window.onload = function(){
      
             tinymce.init({
                 selector: ".textarea",
@@ -21,23 +19,7 @@
                      "save table contextmenu directionality emoticons template paste textcolor jbimages"
                ],
                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
-               relative_urls: false,
-               
-               setup : function(editor){
-                      editor.on('Init', function(ed) {
-                          $.getJSON("<?php echo site_url(array("proyectos","html",$idcliente)) ?>", function(data){
-                            tinymce.get('txt_contacto').setContent(data.html);
-                          });
-                      });
-          
-                   
-//                    editor.on('keyup', function(e) {
-//                        var parametros = {html: tinymce.get('txt_contacto').getContent()};
-//                        console.log($.param(parametros));
-//                        $.post("<?php echo site_url(array("proyectos","html",$idcliente)) ?>", $.param(parametros));
-//                    });                 
-               }
-               
+               relative_urls: false
             });
             
         $("#btn_subir").click(function() {
@@ -65,7 +47,7 @@
 //        
 //        
 //    });
-    });
+    };
 </script>
 <style>
     #inp_file {
@@ -115,7 +97,7 @@
     <br /><hr />
     <h2>Editar mensaje de inicio</h2>
   <div class="col-sm-2 col-sm-offset-3 borde" style="margin-top:3%;">
-                            <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."></textarea>
+      <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."><?php echo $cliente["html"] ?></textarea>
                             <button id="btn_guardar_txt" class="btn btn-success btn-large">Guardar</button>
                         </div>
 </div>

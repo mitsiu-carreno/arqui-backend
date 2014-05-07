@@ -19,6 +19,9 @@ class Proyectos extends CI_Controller {
     }
     function banner($idcliente=1){
         $data = array("idcliente"=>$idcliente);
+        $this->load->model("client_model");
+        
+        $data["cliente"] = $this->client_model->get($idcliente);
         $this->load->model("menu_model");
         $data["menus"] = $this->menu_model->get($idcliente);
         
