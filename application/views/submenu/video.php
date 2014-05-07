@@ -32,6 +32,14 @@
         float: right;
         margin-bottom: 5px;
     }
+    
+    .inp_time{
+        display: none;
+    }
+    
+    .inp_contenido{
+        display: none;
+    }
 </style>
 <div class="btn-group col-md-12">
     <form id="upload-video"  method="post" action="<?php echo base_url() ?>upload.php" enctype="multipart/form-data">
@@ -50,34 +58,27 @@
     <ul id="list_marcadores_video" class="list-group">
         <li><button class="btn btn-success btn-block" id="btn_agregar_indice_video"><span class="glyphicon glyphicon-plus"></span> Agregar Indice</button></li>
     </ul>
-</div>
+
 <!--Indices-->
             <ul id="lista-indices" class="list-group">
-                    <?php foreach ($indices as $i): ?>
-                    <!--<span><?php echo $i["contenido"]?></span>-->
-                        <li class="list-group-item" idIndice="<?php echo $i["id"] ?>">
-                            <a href="#" class="btn-indice-detail"><span class="indice-title"><?php echo floor($i["titulo"] /60); echo ":"; echo ($i["titulo"]%60 <10) ? "0":""; echo  $i["titulo"]%60 ?></span></a>
-                            <input type="text" id="time" value="<?php echo floor($i["titulo"] /60); echo ":"; echo ($i["titulo"]%60 <10) ? "0":""; echo  $i["titulo"]%60?>" class="indice-title-input" />
-                            <a href="#" class="btn-indice-detail2"><span class="indice-contenido"><?php echo $i["contenido"] ?></span></a>
-                            <input type="text" id="inp-indice-contenido" value="<?php echo $i["contenido"] ?>" class=" indice-contenido-input" />
-                            <a href="#" class="btn_indice_eliminar btn-indice-opcion"><span class="glyphicon glyphicon-trash"></span></a>
-                            <!--<a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-resize-vertical"></span></a>-->
-<!--                            <a href="#" class="btn-menu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="menu-tipo"><?php echo $m["tipo"] == "0" ? "sub" : "html" ?></span><span class="caret"></span></a>
-                            <ul class="dropdown-menu pull-right" role="menu">
-                                <li><a href="#" class="menu-tipo-selectable">html</a></li>
-                                <li><a href="#" class="menu-tipo-selectable">sub</a></li>
-                            </ul>-->
-                        </li>
-
-                    <?php endforeach; ?>
-                    <?php if (count($indices) == 0): ?>
+                <?php if (count($indices) == 0 && $videosubmenu == 1): ?>
                         <li id="li_menus_empty">
                             <small><i>No hay indices, haga click en el siguiente botón para agregar uno -></i></small>
                         </li>
-                    <?php endif; ?>
-                   
-                </ul>
+                    <?php elseif(count($indices) > 0 && $videosubmenu == 1) :  foreach ($indices as $i): ?>
+                    <!--<span><?php echo $i["contenido"]?></span>-->
+                        <li class="list-group-item" idIndice="<?php echo $i["id"] ?>">
+                            <a href="#" class="btn-indice-detail i_tiempo"><span class="indice-title"><?php echo floor($i["titulo"] /60); echo ":"; echo ($i["titulo"]%60 <10) ? "0":""; echo  $i["titulo"]%60 ?></span></a>
+                            <input type="text" class="inp_time" value="<?php echo $i["titulo"]?>"/>
+                            <a href="#" class="btn-indice-detail i_contenido"><span class="indice-contenido"><?php echo $i["contenido"] ?></span></a>
+                            <input type="text" class="inp_contenido" value="<?php echo $i["contenido"] ?>"/>
+                            <a href="#" class="btn_indice_eliminar btn-indice-opcion"><span class="glyphicon glyphicon-trash"></span></a>
+                             
+                       </li>
 
+                    <?php endforeach;  else : endif; ?>
+                </ul>
+</div> 
 <!--Fin-Indices-->
             </div><!--cierra el body-->
     </div><!--cierra el row-->
@@ -91,9 +92,7 @@
     <textarea  class="textarea" ></textarea>
 </div>
 <script>
-    tinymce.init({selector:'.textarea',
-   
-});
+    tinymce.init({selector:'.textarea'});
     console.log(submenuid);
             $("#btn_subir").click(function() {
 
@@ -108,104 +107,118 @@
         $(".btn_video_html").click(function(){
         $(this).addClass('active');
           $(".btn_video").removeClass('active');
-                var tipo=2;
+                var tipo=1;
            var parametros={'tipo': tipo};
            console.log("editorr video" + submenuid + tipo); 
            $.post("<?php echo site_url(array("submenu","set_tipo"))?>/"+ submenuid, $.param(parametros));
-           if(tipo==2){
+           if(tipo==1){
                $(".editor").removeClass('hidden');
                $(".editor").css("margin-top","20%");
                $("#panel_indice_video").addClass('hidden');
            }
    
         });
+        $(".btn_guardar_html").addClass("hidden");
          $(".btn_video").click(function(){
                    $(this).addClass('active');
                   $(".btn_video_html").removeClass('active');
-                   var tipo=1;
+                  $(".btn_guardar_html").addClass("hidden");
+                   var tipo=2;
            var parametros={'tipo': tipo};
            console.log("editorr video" + submenuid + tipo); 
            $.post("<?php echo site_url(array("submenu","set_tipo"))?>/"+ submenuid, $.param(parametros));
-           if(tipo==1){
+           if(tipo==2){
                $(".editor").addClass('hidden');
                $("#panel_indice_video").removeClass('hidden');
            }
    
         });
+//
 //        
-//         $(".btn-indice-detail2").click(function(){
-//        //var that2 = this;
-//        $(this).addClass("hidden");
-//        $("#indice-contenido").show().closest().focus();
+//        $("#lista-indices").delegate("a.i_tiempo","click",function(e){
+//        //$(".btn-indice-detail").click(function(){
+//        e.preventDefault();
+//        var that2 = $(this).closest("li");
+//        $(that2).find(".indice-title").hide();
+//        $(that2).find(".inp_time").blur(function(){
+//            console.log("encontrado");
+//                $(this).hide();
+//                $(that2).find(".indice-title").html($(this).val()).show();
 //        });
 //        
-//        $("#indice-contenido").keyup(function(e){
+//        $(that2).find(".inp_time").show().focus().keyup(function(e){
 //            if(e.keyCode == 13){
-//                $("#indice-contenido").hide();
-//                $(".btn-indice-detail2").html($(this).val());
-//                $(".btn-indice-detail2").removeClass("hidden");
-//               // var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
-//                //var parametros = {id: this_idIndice, "titulo": $(this).val()};
-//                //$.post("http://cognosvideoapp.com.mx/index.php/menus/editar/5", $.param(parametros), "json");
+//                $(this).hide();
+//                $(that2).find(".indice-title").html($(this).val()).show();
+//                var this_indiceid = $(this).closest(".list-group-item").attr("idmenu");
+//                var parametros = {id: this_indiceid, "titulo": $(this).val()};
+//                //POST
 //            } else  if(e.keyCode == 27) {
-//                //console.log("entrooooooo");
-//                $("#indice-contenido").hide(); 
-//                $("#indice-contenido").val()
-//                //$(this).hide().val($(that2).text());
-//                $(".btn-indice-detail2").removeClass("hidden");
+//                $(this).hide().val($(that2).text());
+//                $(that).find(".indice-title").show();
 //            }
 //        });
-//        
-//        $(".btn-indice-detail").click(function(){
-//        //var that2 = this;
-//        $(this).addClass("hidden");
-//        $("#time").show().focus();
-////        $(that2).find("time").blur(function(){
-////                $(this).hide();
-////               // $(that2).find(".indice-title").html($(this).val()).show();
-//        });
-//        
-//        $("#time").keyup(function(e){
-//            if(e.keyCode == 13){
-//                $("#time").hide();
-//                $(".btn-indice-detail").html($(this).val());
-//                $(".btn-indice-detail").removeClass("hidden");
-//               // var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
-//                //var parametros = {id: this_idIndice, "titulo": $(this).val()};
-//                //$.post("http://cognosvideoapp.com.mx/index.php/menus/editar/5", $.param(parametros), "json");
-//            } else  if(e.keyCode == 27) {
-//                //console.log("entrooooooo");
-//                $("#time").hide(); 
-//                $("#time").val()
-//                //$(this).hide().val($(that2).text());
-//                $(".btn-indice-detail").removeClass("hidden");
-//            }
-//        });
-        
-        $("#lista-indices").delegate("li","click",function(e){
-        //$(".btn-indice-detail").click(function(){
-        e.preventDefault();
-        var that2 = this;
-        $(that2).find(".indice-title").hide();
-        $(that2).find("#time").blur(function(){
-            console.log("encontrado");
-                $(this).hide();
-                $(that2).find(".indice-title").html($(this).val()).show();
-        });
-        
-        $(that2).find("#time").show().focus().keyup(function(e){
-            if(e.keyCode == 13){
-                $(this).hide();
-                $(that2).find(".indice-title").html($(this).val()).show();
-                var this_indiceid = $(this).closest(".list-group-item").attr("idmenu");
-                var parametros = {id: this_indiceid, "titulo": $(this).val()};
-                //POST
-            } else  if(e.keyCode == 27) {
-                $(this).hide().val($(that2).text());
-                $(that).find(".indice-title").show();
-            }
-        });
-    });
+//    });
+        $("body").delegate(".btn-indice-detail", "click", function() {
+            var that2 = $(this).closest("li");
+            var title = $(that2).find(".inp_time").val();
+            var cont = $(that2).find(".inp_contenido").val();
+            var idindice = $(that2).attr("idIndice");
+            //var that2 = $(this).closest("ls");
+            var title_min = Math.floor(title/60);
+            var title_seg = title%60;
+            console.log(title_seg);
+            console.log(title_min);
+            console.log(cont);
+            console.log(idindice);
+                bootbox.dialog({
+                    message: "<div style='width:50px; float:left; height:35px;'>Min<br><input type='number' id='inp_min_time' step='1' value='"+title_min+"' min='0' style='width:80%'></input> : </div><div  style='width:40px; height:35px; float:left'>Seg<br><input type='number' id='inp_seg_time' value ='"+ title_seg +"' step='1' min='0' style='width:100%'></input></div> <br> <br> <br>Botón <br><input type='text' value='"+ cont+"' id='id_msg_new_boton_video'/>",
+                    buttons: {
+                        main: {
+                            label: "Guardar",
+                            className: "btn-success",
+                            callback: function() {
+                                var li = $("#tpl_li_indice_video").clone().attr("id", "").removeClass("hidden");
+                                li.find("input name[txt_time_video]").val($('#inp_new_time_video').val());
+                                li.find("input name[txt_boton_video]").val($('#id_new_button_video').val());
+                                li.attr("idmarcador", 1);
+                                var min = parseInt($("#inp_min_time").val() * 60);
+                                var seg = parseInt($("#inp_seg_time").val());
+                                var boton = $("#id_msg_new_boton_video").val()
+                                var tiempo = seg + min;
+
+                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton );
+                                var parametros = {"titulo": tiempo, "contenido": boton};
+                                console.log(parametros);
+                                $.post("<?php echo site_url(array("submenu", "update_indice"))?>/" + idindice, $.param(parametros), "json");
+                                //console.log("Hi "+ $('#inp_new_time_video').val());
+                                $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
+                            }
+                        },
+                        danger: {
+                            label: "Cancelar",
+                            className: "btn-danger",
+                            callback: function() {
+                            }
+                        }
+                    }
+                });
+            });
+            
+            $("#lista-indices").delegate(".btn_indice_eliminar", "click", function(e) {
+                e.preventDefault();
+                //$('.btn_menus_titulo').removeClass('active');
+                var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
+                console.log(this_idIndice);
+                var that = this;
+                bootbox.confirm("Está seguro de eliminar el indice?", function(result) {
+                    console.log("Confirmed: " + result);
+                    if (result == true) {
+                        //$.get("http://cognosvideoapp.com.mx/index.php/menus/eliminar/" + this_menuid);
+                        $(that).closest(".list-group-item").remove();
+                    }
+                });
+            });
     
 </script>
 <script src="<?php echo base_url(); ?>js/jquery.ui.widget.js" type="text/javascript"></script>

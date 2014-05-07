@@ -288,6 +288,7 @@ $("#lista-menus li").first().find(".btn-menu-detail").click();
                                 console.log(parametros);
                                 $.post("<?php echo site_url(array("submenu", "set_indice"))?>/" + submenuid, $.param(parametros), "json");
                                 //console.log("Hi "+ $('#inp_new_time_video').val());
+                                //$("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
                             }
                         },
                         danger: {
