@@ -150,4 +150,9 @@ class Submenu extends CI_Controller {
         // var_dump("hecho");
         $this->submenu_model->updateIndice($idIndice, $this->input->post("titulo"), $this->input->post("contenido"));
     }
+    
+    function eliminar_indice($idIndice){
+        $this->load->model("submenu_model");
+        $this->submenu_model->delete_indice($idIndice);
+    }
 }

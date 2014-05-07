@@ -214,7 +214,8 @@
                 bootbox.confirm("Está seguro de eliminar el indice?", function(result) {
                     console.log("Confirmed: " + result);
                     if (result == true) {
-                        //$.get("http://cognosvideoapp.com.mx/index.php/menus/eliminar/" + this_menuid);
+                        $.get("http://cognosvideoapp.com.mx/index.php/submenu/eliminar_indice/" + this_idIndice);
+                        //$.get("<?php echo site_url(array("submenu", "eliminar_indice"))?>/ + this_idIndice");
                         $(that).closest(".list-group-item").remove();
                     }
                 });
