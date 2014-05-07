@@ -188,15 +188,17 @@
              
 $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
         e.preventDefault();
-        $(".hola").removeClass("active");
+        $(".hola").removeClass("active");https://www.google.com.mx/?gws_rd=cr&ei=VGZpU_CzCIbD8QGq3oGIBg
         $(this).closest(".list-group-item").addClass("active");
         var tipo  = $(this).closest(".list-group-item").find(".submenu-tipo").text();
         submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
         console.log(submenuid);
         if (tipo == "video") {
+            $(".btn_guardar_html").addClass('hidden');
             $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
             $("#menu_content").css("display","inline");
-            $(".btn_guardar_html").addClass('hidden'); 
+            
+            
         } else {
             $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
             $(".btn_guardar_html").removeClass('hidden');
