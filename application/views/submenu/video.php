@@ -118,6 +118,7 @@
            }
    
         });
+        $(".btn_guardar_html").addClass("hidden");
          $(".btn_video").click(function(){
                    $(this).addClass('active');
                   $(".btn_video_html").removeClass('active');
@@ -164,11 +165,14 @@
             var cont = $(that2).find(".inp_contenido").val();
             var idindice = $(that2).attr("idIndice");
             //var that2 = $(this).closest("ls");
-            console.log(title);
+            var title_min = Math.floor(title/60);
+            var title_seg = title%60;
+            console.log(title_seg);
+            console.log(title_min);
             console.log(cont);
             console.log(idindice);
                 bootbox.dialog({
-                    message: "<div style='width:50px; float:left; height:35px;'>Min<br><input type='number' id='inp_min_time' step='1' min='0' style='width:80%'></input> : </div><div  style='width:40px; height:35px; float:left'>Seg<br><input type='number' id='inp_seg_time' step='1' min='0' style='width:100%'></input></div> <br> <br> <br>Botón <br><input type='text' id='id_msg_new_boton_video'/>",
+                    message: "<div style='width:50px; float:left; height:35px;'>Min<br><input type='number' id='inp_min_time' step='1' value='"+title_min+"' min='0' style='width:80%'></input> : </div><div  style='width:40px; height:35px; float:left'>Seg<br><input type='number' id='inp_seg_time' value ='"+ title_seg +"' step='1' min='0' style='width:100%'></input></div> <br> <br> <br>Botón <br><input type='text' value='"+ cont+"' id='id_msg_new_boton_video'/>",
                     buttons: {
                         main: {
                             label: "Guardar",
@@ -183,11 +187,12 @@
                                 var boton = $("#id_msg_new_boton_video").val()
                                 var tiempo = seg + min;
 
-                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + submenuid);
+                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton );
                                 var parametros = {"titulo": tiempo, "contenido": boton};
                                 console.log(parametros);
-                                $.post("<?php echo site_url(array("submenu", "set_indice"))?>/" + submenuid, $.param(parametros), "json");
+                                $.post("<?php echo site_url(array("submenu", "update_indice"))?>/" + idindice, $.param(parametros), "json");
                                 //console.log("Hi "+ $('#inp_new_time_video').val());
+                                $("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
                             }
                         },
                         danger: {
@@ -196,6 +201,21 @@
                             callback: function() {
                             }
                         }
+                    }
+                });
+            });
+            
+            $("#lista-indices").delegate(".btn_indice_eliminar", "click", function(e) {
+                e.preventDefault();
+                //$('.btn_menus_titulo').removeClass('active');
+                var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
+                console.log(this_idIndice);
+                var that = this;
+                bootbox.confirm("Está seguro de eliminar el indice?", function(result) {
+                    console.log("Confirmed: " + result);
+                    if (result == true) {
+                        //$.get("http://cognosvideoapp.com.mx/index.php/menus/eliminar/" + this_menuid);
+                        $(that).closest(".list-group-item").remove();
                     }
                 });
             });
