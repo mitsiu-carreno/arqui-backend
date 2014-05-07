@@ -22,7 +22,7 @@ class Submenu extends CI_Controller {
                 //echo json_encode($indices);
                 break;
             case 1:
-                
+                $data["indices"] =null;
                 $data["videosubmenu"] = 2;
                 $nombre_array = explode("/", $data["video"]);
                 $data["nombre_video"] = end($nombre_array);
