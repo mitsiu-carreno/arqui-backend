@@ -16,22 +16,34 @@
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 require APPPATH.'/libraries/REST_Controller.php';
 
-class Submenus extends REST_Controller
+class Contacto extends REST_Controller
 {
     function __construct() {
         parent::__construct();
          header("Access-Control-Allow-Origin: *");
     }
-    function fav_post(){
+    function enviar_post(){
                 $this->load->library('encrypt');
                 $this->load->model("log_model");
         $idcliente = $this->encrypt->decode(base64_decode($this->post("token")));
         if(!is_numeric($idcliente) || !$this->log_model->activo($idcliente)){
             $this->response(array("error" => "bad token"), 400);
         } else {
-            $this->load->model("submenu_model");
-            $this->submenu_model->fav($this->get("submenu"));
-            $this->response(array("success" => "Se guardo a favorito"), 200);
+            $this->load->model("log_model");
+            $cliente = $this->log_model->get($idcliente);
+            $this->load->library('email');
+
+            $this->email->from('webmaster@cognosvideoapp.com.mx', 'Cognos App');
+            $this->email->to($cliente["contacto"]); 
+            $this->email->cc($this->post("email")); 
+
+            $this->email->subject('Contacto Cognos');
+            $this->email->message($this->post("html"));	
+
+            $this->email->send();
+
+            //echo $this->email->print_debugger();
+            $this->response(array("success" => $this->email->print_debugger()), 200);
         }
         //server.php/fav/submenu/xxx
     }

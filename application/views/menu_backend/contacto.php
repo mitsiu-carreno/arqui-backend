@@ -14,49 +14,21 @@
                      "save table contextmenu directionality emoticons template paste textcolor jbimages"
                ],
                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
-               relative_urls: false,,
-            remove_script_host: false,
-               
-               setup : function(editor){
-                      editor.on('Init', function(ed) {
-                          $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
-                            $("#inp_email").val(data.contacto);
-                            
-                            tinymce.get('txt_contacto').setContent(data.contacto_texto);
-                            //tinymce.activeEditor.setContent(data.contacto_texto);
-                          });
-                      });
-          
-                   
-                    editor.on('keyup', function(e) {
-                        var parametros = {contacto: $("#inp_email").val(), contacto_texto: tinymce.get('txt_contacto').getContent()};
-                        console.log($.param(parametros));
-                        $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $.param(parametros));
-                    });                 
-               }
+               relative_urls: false,
+            remove_script_host: false
+
             });
-  
-            $("#nuevo_menu").click(function(e){
-                alert("nuevo menu");
-                e.preventDefault();
-                $('<li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>').appendTo('#menu_div');
-            });
+ 
                 
-//            $.getJSON("<?php echo site_url(array("contacto","get",$idcliente)) ?>", function(data){
-//                $("#inp_email").val(data.contacto);
-//                
-//            });
-             idcliente=<?php echo $idcliente;?>;
-       
-            $.getJSON("<?php echo site_url(array("clients","getclient"));?>/"+ idcliente, function(data){
-               console.log(data.nombre); 
+            $.getJSON("<?php echo site_url(array("clients","getclient",$idcliente));?>", function(data){
+               //console.log(data.nombre); 
                $(".h3").text("Proyecto: "+ data.nombre);
             });
-            $("#inp_email").keyup(function(){
+            $("#form_contacto").submit(function(e){
+                e.preventDefault();
                 var parametros = {contacto: $("#inp_email").val(), contacto_texto:tinymce.get('txt_contacto').getContent()};
                         console.log($.param(parametros));
                         $.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $.param(parametros));
-                //$.post("<?php echo site_url(array("contacto","set",$idcliente)) ?>", $("#form_contacto").serialize());
                 
             });
         })
@@ -123,7 +95,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2 borde">
-                            <input name="contacto" type="email" class="form-contro inp_contactol" id="inp_email" placeholder="Ingrese email">
+                            <input name="contacto" type="email" class="form-contro inp_contactol" id="inp_email" placeholder="Ingrese email" value="<?php echo $cliente["contacto"] ?>">
                         </div>
                     </div>
                     <br>
@@ -132,25 +104,14 @@
                             <label>Contenido</label>
                         </div>
                         <div class="col-sm-2 borde">
-                            <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."></textarea>
+                            <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ...">
+                                <?php echo $cliente["contacto_texto"] ?>
+                            </textarea>
                         </div>
                     </div>
+                    
+                        <button type="submit" class="btn btn-success" >Guardar</button>
                 </form>
             </div>
         </div>
         </div>
-        <!--
-        <div id="menu">
-            <div class="fondo_1">
-                <label>Menús</label>
-            </div>
-            <div class="row">
-                <div class="col-sm-offset-1 borde">
-                    <ul id="menu_div" class="nav nav-tabs">
-                        <!--<li><a href="#" class="menu_cont">Menu1</a></li> ->               
-                        <li><input type="text" href="#" class="menu_cont" id="nuevo_menu"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        -->
