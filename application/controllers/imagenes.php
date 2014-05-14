@@ -67,9 +67,6 @@ class Imagenes extends CI_Controller {
     }
     
     function subir_galeria($idsubmenu){
-//        
-//        $this->load->model("submenu_model");
-//        $idcliente = $this->submenu_model->getClientID($idsubmenu);
         	$config['upload_path'] = './galeria/' . $idsubmenu .'/';
 		$config['allowed_types'] = 'gif|jpg|png';
                 $this->load->model("galeria_model");

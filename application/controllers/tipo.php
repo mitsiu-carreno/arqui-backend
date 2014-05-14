@@ -8,6 +8,7 @@ class Tipo extends CI_Controller {
         //$data["0"]["ownSubmenu"]=null;
         //var_dump($data);
         $data = $this->menu_model->get(null, $idmenu);
+        $data["0"]["idmenu"] = $idmenu;
 /*
 
  * En el menú:
@@ -16,13 +17,9 @@ si tipo = 1 será tipo submenu
  * 
  *  */
         if($data["0"]["tipo"]>0){
-            if (array_key_exists('ownSubmenu', $data["0"])) {
-                $this->load->view("recursos/submenus", $data["0"]);
-            } else {
-                $this->load->view("recursos/lista_submenus");
-            }
+                $this->load->view("menus/submenus", $data["0"]);
         }else{
-            $this->load->view("recursos/editor", $data["0"]);
+            $this->load->view("menus/editor", $data["0"]);
         }
     }
           

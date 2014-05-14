@@ -217,17 +217,16 @@
             $("#menu_content").css("display","none");
             $("#sub-menu_content").css("display","inline");
         }  
-    $.getJSON("<?php echo site_url(array("menus","get_html")) ?>/"+ menuid, function(data){
-                            
-                            if(data==null){
-                                tinymce.activeEditor.setContent(" ");
-                            }
-                            else{tinymce.activeEditor.setContent(data);}
-                          });
+//    $.getJSON("<?php echo site_url(array("menus","get_html")) ?>/"+ menuid, function(data){
+//                            
+//                            if(data==null){
+//                                tinymce.activeEditor.setContent(" ");
+//                            }
+//                            else{tinymce.activeEditor.setContent(data);}
+//                          });
     });
-     idcliente=<?php echo $idcliente;?>;
        
-            $.getJSON("<?php echo site_url(array("clients","getclient"));?>/"+ idcliente, function(data){
+            $.getJSON("<?php echo site_url(array("clients","getclient",$idcliente));?>", function(data){
                console.log(data.nombre); 
                $(".h3").text("Proyecto: "+ data.nombre);
             });
@@ -300,10 +299,5 @@ $("#lista-menus li").first().find(".btn-menu-detail").click();
                     }
                 });
             });
-
-
         </script>
-
-
-
 </body>

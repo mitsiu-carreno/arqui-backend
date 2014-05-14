@@ -36,34 +36,8 @@
     <div style="padding-left:3%">
 
         <ul id="lista-submenus"  class="list-block">
+            <?php if (isset($ownSubmenu) && count($ownSubmenu) > 0): ?>
             <?php foreach ($ownSubmenu as $submenu): ?>
-        <!--        <li class="li-menu" idmenu="<?php echo $submenu["id"] ?>">
-                    <div class="btn-group" style="vertical-align: baseline">
-                            
-                            <input type="button"  id="editar_sub" class="btn btn-default btn_submenus_titulo" value="<?php echo $submenu["titulo"] ?>" style="width:100px;">
-                                
-                      
-                            <button type="button" class="btn btn-default btn_submenus_mover"><span class="glyphicon glyphicon-move"></span></button>
-                            <button type="button" class="btn btn-default btn_submenus_eliminar"><span class="glyphicon glyphicon-remove-circle"></span></button>
-                           
-                            <button type="button" class="btn btn-default btn_submenus_editar dropdown-toggle">
-                                <span class="glyphicon glyphicon-edit"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-           
-                                <form id="tipo" role="form">
-                                    <div class="checkbox">
-                                        <input type="radio" name="tipo" id="sub" value="0"> Submenú
-                                        <br>
-                                        <input type="radio" name="tipo" id="html" value="1" checked="" > HTML 
-                                    </div>
-                                </form>
-                          
-        <li><a href=""><span class="glyphicon glyphicon-remove-circle text-danger"></span>Eliminar</a></li>
-                                <li><a href="<?php echo base_url(); ?>/menus/editar" class="btn_menus_editar"><span class="glyphicon glyphicon-edit"></span>Editar</a></li>
-                            </ul>
-                        </div>
-                    </li>-->
                 <li class="list-group-item hola" idsubmenu="<?php echo $submenu["id"] ?>">
                     <a href="#" class="btn-submenu-detail"><span class="submenu-title"><?php echo $submenu["titulo"] ?></span></a>
                     <input type="text" value="<?php echo $submenu["titulo"] ?>" class=" submenu-title-input" />
@@ -86,7 +60,7 @@
                     </ul>
                 </li>
             <?php endforeach; ?>
-            <?php if (count($ownSubmenu) == 0): ?>
+            <?php else: ?>
                 <li id="li_menus_empty2">
                     <small><i>No hay submenús, haga click en el siguiente botón para agregar uno -></i></small>
                 </li>
@@ -174,11 +148,11 @@
                     if (data && data.length > 0) {
                         var parametros = {"titulo": data};
                         console.log(data);
-                       $.post("<?php echo site_url(array("submenu", "insert")) ?>/"+menuid, $.param(parametros), function(success) {
+                       $.post("<?php echo site_url(array("submenu", "insert", $idmenu)) ?>/", $.param(parametros), function(success) {
                             console.log(success);
                             var li = $("#li_to_clone_sub").clone().attr("id", "").removeClass("hidden").attr("idsubmenu", success.id);
                             li.find(".submenu-title").html(success.titulo);
-                            $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
+                            $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get", $idmenu)) ?>/");
                         }, "json");
                         $("#lista-submenus li").first().find(".btn-submenu-detail").click();
                         $("#li_submenus_empty").remove();
@@ -188,7 +162,7 @@
              
 $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
         e.preventDefault();
-        $(".hola").removeClass("active");https://www.google.com.mx/?gws_rd=cr&ei=VGZpU_CzCIbD8QGq3oGIBg
+        $(".hola").removeClass("active");
         $(this).closest(".list-group-item").addClass("active");
         var tipo  = $(this).closest(".list-group-item").find(".submenu-tipo").text();
         submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
@@ -204,15 +178,15 @@ $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
             $(".btn_guardar_html").removeClass('hidden');
             $("#menu_content").css("display","inline");
         }
-            $.getJSON("<?php echo site_url(array("submenu", "get_html")) ?>/"+ submenuid, function(data){
-                            
-                           console.log("data"+ data);
-                            if(data==null){
-                                tinymce.activeEditor.setContent(" ");
-                            }
-                            else{tinymce.activeEditor.setContent(data);}
-                       
-                          });
+//            $.getJSON("<?php echo site_url(array("submenu", "get_html")) ?>/"+ submenuid, function(data){
+//                            
+//                           console.log("data"+ data);
+//                            if(data==null){
+//                                tinymce.activeEditor.setContent(" ");
+//                            }
+//                            else{tinymce.activeEditor.setContent(data);}
+//                       
+//                          });
     });
         $(".btn_guardar_html").click(function(){
         var parametros={contenido:contenido_menu_html};
@@ -233,6 +207,7 @@ $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
                     }
                 });
             });
+            
             $("#lista-submenus li").first().find(".btn-submenu-detail").click();
 
     </script>      

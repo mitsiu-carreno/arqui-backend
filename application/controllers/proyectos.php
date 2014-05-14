@@ -14,7 +14,7 @@ class Proyectos extends CI_Controller {
         
         $this->load->view("header");
         $this->load->view("navbar-proyecto",$data);
-        $this->load->view("testing/menu",$data);
+        $this->load->view("menus/lista",$data);
         $this->load->view("footer"); 
     }
     function banner($idcliente=1){

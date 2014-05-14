@@ -222,7 +222,4 @@
             });
     
 </script>
-<script src="<?php echo base_url(); ?>js/jquery.ui.widget.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>js/jquery.iframe-transport.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>js/jquery.fileupload.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/upload-video.js" type="text/javascript"></script>

@@ -1,4 +1,3 @@
-
 <?php
 
 class Submenu extends CI_Controller {
@@ -32,7 +31,7 @@ class Submenu extends CI_Controller {
                 break;
             case 3:
                 $data = array("idsubmenu" => $idsubmenu);
-                $this->load->view("galeria", $data);
+                $this->load->view("submenus/galeria", $data);
                 break;
             case 0:
                 $this->load->view("recursos/editor", $data);

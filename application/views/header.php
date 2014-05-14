@@ -14,6 +14,10 @@
         <script src="<?php echo base_url() ?>js/bootbox.js" type="text/javascript"></script>
          <script src="<?php echo base_url() ?>js/moment.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        
+<script src="<?php echo base_url(); ?>js/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>js/jquery.iframe-transport.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>js/jquery.fileupload.js" type="text/javascript"></script>
         <script type="text/javascript">
 /* <![CDATA[ */
     var global_baseurl = "<?php echo base_url(); ?>";
