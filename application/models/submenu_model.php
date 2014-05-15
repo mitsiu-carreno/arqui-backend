@@ -102,5 +102,14 @@ class Submenu_model extends CI_Model {
         $indice = R::load('indice', $idIndice);
         R::trash($indice);
     }
+    
+        
+    function updatePos($data){
+            foreach ($data as $key => $value) {
+                $submenu = R::load( 'submenu', $value );
+                $submenu->pos=$key;
+                R::store($submenu); 
+            }
+    }
 }
     

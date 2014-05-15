@@ -34,7 +34,7 @@ class Submenu extends CI_Controller {
                 $this->load->view("submenus/galeria", $data);
                 break;
             case 0:
-                $this->load->view("recursos/editor", $data);
+                $this->load->view("menus/editor", $data);
                 //echo json_encode($data["html"]);
                 break;
             default:
@@ -153,5 +153,10 @@ class Submenu extends CI_Controller {
     function eliminar_indice($idIndice){
         $this->load->model("submenu_model");
         $this->submenu_model->delete_indice($idIndice);
+    }
+        
+    function resort(){
+        $this->load->model("submenu_model");
+        $this->submenu_model->updatePos($this->input->post("submenus"));
     }
 }

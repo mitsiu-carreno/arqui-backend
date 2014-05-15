@@ -1,5 +1,3 @@
-
-
 <style>
     #lista-submenus {
         list-style: none;
@@ -207,6 +205,20 @@ $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
                     }
                 });
             });
+            
+                 $("#lista-submenus").sortable({
+     
+        update: function(event, ui) {
+            var elementos = {};
+            $.each($("#lista-submenus .list-group-item"), function(index, value) {
+                
+                elementos[index + 1] = $(value).attr("idsubmenu");
+            });
+            var parametros = {"submenus": elementos};
+            console.log(parametros);
+            $.post("<?php echo site_url(array("submenu", "resort")) ?>", $.param(parametros), "json");
+        }
+    }).disableSelection();
             
             $("#lista-submenus li").first().find(".btn-submenu-detail").click();
 

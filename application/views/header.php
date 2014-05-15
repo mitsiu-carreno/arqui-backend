@@ -14,10 +14,10 @@
         <script src="<?php echo base_url() ?>js/bootbox.js" type="text/javascript"></script>
          <script src="<?php echo base_url() ?>js/moment.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-        
 <script src="<?php echo base_url(); ?>js/jquery.ui.widget.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/jquery.iframe-transport.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>js/jquery.fileupload.js" type="text/javascript"></script>
+        <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
         <script type="text/javascript">
 /* <![CDATA[ */
     var global_baseurl = "<?php echo base_url(); ?>";
@@ -38,9 +38,9 @@
                 plugins: [
                      "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
                      "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                     "save table contextmenu directionality emoticons template paste textcolor jbimages"
+                     "save table contextmenu directionality emoticons template paste textcolor jbimages textcolor"
                ],
-               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages forecolor backcolor",
                relative_urls: false,
             remove_script_host: false
 

@@ -1,28 +1,27 @@
 $(function() {
 
     // Initialize the jQuery File Upload plugin
-    $('#upload').fileupload({
+    $('#galeria').fileupload({
         // This element will accept file drag/drop uploading
         dropZone: $('#panel_list_files'),
         dataType: 'json',
+        autoUpload: false,
         global: false,
         // This function is called when a file is added to the queue;
         // either via the browse button, or via drag/drop:
         add: function(e, data) {
-
+            console.log(data);
             var progressBar = $("<div />").addClass("progress progress-striped active").attr("style", "width:328px")
                     .append('<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"><span>0%</span></div>');
-
-            bootbox.prompt({
-                title: "Título de la imagen",
-                //            value: nombreDelMenu,
-                callback: function(result) {
+            var jqXHR;
+            bootbox.prompt("Título de la imagen",function(result) {
                     if (result === null) {
                         console.log("Prompt dismissed");
                     } else {
+                        console.log("Titulo de la imagen "+result);
                         data.formData = {titulo: result};
-                        var jqXHR = data.submit().success(function(result, textStatus, jqXHR) {
-                            console.log(result);
+                        jqXHR = data.submit().success(function(result, textStatus, jqXHR) {
+                            console.log("subir imagen: " + textStatus);
                             if (result.hasOwnProperty("error")) {
                                 $("#status").empty();
                                 $("#error-message").clone().attr("id", "").appendTo($("#status")).find("i").html(result.error);
@@ -37,22 +36,21 @@ $(function() {
 
                         });
                     }
-                }
-            });
+           });
 
             data.context = progressBar.appendTo($("#status"));
 
-            progressBar.find('span').click(function() {
-
-                if (tpl.hasClass('working')) {
-                    jqXHR.abort();
-                }
-
-                tpl.fadeOut(function() {
-                    tpl.remove();
-                });
-
-            });
+//            progressBar.find('span').click(function() {
+//
+//                if (tpl.hasClass('working')) {
+//                    jqXHR.abort();
+//                }
+//
+//                tpl.fadeOut(function() {
+//                    tpl.remove();
+//                });
+//
+//            });
 
             // Automatically upload the file once it is added to the queue
 

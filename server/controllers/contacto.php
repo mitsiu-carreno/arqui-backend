@@ -35,10 +35,15 @@ class Contacto extends REST_Controller
 
             $this->email->from('webmaster@cognosvideoapp.com.mx', 'Cognos App');
             $this->email->to($cliente["contacto"]); 
-            $this->email->cc($this->post("email")); 
+//            $this->email->cc($this->post("email")); 
 
             $this->email->subject('Contacto Cognos');
-            $this->email->message($this->post("html"));	
+            $html = "Formulario de contacto
+                    Nombre: " . $this->post("nombre") . "
+                    Email: " . $this->post("email") . "
+                    Teléfono: " . $this->post("telefono") . "
+                    Comentarios: " . $this->post("comentarios");
+            $this->email->message($html);	
 
             $this->email->send();
 

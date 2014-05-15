@@ -1,4 +1,4 @@
-<textarea  class="textarea " id="texto" <?php echo $html?> ></textarea>
+<textarea  class="textarea " id="texto" <?php echo @$html?> ></textarea>
 <script>
     tinymce.remove('.textarea');
 tinymce.init({selector:'.textarea',

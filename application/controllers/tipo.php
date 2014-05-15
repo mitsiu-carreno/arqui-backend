@@ -9,6 +9,12 @@ class Tipo extends CI_Controller {
         //var_dump($data);
         $data = $this->menu_model->get(null, $idmenu);
         $data["0"]["idmenu"] = $idmenu;
+        usort($data["0"]["ownSubmenu"], function ($a, $b){
+                    if ($a["pos"] == $b["pos"]) {
+                        return 0;
+                    }
+                    return ($a < $b) ? -1 : 1;
+                });
 /*
 
  * En el menú:

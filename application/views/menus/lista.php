@@ -100,7 +100,6 @@
             <li><a href="#" class="menu-tipo-selectable">sub</a></li>
         </ul>
     </li>
-        <script src="<?php echo base_url() ?>js/jquery-ui-1.10.4.sortable.min.js" type="text/javascript"></script>
         <script>
 
             var menuid = null;
