@@ -85,7 +85,6 @@
             <div class="col-md-6">
                 <label>Contenido</label>
                 <div id="menu_content"></div>
-                <div><input type="submit" value="guardar" class="btn btn-primary hidden btn_guardar_html" style="margin:3% 40%;"/></div>
             </div>
 
         </div>
@@ -207,12 +206,10 @@
         menuid = $(this).closest(".list-group-item").attr("idmenu");
         if (tipo == "html") {
             $("#menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
-            $(".btn_guardar_html").removeClass('hidden');
             $("#menu_content").css("display","inline");
             $("#sub-menu_content").css("display","none");
         } else {
             $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
-            $(".btn_guardar_html").addClass('hidden');
             $("#menu_content").css("display","none");
             $("#sub-menu_content").css("display","inline");
         }  
@@ -230,20 +227,6 @@
                $(".h3").text("Proyecto: "+ data.nombre);
             });
 
-    $(".btn_guardar_html").click(function(){
-        var parametros={contenido:contenido_menu_html};
-console.log(parametros);    
-        $.post("<?php echo site_url(array("menus", "set_html")) ?>/"+ menuid, $.param(parametros));
-          $.getJSON("<?php echo site_url(array("menus", "get_html")) ?>/"+ menuid, function(data){
-                            
-                            if(data==null){
-                                bootbox.alert("Los datos no se guardaron correctamente", function(){});
-                                
-                            }
-                            else{bootbox.alert("Datos guardados exitosamente!", function() {
-});}
-                          });
-    });
     $("#lista-menus").delegate(".btn_menus_eliminar", "click", function(e) {
                 e.preventDefault();
                 $('.btn_menus_titulo').removeClass('active');

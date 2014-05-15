@@ -1,4 +1,4 @@
-<form id="menu_html" action="#" >
+<form id="submenu_html" action="#" >
 <textarea  class="textarea "><?php echo @$html?></textarea>
 <input type="submit" value="Guardar" class="btn btn-success" />
 </form>
@@ -16,11 +16,11 @@ tinymce.init({selector:'.textarea',
                            relative_urls: false,
                             remove_script_host: false,
 });
-    $("#menu_html").submit(function(e){
+    $("#submenu_html").submit(function(e){
         e.preventDefault();
         var parametros={contenido:tinymce.activeEditor.getContent()};
 console.log(parametros);    
-        $.post("<?php echo site_url(array("menus", "set_html",$idmenu)) ?>/", $.param(parametros)).done(function(){
+        $.post("<?php echo site_url(array("submenu", "set_html",$id)) ?>/", $.param(parametros)).done(function(){
             bootbox.alert("Datos guardados exitosamente!", function() {});
         });
 
