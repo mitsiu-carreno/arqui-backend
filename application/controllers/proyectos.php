@@ -7,8 +7,6 @@ class Proyectos extends CI_Controller {
         $userid = $this->session->userdata("userid");
         if(!($userid > 0))
             redirect ("users/login");
-        else
-            redirect ("clients");
     }
     
     function index(){
