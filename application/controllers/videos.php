@@ -19,4 +19,17 @@ class Videos extends CI_Controller {
         $this->load->model("submenu_model");
         $this->submenu_model->update($submenuid,"video",  $this->input->post("url"));
     }
+    
+    function editor($idsubmenu){
+        $this->load->model("submenu_model");
+        
+        $data = $this->submenu_model->getSubmenu($idsubmenu);
+        $data["idsubmenu"] = $idsubmenu;
+        $this->load->view("submenu/editor_video",$data);
+    }
+    
+    function set_html($idsubmenu){
+        $this->load->model("submenu_model");
+        $this->submenu_model->update($idsubmenu, "video_html", $this->input->post("contenido"));
+    }
 }

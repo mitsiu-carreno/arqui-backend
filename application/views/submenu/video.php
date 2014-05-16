@@ -89,16 +89,21 @@
     <input type="type" class="col-md-12" name="txt_boton_video" />
 </li>
 <div class="hidden editor">
-    <textarea  class="textarea" ></textarea>
 </div>
 <script>
-    tinymce.init({selector:'.textarea'});
+    $(".editor").load("<?php echo site_url(array("videos","editor")) ?>/"+submenuid);
     console.log(submenuid);
             $("#btn_subir").click(function() {
 
                             $("#inp_file").click();
         });
-
+        <?php 
+        if($videosubmenu == 2):
+        ?> 
+        $(".editor").removeClass('hidden');
+               $(".editor").css("margin-top","20%");
+               $("#panel_indice_video").addClass('hidden');
+          <?php endif; ?>
         $("#upload-video").submit(function(e) {
             
             e.preventDefault();

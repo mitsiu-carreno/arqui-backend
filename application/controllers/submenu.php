@@ -27,7 +27,7 @@ class Submenu extends CI_Controller {
                 $data["nombre_video"] = end($nombre_array);
                 $this->load->view("submenu/video", $data);
                 
-                echo json_encode($data["video_html"]);
+                //echo json_encode($data["video_html"]);
                 break;
             case 3:
                 $data = array("idsubmenu" => $idsubmenu);
