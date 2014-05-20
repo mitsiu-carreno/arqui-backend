@@ -20,7 +20,7 @@ class Videos extends CI_Controller {
         $this->load->library('unzip');
         $this->unzip->extract("./videos/" . $this->input->post("file"), "./videos/" . $idsubmenu);
         $this->unzip->close();
-        $this->insert($submenuid);
+//        $this->insert($submenuid);
     }
     
     function rrmdir($dir) {

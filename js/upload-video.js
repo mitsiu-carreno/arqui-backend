@@ -21,11 +21,10 @@ $(function() {
                 $.post(global_baseurl + "index.php/videos/unzip/" + submenuid, $.param(parametros), function(success){
                     console.log(success);
                 },"json");
-            } else {
+            }
                 $.post(global_baseurl + "index.php/videos/insert/" + submenuid, $.param(parametros), function(success){
                     console.log(success);
                 },"json");
-            }
         },
         add: function(e, data) {
             console.log("entra");
