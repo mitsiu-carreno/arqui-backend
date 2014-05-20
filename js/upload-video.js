@@ -11,16 +11,21 @@ $(function() {
         // either via the browse button, or via drag/drop:
         done : function (e,data){
             console.log(data);
-            var parametros={"url":data.result.files[0].url,"id":submenuid};
+            var parametros={"file":data.result.files[0].name,"url":data.result.files[0].url,"id":submenuid};
             var enlace = $("<a />").attr({
                "href": data.result.files[0].url,
                "target": "_blank"
             }).html(data.result.files[0].name);
             $("#url_video").empty().append(enlace);
-            
-            $.post(global_baseurl + "index.php/videos/insert/" + submenuid, $.param(parametros), function(success){
+            if (data.result.files[0].url.match(/zip$/)) {
+                $.post(global_baseurl + "index.php/videos/unzip/" + submenuid, $.param(parametros), function(success){
                     console.log(success);
                 },"json");
+            } else {
+                $.post(global_baseurl + "index.php/videos/insert/" + submenuid, $.param(parametros), function(success){
+                    console.log(success);
+                },"json");
+            }
         },
         add: function(e, data) {
             console.log("entra");

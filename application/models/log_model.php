@@ -12,6 +12,11 @@ class Log_model extends CI_Model {
         return $user;
     }
     
+    function get($clientid){
+                $client = R::load( 'client', $clientid );
+        return $client->export();
+    }
+    
     function insert($email,$password){
         $user = R::dispense('user');
         $user->email = $email;

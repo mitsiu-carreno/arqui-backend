@@ -22,6 +22,41 @@ class Log extends REST_Controller
         parent::__construct();
          header("Access-Control-Allow-Origin: *");
     }
+    
+    function recuperar_post(){
+        if(!$this->post("email")){
+            $this->response(array("error" => "no se recibio ningún email"), 400);
+        } else {
+            $this->load->model("log_model");
+            if($this->log_model->exists($this->post("email"))){
+                if($this->log_model->isActivo($this->post("email"))){
+                    $this->load->library('email');
+
+                    $this->email->from('webmaster@cognosvideoapp.com.mx', 'Cognos App');
+                    $this->email->to($this->post("email"));
+                    $this->email->subject('Recuperar contraseña');
+                    
+            $user = $this->log_model->getByEmail($this->post("email"));
+                $this->load->library('encrypt');
+                $user["token"] = base64_encode($this->encrypt->encode($user["id"]));
+                    $url = "http://cognosvideoapp.com.mx/index.php/log/recuperar/" . $user["token"];
+                    $html = "Estimado usuario
+                        
+Hemos recibido una solicitud de cambio de contraseña, si usted no solicitó el cambio favor de ignorar este correo, de lo contrario haga click en el siguiente enlae para establecer una nueva
+
+" . $url;
+                    $this->email->message($html);	
+
+                    $this->email->send();
+                    $this->response(array("success" => "Correo enviado"), 200);
+                } else {
+                    $this->response(array("error" => "La cuenta está deshabilitada por el administrador"), 400);
+                }
+            } else {
+                $this->response(array("error" => "El email no está registrado"), 400);
+            }
+        }
+    }
             
     function in_post(){
         if(!$this->post("email") || !$this->post("password")){

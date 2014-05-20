@@ -60,7 +60,7 @@
     </ul>
 
 <!--Indices-->
-            <ul id="lista-indices" class="list-group">
+            <ul id="lista-indices" class="list-group <?php echo ($videosubmenu == 2) ? "hidden" : "" ?>">
                 <?php if (count($indices) == 0 && $videosubmenu == 1): ?>
                         <li id="li_menus_empty">
                             <small><i>No hay indices, haga click en el siguiente botón para agregar uno -></i></small>
@@ -88,26 +88,24 @@
 <span class="col-md-6">Marcador:</span> <input type="time" class="col-md-6" step="1" name="txt_time_video" />
     <input type="type" class="col-md-12" name="txt_boton_video" />
 </li>
-<div class="hidden editor">
+<div class="<?php echo ($videosubmenu == 2) ? "" : "hidden" ?> editor">
 </div>
 <script>
     $(".editor").load("<?php echo site_url(array("videos","editor")) ?>/"+submenuid);
+    
     console.log(submenuid);
             $("#btn_subir").click(function() {
 
                             $("#inp_file").click();
         });
-        <?php 
-        if($videosubmenu == 2):
-        ?> 
+        <?php if($videosubmenu == 2): ?> 
         $(".editor").removeClass('hidden');
-               $(".editor").css("margin-top","20%");
-               $("#panel_indice_video").addClass('hidden');
+        $(".editor").css("margin-top","20%");
+        $("#panel_indice_video").addClass('hidden');
           <?php endif; ?>
         $("#upload-video").submit(function(e) {
-            
             e.preventDefault();
-                        $("#status").empty();
+            $("#status").empty();
         });
         $(".btn_video_html").click(function(){
         $(this).addClass('active');
@@ -124,7 +122,7 @@
    
         });
         $(".btn_guardar_html").addClass("hidden");
-         $(".btn_video").click(function(){
+            $(".btn_video").click(function(){
                    $(this).addClass('active');
                   $(".btn_video_html").removeClass('active');
                   $(".btn_guardar_html").addClass("hidden");

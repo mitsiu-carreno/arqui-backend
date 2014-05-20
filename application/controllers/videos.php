@@ -15,6 +15,24 @@ class Videos extends CI_Controller {
         $upload_handler = new UploadHandler();
     }
     
+    function unzip($idsubmenu){
+        $this->rrmdir("./videos/" . $idsubmenu);
+        $this->load->library('unzip');
+        $this->unzip->extract("./videos/" . $this->input->post("file"), "./videos/" . $idsubmenu);
+        $this->unzip->close();
+        $this->insert($submenuid);
+    }
+    
+    function rrmdir($dir) {
+        foreach(glob($dir . '/*') as $file) {
+            if(is_dir($file))
+                rrmdir($file);
+            else
+                unlink($file);
+        }
+        rmdir($dir);
+    }
+    
     function insert($submenuid){
         $this->load->model("submenu_model");
         $this->submenu_model->update($submenuid,"video",  $this->input->post("url"));
