@@ -66,8 +66,12 @@ Hemos recibido una solicitud de cambio de contraseña, si usted no solicitó el 
         if(!is_numeric($idcliente) || !$this->log_model->activo($idcliente)){
             $this->response(array("error" => "bad token"), 400);
         } else {
-            $this->log_model->update_field($idcliente,"password",md5($this->post("password")));
-            $this->response(array("success" => "Password changed"), 200);
+            $user = $this->log_model->in($this->post("email"),$this->post("actual"));
+            if(is_array($user)){
+                $this->log_model->update_field($idcliente,"password",md5($this->post("password")));
+                $this->response(array("success" => "Password changed"), 200);
+            
+            }
         }
     }
     function in_post(){
