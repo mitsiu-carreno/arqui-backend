@@ -57,7 +57,19 @@ Hemos recibido una solicitud de cambio de contraseña, si usted no solicitó el 
             }
         }
     }
-            
+      
+    function cambiar_post(){
+        $this->load->library('encrypt');
+        $this->load->model("log_model");
+        $idcliente = $this->encrypt->decode(base64_decode($this->post("token")));
+//        echo $idcliente;
+        if(!is_numeric($idcliente) || !$this->log_model->activo($idcliente)){
+            $this->response(array("error" => "bad token"), 400);
+        } else {
+            $this->log_model->update_field($idcliente,"password",md5($this->post("password")));
+            $this->response(array("success" => "Password changed"), 200);
+        }
+    }
     function in_post(){
         if(!$this->post("email") || !$this->post("password")){
             $this->response(array("error" => "no data was recived"), 400);

@@ -51,4 +51,11 @@ class Log_model extends CI_Model {
         else
             return FALSE;
     }
+    
+    function update_field($id,$field,$value){
+        $client = R::load( 'client', $id );
+        $client->$field = $value;
+        R::store($client);
+        return $id;
+    }
 }
