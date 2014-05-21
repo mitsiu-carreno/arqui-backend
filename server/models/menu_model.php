@@ -9,6 +9,7 @@ class Menu_model extends CI_Model {
     }
 
     function get($clientid) {
+        $this->load->helper('directory');
         $clients = R::find( 'menu', "client_id = ? ORDER BY pos ASC", array($clientid));
 //        var_dump($client);
         $proyectos = R::exportAll($clients);
@@ -32,6 +33,15 @@ class Menu_model extends CI_Model {
                     unset($s["pos"]);
                     unset($s["menu_id"]);
                     $s["html"] = $s["tipo"] == 1 ? $s["video_html"] : $s["html"];
+                     
+                    if($this->endsWith($s["video"], "zip")){
+                        $files = directory_map('./videos/' . $s["id"], 1);
+                        foreach($files as $k => $v){
+                            if($this->endsWith(strtolower($v), ".m3u8"))
+                            $s["video"] = "http://cognosvideoapp.com.mx/videos/" . $s["id"] . "/" . $v;
+                        }
+                    }
+                   
                     $s["html"] = base64_encode($s["html"]);
                     unset($s["video_html"]);
                     if(array_key_exists("ownIndice",$s)){
@@ -75,7 +85,10 @@ class Menu_model extends CI_Model {
         
         return $exportar;
     }
-    
+    function endsWith($haystack, $needle)
+{
+    return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
+}
     
 
 }
