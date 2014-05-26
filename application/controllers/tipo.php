@@ -19,13 +19,17 @@ si tipo = 1 será tipo submenu
  *  */
         if($data["0"]["tipo"]>0){
             if (isset($data["0"]["ownSubmenu"])){
-                    usort($data["0"]["ownSubmenu"], function ($a, $b){
+                $submenus=$data["0"]["ownSubmenu"];
+                    usort($submenus, function ($a, $b){
                     if ($a["pos"] == $b["pos"]) {
                         return 0;
                     }
-                    return ($a < $b) ? -1 : 1;
+                    return ($a["pos"] < $b["pos"]) ? -1 : 1;
                 });
+                $data["0"]["ownSubmenu"]=$submenus;
+//                var_dump($submenus);
             }
+            
                 $this->load->view("menus/submenus", $data["0"]);
         }else{
             $this->load->view("menus/editor", $data["0"]);

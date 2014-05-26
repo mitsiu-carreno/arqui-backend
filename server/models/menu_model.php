@@ -25,7 +25,7 @@ class Menu_model extends CI_Model {
                     if ($a["pos"] == $b["pos"]) {
                         return 0;
                     }
-                    return ($a < $b) ? -1 : 1;
+                    return ($a["pos"] < $b["pos"]) ? -1 : 1;
                 });
                 $p["Submenus"] = array();
                 foreach($p["ownSubmenu"] as $s){
@@ -63,7 +63,7 @@ class Menu_model extends CI_Model {
                             if ($a["pos"] == $b["pos"]) {
                                 return 0;
                             }
-                            return ($a < $b) ? -1 : 1;
+                            return ($a["pos"] < $b["pos"]) ? -1 : 1;
                         });
                         foreach($s["ownGaleria"] as $g){
                             unset($g["pos"]);

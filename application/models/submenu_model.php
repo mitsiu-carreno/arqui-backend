@@ -108,6 +108,7 @@ class Submenu_model extends CI_Model {
             foreach ($data as $key => $value) {
                 $submenu = R::load( 'submenu', $value );
                 $submenu->pos=$key;
+                echo $submenu->titulo;
                 R::store($submenu); 
             }
     }
