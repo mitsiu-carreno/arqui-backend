@@ -167,6 +167,9 @@
         $(that).find("input").blur(function(){
                 $(this).hide();
                 $(that).find(".menu-title").html($(this).val()).show();
+                var this_menuid = $(this).closest(".list-group-item").attr("idmenu");
+                var parametros = {id: this_menuid, "titulo": $(this).val()};
+                $.post("<?php echo site_url(array("menus", "editar", $idcliente)) ?>", $.param(parametros), "json");
         });
         $(that).find("input").show().focus().keyup(function(e){
             if(e.keyCode == 13){
