@@ -160,6 +160,7 @@
         console.log('id ' + menuid + $.param(parametros));
         $.post("<?php echo site_url(array("tipo", "set")) ?>/" + this_menuid, $.param(parametros));
         $(this).closest(".list-group-item").find(".menu-tipo").html($(e.target).html());
+        
     });
     $("#lista-menus").delegate("li","dblclick",function(){
         var that = this;
@@ -190,19 +191,19 @@
                         var parametros = {"titulo": data};
                         console.log(data);
                         $.post("<?php echo site_url(array("menus", "insert", $idcliente)) ?>", $.param(parametros), function(success) {
-                            console.log(success);
-                            console.log('prueba');
                             var li = $("#li_to_clone").clone().attr("id", "").removeClass("hidden").attr("idmenu", success.id);
                             li.find(".menu-title").html(success.titulo);
                             $("#lista-menus li:last-of-type").after(li);
+                            li.find(".btn-menu-detail").click();
+                            li.addClass("active");
                         }, "json");
-
                         $("#li_menus_empty").remove();
                     }
                 });
             });
     $("#lista-menus").delegate(".btn-menu-detail", "click", function(e) {
         e.preventDefault();
+        console.log($(this).closest(".list-group-item"));
         $(".list-group-item").removeClass("active");
         $(this).closest(".list-group-item").addClass("active");
         var tipo  = $(this).closest(".list-group-item").find(".menu-tipo").text();
@@ -215,14 +216,7 @@
             $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get")) ?>/" + menuid);
             $("#menu_content").css("display","none");
             $("#sub-menu_content").css("display","inline");
-        }  
-//    $.getJSON("<?php echo site_url(array("menus","get_html")) ?>/"+ menuid, function(data){
-//                            
-//                            if(data==null){
-//                                tinymce.activeEditor.setContent(" ");
-//                            }
-//                            else{tinymce.activeEditor.setContent(data);}
-//                          });
+        }
     });
        
             $.getJSON("<?php echo site_url(array("clients","getclient",$idcliente));?>", function(data){
