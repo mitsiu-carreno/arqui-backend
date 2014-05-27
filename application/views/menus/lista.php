@@ -193,7 +193,7 @@
                         $.post("<?php echo site_url(array("menus", "insert", $idcliente)) ?>", $.param(parametros), function(success) {
                             var li = $("#li_to_clone").clone().attr("id", "").removeClass("hidden").attr("idmenu", success.id);
                             li.find(".menu-title").html(success.titulo);
-                            $("#lista-menus li:last-of-type").after(li);
+                            $("#lista-menus").append(li);
                             li.find(".btn-menu-detail").click();
                             li.addClass("active");
                         }, "json");
