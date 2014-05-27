@@ -5,17 +5,18 @@
      
             tinymce.init({
                 selector: ".textarea",
-                width: 550,
-                menubar : false,
+                width: 650,
                 height: 200,
                 language : 'es',
                 image_advtab: true,
                 plugins: [
-                     "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-                     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                     "save table contextmenu directionality emoticons template paste textcolor jbimages"
+                     "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor  jbimages"
                ],
-               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
+               toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+               toolbar2: "print preview media | forecolor backcolor emoticons  jbimages",
                relative_urls: false,
             remove_script_host: false
             });
