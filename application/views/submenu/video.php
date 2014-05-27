@@ -84,9 +84,13 @@
     </div><!--cierra el row-->
 </div>
 
-<li class="hidden" id="tpl_li_indice_video" idmarcador="">
-<span class="col-md-6">Marcador:</span> <input type="time" class="col-md-6" step="1" name="txt_time_video" />
-    <input type="type" class="col-md-12" name="txt_boton_video" />
+<li class="hidden list-group-item" id="tpl_li_indice_video">
+
+                            <a href="#" class="btn-indice-detail i_tiempo"><span class="indice-title"></span></a>
+                            <input type="text" class="inp_time" value=""/>
+                            <a href="#" class="btn-indice-detail i_contenido"><span class="indice-contenido"></span></a>
+                            <input type="text" class="inp_contenido" value=""/>
+                            <a href="#" class="btn_indice_eliminar btn-indice-opcion"><span class="glyphicon glyphicon-trash"></span></a>
 </li>
 <div class="<?php echo ($videosubmenu == 2) ? "" : "hidden" ?> editor">
 </div>
@@ -137,31 +141,6 @@
    
         });
 //
-//        
-//        $("#lista-indices").delegate("a.i_tiempo","click",function(e){
-//        //$(".btn-indice-detail").click(function(){
-//        e.preventDefault();
-//        var that2 = $(this).closest("li");
-//        $(that2).find(".indice-title").hide();
-//        $(that2).find(".inp_time").blur(function(){
-//            console.log("encontrado");
-//                $(this).hide();
-//                $(that2).find(".indice-title").html($(this).val()).show();
-//        });
-//        
-//        $(that2).find(".inp_time").show().focus().keyup(function(e){
-//            if(e.keyCode == 13){
-//                $(this).hide();
-//                $(that2).find(".indice-title").html($(this).val()).show();
-//                var this_indiceid = $(this).closest(".list-group-item").attr("idmenu");
-//                var parametros = {id: this_indiceid, "titulo": $(this).val()};
-//                //POST
-//            } else  if(e.keyCode == 27) {
-//                $(this).hide().val($(that2).text());
-//                $(that).find(".indice-title").show();
-//            }
-//        });
-//    });
         $("body").delegate(".btn-indice-detail", "click", function() {
             var that2 = $(this).closest("li");
             var title = $(that2).find(".inp_time").val();
@@ -220,6 +199,54 @@
                         $.get("http://cognosvideoapp.com.mx/index.php/submenu/eliminar_indice/" + this_idIndice);
                         //$.get("<?php echo site_url(array("submenu", "eliminar_indice"))?>/ + this_idIndice");
                         $(that).closest(".list-group-item").remove();
+                    }
+                });
+            });
+            
+            
+            $("body").delegate("#btn_agregar_indice_video", "click", function() {
+                console.log("bumm");
+                bootbox.dialog({
+                    //message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
+                    //message: "Tiempo <br> Minutos: <br><input type='number' id='inp_min_time' step='1' min='0'></input> <br> Segundos: <br><input type='number' id='inp_seg_time' step='1' min='0'></input> <br> <hr> Botón <br><input type='text' id='id_msg_new_boton_video'/>",
+                    message: "<div style='width:50px; float:left; height:35px;'>Min<br><input type='number' id='inp_min_time' step='1' min='0' style='width:80%'></input> : </div><div  style='width:40px; height:35px; float:left'>Seg<br><input type='number' id='inp_seg_time' step='1' min='0' style='width:100%'></input></div> <br> <br> <br>Botón <br><input type='text' id='id_msg_new_boton_video'/>",
+                    buttons: {
+                        main: {
+                            label: "Insertar",
+                            className: "btn-success",
+                            callback: function() {
+                                var li = $("#tpl_li_indice_video").clone().attr("id", "").removeClass("hidden");
+                                li.find("input name[txt_time_video]").val($('#inp_new_time_video').val());
+                                li.find("input name[txt_boton_video]").val($('#id_new_button_video').val());
+                                li.attr("idmarcador", 1);
+                                var minutos = parseInt($("#inp_min_time").val());
+                                var min = parseInt($("#inp_min_time").val() * 60);
+                                var seg = parseInt($("#inp_seg_time").val());
+                                var boton = $("#id_msg_new_boton_video").val()
+                                var tiempo = seg + min;
+
+                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + submenuid);
+                                var parametros = {"titulo": tiempo, "contenido": boton};
+                                console.log(parametros);
+                                $.post("<?php echo site_url(array("submenu", "set_indice"))?>/" + submenuid, $.param(parametros), function(data){
+                                    var li = $("#tpl_li_indice_video").clone().attr("id","").attr("idIndice",data.id).removeClass("hidden");
+                                    li.find(".indice-title").html(minutos + ":" + (seg<10 ? "0"+seg : seg));
+                                    li.find(".indice-contenido").html(boton);
+                                    li.find(".inp_time").val(tiempo);
+                                    li.find(".inp_contenido").val(data.contenido);
+                                    $("#lista-indices").append(li);
+                                    console.log("entra");
+                                }
+                                ,"json");
+                                $("li_menus_empty").remove();
+                            }
+                        },
+                        danger: {
+                            label: "Cancelar",
+                            className: "btn-danger",
+                            callback: function() {
+                            }
+                        }
                     }
                 });
             });

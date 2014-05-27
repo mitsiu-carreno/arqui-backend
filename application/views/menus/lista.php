@@ -239,44 +239,5 @@
             });
 
 $("#lista-menus li").first().find(".btn-menu-detail").click();
-
-
-            $("body").delegate("#btn_agregar_indice_video", "click", function() {
-                console.log("bumm");
-                bootbox.dialog({
-                    //message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
-                    //message: "Tiempo <br> Minutos: <br><input type='number' id='inp_min_time' step='1' min='0'></input> <br> Segundos: <br><input type='number' id='inp_seg_time' step='1' min='0'></input> <br> <hr> Botón <br><input type='text' id='id_msg_new_boton_video'/>",
-                    message: "<div style='width:50px; float:left; height:35px;'>Min<br><input type='number' id='inp_min_time' step='1' min='0' style='width:80%'></input> : </div><div  style='width:40px; height:35px; float:left'>Seg<br><input type='number' id='inp_seg_time' step='1' min='0' style='width:100%'></input></div> <br> <br> <br>Botón <br><input type='text' id='id_msg_new_boton_video'/>",
-                    buttons: {
-                        main: {
-                            label: "Insertar",
-                            className: "btn-success",
-                            callback: function() {
-                                var li = $("#tpl_li_indice_video").clone().attr("id", "").removeClass("hidden");
-                                li.find("input name[txt_time_video]").val($('#inp_new_time_video').val());
-                                li.find("input name[txt_boton_video]").val($('#id_new_button_video').val());
-                                li.attr("idmarcador", 1);
-                                var min = parseInt($("#inp_min_time").val() * 60);
-                                var seg = parseInt($("#inp_seg_time").val());
-                                var boton = $("#id_msg_new_boton_video").val()
-                                var tiempo = seg + min;
-
-                                console.log("Tiempo en segundos = " + tiempo + " Boton:" + boton + " idsubmenu:" + submenuid);
-                                var parametros = {"titulo": tiempo, "contenido": boton};
-                                console.log(parametros);
-                                $.post("<?php echo site_url(array("submenu", "set_indice"))?>/" + submenuid, $.param(parametros), "json");
-                                //console.log("Hi "+ $('#inp_new_time_video').val());
-                                //$("#menu_content").load("<?php echo site_url(array("submenu", "get")) ?>/" + submenuid);
-                            }
-                        },
-                        danger: {
-                            label: "Cancelar",
-                            className: "btn-danger",
-                            callback: function() {
-                            }
-                        }
-                    }
-                });
-            });
         </script>
 </body>

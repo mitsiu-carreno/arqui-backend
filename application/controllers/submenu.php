@@ -116,7 +116,7 @@ class Submenu extends CI_Controller {
     function set_indice($idsubmenu) {
         $this->load->model("submenu_model");
         // var_dump("hecho");
-        $this->submenu_model->insertIndice($idsubmenu, $this->input->post("titulo"), $this->input->post("contenido"));
+        echo json_encode($this->submenu_model->insertIndice($idsubmenu, $this->input->post("titulo"), $this->input->post("contenido")));
     }
 
     function eliminar($idsubmenu) {
