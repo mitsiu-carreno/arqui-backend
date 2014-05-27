@@ -160,7 +160,9 @@
         console.log('id ' + menuid + $.param(parametros));
         $.post("<?php echo site_url(array("tipo", "set")) ?>/" + this_menuid, $.param(parametros));
         $(this).closest(".list-group-item").find(".menu-tipo").html($(e.target).html());
-        
+        if($(this).closest(".list-group-item").hasClass("active")){
+            $(this).closest(".list-group-item").find(".btn-menu-detail").click();
+        }
     });
     $("#lista-menus").delegate("li","dblclick",function(){
         var that = this;
