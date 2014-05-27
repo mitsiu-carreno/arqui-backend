@@ -27,7 +27,9 @@
         $("#btn_guardar_txt").click(function(){
             var parametros = {html: tinymce.get('txt_contacto').getContent()};
                         console.log($.param(parametros));
-                        $.post("<?php echo site_url(array("proyectos","html",$idcliente)) ?>", $.param(parametros));
+                        $.post("<?php echo site_url(array("proyectos","html",$idcliente)) ?>", $.param(parametros)).done(function(){
+                            bootbox.alert("Datos guardados exitosamente!", function() {});
+                        });
         });
 
         $("#upload").submit(function(e) {
