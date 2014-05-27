@@ -16,7 +16,8 @@
             toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
             toolbar2: "print preview media | forecolor backcolor emoticons  jbimages",
             relative_urls: false,
-            remove_script_host: false
+            remove_script_host: false,
+            content_css : global_baseurl + "css/custom_content.css"
 
         });
 
