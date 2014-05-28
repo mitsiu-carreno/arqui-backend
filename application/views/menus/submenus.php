@@ -64,27 +64,18 @@
                 </li>
 
             <?php endif; ?>
-            <li id="li_menus_add">
+        </ul>
+            <div id="li_menus_add">
                 <button class="btn btn-success btn-block" id="btn_submenus_add">Nuevo submenú <span class="glyphicon glyphicon-plus"></span></button>
                 <small>- Doble click sobre el título para editarlo</small>
-            </li>
-        </ul>
+            </div>
         <li id="li_to_clone_sub" class="hidden list-group-item hola">
             <a href="#" class="btn-submenu-detail"><span class="submenu-title">Cras justo odio </span></a>
             <input type="text" value="Cras justo odio" class=" submenu-title-input" />
             <a href="#" class="btn_submenus_eliminar btn-menu-opcion"><span class="glyphicon glyphicon-trash"></span></a>
             <!--<a href="#" class="btn-menu-opcion"><span class="glyphicon glyphicon-resize-vertical"></span></a>-->
                     <a href="#" class="btn-submenu-opcion dropdown-toggle pull-right" data-toggle="dropdown"><span class="submenu-tipo">
-                <?php
-                            if ($submenu["tipo"] == "0") {
-                                echo "html";
-                            } else if ($submenu["tipo"] == "3") {
-                                echo "galeria";
-                            } else {
-                                
-                                echo "video";
-                            }
-                            ?>
+                video
                 </span><span class="caret"></span></a>
             <ul class="dropdown-menu pull-right" role="menu">
                 <li><a href="#" class="submenu-tipo-selectable">video</a></li>
@@ -148,11 +139,13 @@
                         console.log(data);
                        $.post("<?php echo site_url(array("submenu", "insert", $idmenu)) ?>/", $.param(parametros), function(success) {
                             console.log(success);
-                            var li = $("#li_to_clone_sub").clone().attr("id", "").removeClass("hidden").attr("idsubmenu", success.id);
+                            var li = $("#li_to_clone_sub").clone().attr("id", "").removeClass("hidden").attr("idsubmenu", success.idsubmenu);
                             li.find(".submenu-title").html(success.titulo);
-                            $("#sub-menu_content").load("<?php echo site_url(array("tipo", "get", $idmenu)) ?>/");
+                            $("#lista-submenus").append(li);
+                            li.find(".btn-submenu-detail").click();
+                            //$("#sub-menu_content").load("<?php echo site_url(array("tipo", "get", $idmenu)) ?>/");
                         }, "json");
-                        $("#lista-submenus li").first().find(".btn-submenu-detail").click();
+                        //$("#lista-submenus li").()
                         $("#li_submenus_empty").remove();
                     } 
                 });
@@ -176,15 +169,6 @@ $("#lista-submenus").delegate(".btn-submenu-detail", "click", function(e) {
             $(".btn_guardar_html").removeClass('hidden');
             $("#menu_content").css("display","inline");
         }
-//            $.getJSON("<?php echo site_url(array("submenu", "get_html")) ?>/"+ submenuid, function(data){
-//                            
-//                           console.log("data"+ data);
-//                            if(data==null){
-//                                tinymce.activeEditor.setContent(" ");
-//                            }
-//                            else{tinymce.activeEditor.setContent(data);}
-//                       
-//                          });
     });
         $(".btn_guardar_html").click(function(){
         var parametros={contenido:contenido_menu_html};

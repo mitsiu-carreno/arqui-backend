@@ -63,7 +63,7 @@
             <ul id="lista-indices" class="list-group <?php echo ($videosubmenu == 2) ? "hidden" : "" ?>">
                 <?php if (count($indices) == 0 && $videosubmenu == 1): ?>
                         <li id="li_menus_empty">
-                            <small><i>No hay indices, haga click en el siguiente botón para agregar uno -></i></small>
+                            <small><i>No hay indices, haga click en el botón anterior para agregar uno</i></small>
                         </li>
                     <?php elseif(count($indices) > 0 && $videosubmenu == 1) :  foreach ($indices as $i): ?>
                     <!--<span><?php echo $i["contenido"]?></span>-->
@@ -187,7 +187,7 @@
                 });
             });
             
-            $("#lista-indices").delegate(".btn_indice_eliminar", "click", function(e) {
+            $("#lista-indices").undelegate(".btn_indice_eliminar", "click").delegate(".btn_indice_eliminar", "click", function(e) {
                 e.preventDefault();
                 //$('.btn_menus_titulo').removeClass('active');
                 var this_idIndice = $(this).closest(".list-group-item").attr("idIndice");
@@ -204,7 +204,7 @@
             });
             
             
-            $("body").delegate("#btn_agregar_indice_video", "click", function() {
+            $("body").undelegate("#btn_agregar_indice_video", "click").delegate("#btn_agregar_indice_video", "click", function() {
                 console.log("bumm");
                 bootbox.dialog({
                     //message: "Tiempo:<input type='time' id='inp_new_time_video' step='1'></input><br />Botón<input typoe='text' id='id_new_button_video' />",
@@ -238,7 +238,7 @@
                                     console.log("entra");
                                 }
                                 ,"json");
-                                $("li_menus_empty").remove();
+                                $("#li_menus_empty").remove();
                             }
                         },
                         danger: {
