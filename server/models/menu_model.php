@@ -37,7 +37,7 @@ class Menu_model extends CI_Model {
                     if($this->endsWith($s["video"], "zip")){
                         $files = directory_map('./videos/' . $s["id"], 1);
                         foreach($files as $k => $v){
-                            if($this->endsWith(strtolower($v), ".m3u8"))
+                            if($this->endsWith(strtolower($v), "prog_index.m3u8"))
                             $s["video"] = "http://cognosvideoapp.com.mx/videos/" . $s["id"] . "/" . $v;
                         }
                     }
