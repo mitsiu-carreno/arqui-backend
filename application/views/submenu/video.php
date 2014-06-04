@@ -1,4 +1,8 @@
 <style>
+    #url_video {
+        height: 50px;
+    }
+    
     #inp_file {
         display: none;
     }
@@ -40,6 +44,10 @@
     .inp_contenido{
         display: none;
     }
+    .editor_video {
+        position: relative;
+        margin-top: 10px;
+    }
 </style>
 <div class="btn-group col-md-12">
     <form id="upload-video"  method="post" action="<?php echo base_url() ?>upload.php" enctype="multipart/form-data">
@@ -78,11 +86,7 @@
 
                     <?php endforeach;  else : endif; ?>
                 </ul>
-</div> 
 <!--Fin-Indices-->
-            </div><!--cierra el body-->
-    </div><!--cierra el row-->
-</div>
 
 <li class="hidden list-group-item" id="tpl_li_indice_video">
 
@@ -92,7 +96,10 @@
                             <input type="text" class="inp_contenido" value=""/>
                             <a href="#" class="btn_indice_eliminar btn-indice-opcion"><span class="glyphicon glyphicon-trash"></span></a>
 </li>
-<div class="<?php echo ($videosubmenu == 2) ? "" : "hidden" ?> editor">
+</div>
+<div class="btn-group col-md-12">
+<div class="<?php echo ($videosubmenu == 2) ? "" : "hidden" ?> editor editor_video">
+</div>
 </div>
 <script>
     $(".editor").load("<?php echo site_url(array("videos","editor")) ?>/"+submenuid);
@@ -104,7 +111,6 @@
         });
         <?php if($videosubmenu == 2): ?> 
         $(".editor").removeClass('hidden');
-        $(".editor").css("margin-top","20%");
         $("#panel_indice_video").addClass('hidden');
           <?php endif; ?>
         $("#upload-video").submit(function(e) {
