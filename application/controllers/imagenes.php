@@ -91,6 +91,12 @@ class Imagenes extends CI_Controller {
 			$data = array('upload_data' => $this->upload->data());
                         $config2['image_library'] = 'ImageMagick';
                         $config2['library_path'] = '/usr/bin';
+                        if($data["upload_data"]["image_width"] > 1024 || $data["upload_data"]["image_height"] > 768){
+                            $config2['width'] = 1024;
+                            $config2['height'] = 768;
+                            $config2["maintain_ratio"] = TRUE;
+                            
+                        }
                         $config2['source_image']=$data["upload_data"]["full_path"];
                         $config2['new_image']=$data["upload_data"]["file_path"] . $galeria["id"] . ".png";
                         $this->load->library('image_lib',$config2);
@@ -113,6 +119,11 @@ class Imagenes extends CI_Controller {
         $archivos = $this->galeria_model->get($idsubmenu);
         
         echo json_encode(array("archivos"=>$archivos));
+    }
+    
+    function eliminar($idgaleria){
+        $this->load->model("galeria_model");
+        $menu = $this->galeria_model->delete($idgaleria);
     }
     
 }

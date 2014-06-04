@@ -109,8 +109,14 @@
         var this_submenuid = $(this).closest(".list-group-item").attr("idsubmenu");
         var parametros = {"tipo": tipo};
         console.log('id ' + this_submenuid + $.param(parametros));
-         $.post("<?php echo site_url(array("submenu", "set_tipo")) ?>/" + this_submenuid, $.param(parametros));
-        $(this).closest(".list-group-item").find(".submenu-tipo").html($(e.target).html());
+        var that = this;
+         $.post("<?php echo site_url(array("submenu", "set_tipo")) ?>/" + this_submenuid, $.param(parametros)).done(function(){
+             $(that).closest(".list-group-item").find(".submenu-tipo").html($(e.target).html());
+             if($(that).closest(".list-group-item").hasClass("active")){
+                $(that).closest(".list-group-item").find(".btn-submenu-detail").click();
+            }
+         });
+        
     });
         $("#lista-submenus").delegate("li","dblclick",function(){
         var that = this;

@@ -34,4 +34,9 @@ class Galeria_model extends CI_Model {
         $galerias = R::find( 'galeria', "submenu_id = ? ORDER BY pos ASC", array($idsubmenu));
         return R::exportAll($galerias);
     }
+    
+    function delete($idgaleria){
+        $galeria = R::load( 'galeria', $idgaleria );
+        R::trash($galeria);
+    }
 }

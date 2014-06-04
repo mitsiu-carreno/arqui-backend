@@ -37,14 +37,27 @@
         console.log("este form no se debe de enviar");
         $("#status").empty();
     });
+    
+         $("#ul_filelist").delegate(".btn-eliminar-imagen", "click", function(e) {
+                e.preventDefault();
+                var this_idgaleria = $(this).closest(".list-group-item").attr("idgaleria");
+                var that = this;
+                bootbox.confirm("Está seguro de eliminar esta imagen?", function(result) {
+                    console.log("Confirmed: " + result);
+                    if (result == true) {
+                        $.get("<?php echo site_url(array("imagenes", "eliminar")) ?>/" + this_idgaleria);
+                        $(that).closest(".list-group-item").remove();
+                    }
+                });
+            });
 
     var listOfFiles = function() {
         $("#ul_filelist").empty();
         $.getJSON("<?php echo site_url(array("imagenes", "galeria_files", $idsubmenu)) ?>", function(data) {
             $.each(data.archivos, function(index, value) {
-                var titulo = $("<a />").html(value.titulo).attr("href", "<?php echo base_url() ?>galeria/" + value.submenu_id + "/" + value.id + ".png");
+                var titulo = $("<a />").html(value.titulo || "Ver Imagen").attr("href", "<?php echo base_url() ?>galeria/" + value.submenu_id + "/" + value.id + ".png");
                 var thumbnail = $("<a />").html(' <small> Thumbnail</small>').attr("href", "<?php echo base_url() ?>galeria/" + value.submenu_id + "/" + value.id + "_thumb.png");
-                $("#ul_filelist").append($("<li />").addClass("list-group-item").append(titulo).append(thumbnail).append($("<a />").attr("href", "<?php echo site_url(array("imagenes", "del_galeria")) ?>/").append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
+                $("#ul_filelist").append($("<li />").addClass("list-group-item").attr("idgaleria",value.id).append(titulo).append(thumbnail).append($("<a />").attr("href", "<?php echo site_url(array("imagenes", "del_galeria")) ?>/").append($("<span />").addClass("glyphicon glyphicon-remove-circle btn-eliminar-imagen"))));
             });
         });
     }
