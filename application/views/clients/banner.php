@@ -88,11 +88,11 @@
 <div class="container" style="margin-top: 80px">
     <label class="titulo"><h3 class="h3"></h3></label>
     <form id="upload" method="post" action="<?php echo site_url(array("imagenes", "subir_banner", $idcliente)) ?>" enctype="multipart/form-data">
-        <img id="img_banner" width="1024" height="227" src="<?php echo site_url(array("imagenes", "get_banner", $idcliente)) ?>" />
+        <img id="img_banner" width="1024" src="<?php echo site_url(array("imagenes", "get_banner", $idcliente)) ?>" />
         <input type="file" id="inp_file" name="userfile" />
         <button class="btn btn-default btn-large" id="btn_subir"><span class="glyphicon glyphicon-circle-arrow-up"></span> Subir Imagen</button>
         
-        <div id="status">
+        <div id="status">tamaño 1024 x 197 px
         </div>
     </form>
     <div id="error-message" class="text-danger"><span class="glyphicon glyphicon-warning-sign" style="float:left;margin-right: 5px;"></span><i></i></div>

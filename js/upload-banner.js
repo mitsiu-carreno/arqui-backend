@@ -16,7 +16,7 @@ $(function(){
                 var img = new Image();
                 img.src = oFREvent.target.result;
                 img.onload = function () {
-                    if ((this.width != 1024) && (this.height != 227)) {
+                    if ((this.width != 1024) && (this.height != 197)) {
                         //that.value="";
                         $("#status").empty();
                         $("#error-message").clone().attr("id","").html("<p>Solo se permiten archivos de 1024 x 227</p>").appendTo($("#status"));
