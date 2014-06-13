@@ -5,7 +5,7 @@
      
             tinymce.init({
                 selector: ".textarea",
-                width: 650,
+                width: 1024,
                 height: 200,
                 language : 'es',
                 image_advtab: true,
@@ -99,7 +99,7 @@
     <div id="success-message" class="text-success"><span class="glyphicon glyphicon-ok-circle" style="float:left;margin-right: 5px;"></span><i></i></div>
     <br /><hr />
     <h2>Editar mensaje de inicio</h2>
-  <div class="col-sm-2 col-sm-offset-3 borde" style="margin-top:3%;">
+  <div class=" borde" style="margin-top:3%;">
       <textarea name="contacto_texto" id="txt_contacto" class="textarea inp_contacto" placeholder="Enter text ..."><?php echo $cliente["html"] ?></textarea>
                             <button id="btn_guardar_txt" class="btn btn-success btn-large">Guardar</button>
                         </div>
